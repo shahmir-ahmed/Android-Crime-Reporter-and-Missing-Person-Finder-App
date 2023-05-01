@@ -2,6 +2,7 @@ package com.example.crimereporterandmissingpersonfinderapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -41,7 +42,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         // if crimes search button is clicked
         if(text.equals("Crimes Around You")){
-            Toast.makeText(this, "Crimes Search Screen Opening!", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(this, "Crimes Search Screen Opening!", Toast.LENGTH_SHORT).show();
+
+            // Intent to activate the SearchCrimeActivity
+            Intent intent = new Intent(this, SearchCrimeActivity.class);
+
+            startActivity(intent);
         }
         // if missing persons search button is clicked
         else if(text.equals("Missing People")){
