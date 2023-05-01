@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         missingPersonsSearchButton = (Button) findViewById(R.id.missingPersonsSearch);
         loginButton = (Button) findViewById(R.id.login);
 
-        // Adding event listener
+        // Setting event listener
         crimesSearchButton.setOnClickListener(this);
         missingPersonsSearchButton.setOnClickListener(this);
         loginButton.setOnClickListener(this);
