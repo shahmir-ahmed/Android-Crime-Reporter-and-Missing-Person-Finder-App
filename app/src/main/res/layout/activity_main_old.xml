@@ -1,0 +1,376 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#240e71"
+    tools:context=".SearchCrimeActivity">
+
+
+    <!--    Card view from stackoverflow text-->
+    <!--    <androidx.cardview.widget.CardView-->
+    <!--        android:layout_width="300dp"-->
+    <!--        android:layout_height="200dp"-->
+    <!--        android:layout_marginTop="4dp"-->
+    <!--        android:orientation="vertical"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toTopOf="parent">-->
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:layout_marginTop="4dp"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="10dp"
+        app:cardMaxElevation="12dp"
+        app:cardPreventCornerOverlap="true"
+        app:cardUseCompatPadding="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <!--        Stack overflow-->
+        <!--        <ImageView-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_gravity="start|center_vertical"-->
+        <!--            android:layout_marginBottom="16dp"-->
+        <!--            android:background="@drawable/user_icon_1"-->
+        <!--            app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--            app:layout_constraintEnd_toEndOf="parent"-->
+        <!--            app:layout_constraintStart_toStartOf="parent" />-->
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <!--        Stack overflow-->
+            <!--            <TextView-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_marginStart="8dp"-->
+            <!--                android:layout_marginTop="8dp"-->
+            <!--                android:layout_marginEnd="8dp"-->
+            <!--                android:layout_marginBottom="8dp"-->
+            <!--                android:text="TextV'ew"-->
+            <!--                android:textSize="14sp"-->
+            <!--                app:layout_constraintBottom_toBottomOf="parent"-->
+            <!--                app:layout_constraintEnd_toEndOf="parent"-->
+            <!--                app:layout_constraintStart_toStartOf="parent"-->
+            <!--                app:layout_constraintTop_toTopOf="parent" />-->
+
+            <TextView
+                android:id="@+id/tv6"
+                android:layout_width="170dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:fontFamily="@font/poppins_light"
+                android:text="Very high profile theft"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.525"
+                app:layout_constraintStart_toEndOf="@+id/tv5"
+                app:layout_constraintTop_toBottomOf="@+id/tv4" />
+
+            <TextView
+                android:id="@+id/tv4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/poppins_light"
+                android:text="Rawalpindi"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.326"
+                app:layout_constraintStart_toEndOf="@+id/tv3"
+                app:layout_constraintTop_toBottomOf="@+id/tv2" />
+
+            <TextView
+                android:id="@+id/tv3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="36dp"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/poppins_light"
+                android:text="Street:"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv1" />
+
+            <TextView
+                android:id="@+id/tv5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="36dp"
+                android:layout_marginTop="24dp"
+                android:fontFamily="@font/poppins_light"
+                android:text="Details:"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv3" />
+
+            <TextView
+                android:id="@+id/tv2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="28dp"
+                android:fontFamily="@font/poppins_light"
+                android:text="Theft"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.291"
+                app:layout_constraintStart_toEndOf="@+id/tv1"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="36dp"
+                android:layout_marginTop="28dp"
+                android:fontFamily="@font/poppins_light"
+                android:text="Type:"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <!--            Code before changing the content of this constraint layout-->
+            <!--                <TextView-->
+            <!--                    android:id="@+id/tv3"-->
+            <!--                    android:layout_width="wrap_content"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:layout_gravity="center"-->
+            <!--                    android:fontFamily="@font/poppins_light"-->
+            <!--                    android:text="Street:"-->
+            <!--                    android:textSize="20sp"-->
+            <!--                    android:textStyle="bold"-->
+            <!--                    tools:layout_editor_absoluteX="26dp"-->
+            <!--                    tools:layout_editor_absoluteY="59dp" />-->
+
+            <!--                <TextView-->
+            <!--                    android:id="@+id/tv4"-->
+            <!--                    android:layout_width="wrap_content"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:layout_gravity="center|end"-->
+            <!--                    android:fontFamily="@font/poppins_light"-->
+            <!--                    android:text="Rawalpindi"-->
+            <!--                    android:textSize="20sp"-->
+            <!--                    tools:layout_editor_absoluteX="109dp"-->
+            <!--                    tools:layout_editor_absoluteY="59dp" />-->
+
+            <!--                <TextView-->
+            <!--                    android:id="@+id/tv5"-->
+            <!--                    android:layout_width="wrap_content"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:layout_gravity="bottom|center"-->
+            <!--                    android:fontFamily="@font/poppins_light"-->
+            <!--                    android:text="Status:"-->
+            <!--                    android:textSize="20sp"-->
+            <!--                    android:textStyle="bold"-->
+            <!--                    tools:layout_editor_absoluteX="26dp"-->
+            <!--                    tools:layout_editor_absoluteY="92dp" />-->
+
+            <!--                <TextView-->
+            <!--                    android:id="@+id/tv6"-->
+            <!--                    android:layout_width="wrap_content"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:layout_gravity="bottom|center|end"-->
+            <!--                    android:fontFamily="@font/poppins_light"-->
+            <!--                    android:text="Submitted"-->
+            <!--                    android:textSize="20sp"-->
+            <!--                    tools:layout_editor_absoluteX="116dp"-->
+            <!--                    tools:layout_editor_absoluteY="92dp" />-->
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="30dp">
+
+
+            <TextView
+                android:id="@+id/tv7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="4dp"
+                android:fontFamily="@font/poppins_light"
+                android:text="Status:"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal|end"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="16dp"
+                android:fontFamily="@font/poppins_light"
+                android:text="Submitted"
+                android:textColor="#3DBF19"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.393"
+                app:layout_constraintStart_toEndOf="@+id/tv7"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!--        Crime image-->
+        <ImageView
+            android:id="@+id/img"
+            android:layout_width="110dp"
+            android:layout_height="117dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="50dp"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/user_icon_1" />
+
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!--Geeks for geeks cod efor card view-->
+    <!--<?xml version="1.0" encoding="utf-8"?>-->
+    <!--<androidx.constraintlayout.widget.ConstraintLayout -->
+    <!--    xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--    xmlns:app="http://schemas.android.com/apk/res-auto"-->
+    <!--    xmlns:tools="http://schemas.android.com/tools"-->
+    <!--    android:layout_width="match_parent"-->
+    <!--    android:layout_height="match_parent"-->
+    <!--    android:background="#240e71"-->
+    <!--    tools:context=".SearchCrimeActivity">-->
+
+    <!--    <androidx.cardview.widget.CardView-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginTop="4dp"-->
+    <!--        app:cardBackgroundColor="@color/white"-->
+    <!--        app:cardCornerRadius="20dp"-->
+    <!--        app:cardElevation="10dp"-->
+    <!--        app:cardMaxElevation="12dp"-->
+    <!--        app:cardPreventCornerOverlap="true"-->
+    <!--        app:cardUseCompatPadding="true"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintHorizontal_bias="0.0"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toTopOf="parent">-->
+
+    <!--        &lt;!&ndash;-->
+    <!--    In the above cardview widget-->
+    <!--    cardelevation property will give elevation to your card view-->
+    <!--    card corner radius will provide radius to your card view-->
+    <!--    card background color will give background color to your card view-->
+    <!--    card max elevation will give the cardview maximum elevation-->
+    <!--    card prevent corner overlap will add padding to CardView on v20 and before to prevent intersections between the Card content and rounded corners.-->
+    <!--    card use compact padding will add padding in API v21+ as well to have the same measurements with previous versions.-->
+    <!--    below are the two widgets imageview and text view we are displaying inside our card view.-->
+    <!--    &ndash;&gt;-->
+
+    <!--        <ImageView-->
+    <!--            android:id="@+id/img"-->
+    <!--            android:layout_width="110dp"-->
+    <!--            android:layout_height="118dp"-->
+    <!--            android:layout_margin="20dp"-->
+    <!--            android:contentDescription="@string/app_name"-->
+    <!--            android:src="@drawable/user_icon_1" />-->
+
+    <!--        <TextView-->
+    <!--            android:id="@+id/tv1"-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_gravity="center_horizontal"-->
+    <!--            android:layout_marginTop="20dp"-->
+    <!--            android:layout_marginBottom="20dp"-->
+    <!--            android:fontFamily="@font/poppins_light"-->
+    <!--            android:text="Type:"-->
+    <!--            android:textSize="20sp"-->
+    <!--            android:textStyle="bold" />-->
+
+    <!--        <TextView-->
+    <!--            android:id="@+id/tv2"-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_gravity="center_horizontal|end"-->
+    <!--            android:layout_marginTop="20dp"-->
+    <!--            android:layout_marginRight="73dp"-->
+    <!--            android:layout_marginBottom="20dp"-->
+    <!--            android:fontFamily="@font/poppins_light"-->
+    <!--            android:text="Theft"-->
+    <!--            android:textSize="20sp" />-->
+
+    <!--        <TextView-->
+    <!--            android:id="@+id/tv3"-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_gravity="center"-->
+    <!--            android:layout_marginTop="20dp"-->
+    <!--            android:layout_marginBottom="20dp"-->
+    <!--            android:fontFamily="@font/poppins_light"-->
+    <!--            android:text="Street:"-->
+    <!--            android:textSize="20sp"-->
+    <!--            android:textStyle="bold" />-->
+
+    <!--        <TextView-->
+    <!--            android:id="@+id/tv4"-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_gravity="center|end"-->
+    <!--            android:layout_marginTop="20dp"-->
+    <!--            android:layout_marginRight="20dp"-->
+    <!--            android:layout_marginBottom="20dp"-->
+    <!--            android:fontFamily="@font/poppins_light"-->
+    <!--            android:text="Rawalpindi"-->
+    <!--            android:textSize="20sp" />-->
+
+    <!--        <TextView-->
+    <!--            android:id="@+id/tv5"-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_gravity="bottom|center"-->
+    <!--            android:layout_marginTop="20dp"-->
+    <!--            android:layout_marginBottom="20dp"-->
+    <!--            android:fontFamily="@font/poppins_light"-->
+    <!--            android:text="Status:"-->
+    <!--            android:textSize="20sp"-->
+    <!--            android:textStyle="bold" />-->
+
+    <!--        <TextView-->
+    <!--            android:id="@+id/tv6"-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_gravity="bottom|center|end"-->
+    <!--            android:layout_marginTop="20dp"-->
+    <!--            android:layout_marginRight="27dp"-->
+    <!--            android:layout_marginBottom="20dp"-->
+    <!--            android:fontFamily="@font/poppins_light"-->
+    <!--            android:text="Submitted"-->
+    <!--            android:textSize="20sp" />-->
+
+
+    <!--    </androidx.cardview.widget.CardView>-->
+
+    <!--</androidx.constraintlayout.widget.ConstraintLayout>-->
