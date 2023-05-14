@@ -29,8 +29,9 @@
                 android:value=".MainActivity" />
         </activity>
         <activity
-            android:name=".UserDashboard"
-            android:exported="false" />
+            android:name=".UserDashboardActivity"
+            android:exported="false"
+            android:theme="@style/DashboardTheme"/>
         <activity
             android:name=".AddMissingPerson"
             android:exported="false" /> <!-- <activity -->

@@ -41,6 +41,11 @@ public class LoginActivity extends AppCompatActivity {
                 } else {
                     // Perform actual login logic here, such as authentication against a server
                     Toast.makeText(LoginActivity.this, "Logged in successfully", Toast.LENGTH_SHORT).show();
+
+                    // send intent to user dashboard activity
+                    Intent intent = new Intent(LoginActivity.this, UserDashboardActivity.class);
+
+                    startActivity(intent);
                 }
             }
         });
