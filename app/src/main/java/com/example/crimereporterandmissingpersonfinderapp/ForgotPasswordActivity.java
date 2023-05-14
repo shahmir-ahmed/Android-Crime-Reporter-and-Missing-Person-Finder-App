@@ -37,8 +37,8 @@ public class ForgotPasswordActivity extends AppCompatActivity {
                 emailEditText.requestFocus();
             }
             else {
-//                Intent intent = new Intent(this, ResetPasswordActivity.class);
-//                startActivity(intent);
+                Intent intent = new Intent(this, ResetPasswordActivity.class);
+                startActivity(intent);
                 }
             });
 
