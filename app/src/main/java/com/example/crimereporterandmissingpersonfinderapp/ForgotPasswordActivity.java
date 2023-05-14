@@ -13,14 +13,18 @@ import java.util.regex.Pattern;
 
 public class ForgotPasswordActivity extends AppCompatActivity {
 
+    EditText emailEditText;
+
+    Button submitButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forgot_password);
 
-        EditText emailEditText = findViewById(R.id.email_ET);
+        emailEditText = findViewById(R.id.email_ET);
 
-        Button submitButton = findViewById(R.id.submit_btn);
+        submitButton = findViewById(R.id.submit_btn);
+
         submitButton.setOnClickListener(view -> {
             String email = emailEditText.getText().toString();
             //String password = passwordEditText.getText().toString();
@@ -38,6 +42,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
             }
             else {
                 Intent intent = new Intent(this, ResetPasswordActivity.class);
+                intent.putExtra("email", email);
                 startActivity(intent);
                 }
             });
