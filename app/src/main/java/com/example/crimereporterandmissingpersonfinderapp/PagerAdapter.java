@@ -19,8 +19,8 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
         switch (position) {
             case 0:
                 return new ReportMissingPersonFragment();
-//            case 1:
-//                return new TabFragment2();
+            case 1:
+                return new MissingPersonReportsFragment();
 //            case 2:
 //                return new TabFragment3();
             default:
