@@ -55,7 +55,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         // if login button is clicked
         else if(text.equals("Login")){
-            Toast.makeText(this, "Login Screen Opening!", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(this, "Login Screen Opening!", Toast.LENGTH_SHORT).show();
+
+            // Sending intent to Login Activity
+            Intent intent = new Intent(this, LoginActivity.class);
+
+            startActivity(intent);
+
         }
     }
 
