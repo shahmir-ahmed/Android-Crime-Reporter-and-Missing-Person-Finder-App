@@ -2,6 +2,7 @@ package com.example.crimereporterandmissingpersonfinderapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -48,7 +49,12 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Perform forgot password logic here
-                Toast.makeText(LoginActivity.this, "Forgot password clicked", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(LoginActivity.this, "Forgot password clicked", Toast.LENGTH_SHORT).show();
+
+                // Sending intent to forgot password activity
+                Intent intent = new Intent(LoginActivity.this, ForgotPasswordActivity.class);
+
+                startActivity(intent);
             }
         });
 
