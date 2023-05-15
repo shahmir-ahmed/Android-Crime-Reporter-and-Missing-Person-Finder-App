@@ -1,8 +1,9 @@
 <resources>
     <string name="app_name">Police System</string>
     <string name="tab_label1">Report Missing Person</string>
-    <string name="tab_label2">Missing Reports</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <!--    <string name="tab_label3">Cooking</string>-->
+    <string name="tab_label2">Report Crime</string>
+    <string name="tab_label3">Lodge Complaint</string>
+    <string name="tab_label4">Missing Person Reports</string>
+    <string name="tab_label5">Crime Reports</string>
+    <string name="tab_label6">Lodged Complaints</string>
 </resources>
