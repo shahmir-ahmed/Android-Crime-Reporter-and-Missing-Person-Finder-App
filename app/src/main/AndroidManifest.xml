@@ -32,9 +32,7 @@
             android:name=".UserDashboardActivity"
             android:exported="false"
             android:theme="@style/DashboardTheme"/>
-        <activity
-            android:name=".AddMissingPerson"
-            android:exported="false" /> <!-- <activity -->
+        <!-- <activity -->
         <!-- android:name=".SearchCrimeActivity" -->
         <!-- android:exported="false" /> -->
         <activity
