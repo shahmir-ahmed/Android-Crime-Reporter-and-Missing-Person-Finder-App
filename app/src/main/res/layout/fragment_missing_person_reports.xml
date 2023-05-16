@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#240e71"
     tools:context=".MissingPersonReportsFragment">
 
     <!-- TODO: Update blank fragment layout -->
@@ -12,9 +14,24 @@
 <!--        android:text="@string/hello_blank_fragment" />-->
 
     <TextView
+        android:id="@+id/textView8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Your all missing person reports::"
-        android:textAppearance="?android:attr/textAppearanceLarge"/>
+        android:fontFamily="@font/poppins_light"
+        android:text="Your all missing person reports here:"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <!--    <TextView-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="Your all missing person reports::"-->
+<!--        android:textAppearance="?android:attr/textAppearanceLarge"/>-->
 
 </FrameLayout>
