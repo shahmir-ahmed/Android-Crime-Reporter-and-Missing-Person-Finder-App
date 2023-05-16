@@ -13,7 +13,7 @@ public class SearchMissingPersonReportsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_search_crime);
+        setContentView(R.layout.activity_search_missing_person_reports);
     }
 
     @Override
