@@ -67,7 +67,11 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Perform sign up logic here
-                Toast.makeText(LoginActivity.this, "Sign up clicked", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(LoginActivity.this, "Sign up clicked", Toast.LENGTH_SHORT).show();
+
+                Intent intent = new Intent(LoginActivity.this, RegistrationActivity.class);
+
+                startActivity(intent);
             }
         });
     }
