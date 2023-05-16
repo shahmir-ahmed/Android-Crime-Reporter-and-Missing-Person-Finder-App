@@ -26,7 +26,6 @@ public class SearchMissingPersonReportsActivity extends AppCompatActivity {
         MenuItem menuItem = menu.findItem(R.id.action_search);
         SearchView searchView = (SearchView) menuItem.getActionView();
         searchView.setQueryHint("Type zip/postal code here");
-
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {

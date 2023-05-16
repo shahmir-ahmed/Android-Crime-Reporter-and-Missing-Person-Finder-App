@@ -51,7 +51,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         // if missing persons search button is clicked
         else if(text.equals("Missing People")){
-            Toast.makeText(this, "Missing People Search Screen Opening!", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(this, "Missing People Search Screen Opening!", Toast.LENGTH_SHORT).show();
+
+            Intent intent = new Intent(this, SearchMissingPersonReportsActivity.class);
+
+            startActivity(intent);
         }
         // if login button is clicked
         else if(text.equals("Login")){
