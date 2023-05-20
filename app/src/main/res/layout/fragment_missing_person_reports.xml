@@ -262,7 +262,7 @@
 
                             <!--  "Type" text view  -->
                             <TextView
-                                android:id="@+id/tv1"
+                                android:id="@+id/tv10"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="36dp"
@@ -280,7 +280,7 @@
                             <!--  "Street" text view  -->
 
                             <TextView
-                                android:id="@+id/tv2"
+                                android:id="@+id/tv11"
                                 android:layout_width="180dp"
                                 android:layout_height="25dp"
                                 android:layout_marginStart="10dp"
@@ -291,11 +291,11 @@
                                 android:textSize="15sp"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintHorizontal_bias="0.614"
-                                app:layout_constraintStart_toEndOf="@+id/tv1"
+                                app:layout_constraintStart_toEndOf="@+id/tv10"
                                 app:layout_constraintTop_toTopOf="parent" />
 
                             <TextView
-                                android:id="@+id/tv3"
+                                android:id="@+id/tv12"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="36dp"
@@ -310,7 +310,7 @@
 
                             <!--  "street name" text view  -->
                             <TextView
-                                android:id="@+id/tv4"
+                                android:id="@+id/tv13"
                                 android:layout_width="180dp"
                                 android:layout_height="25dp"
                                 android:layout_marginStart="28dp"
@@ -326,7 +326,7 @@
 
                             <!--  "Details" text view  -->
                             <TextView
-                                android:id="@+id/tv5"
+                                android:id="@+id/tv14"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="36dp"
@@ -341,7 +341,7 @@
 
                             <!--  "details description" text view  -->
                             <TextView
-                                android:id="@+id/tv6"
+                                android:id="@+id/tv15"
                                 android:layout_width="180dp"
                                 android:layout_height="25dp"
                                 android:layout_marginStart="10dp"
@@ -370,7 +370,7 @@
 
                             <!--  "Status" text view  -->
                             <TextView
-                                android:id="@+id/tv7"
+                                android:id="@+id/tv16"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_horizontal"
@@ -387,7 +387,7 @@
 
                             <!--  "status description" text view  -->
                             <TextView
-                                android:id="@+id/tv8"
+                                android:id="@+id/tv17"
                                 android:layout_width="160dp"
                                 android:layout_height="25dp"
                                 android:layout_marginStart="32dp"
@@ -410,7 +410,7 @@
                         <!--  Crime image Image View inside card view -->
                         <!-- Crime image -->
                         <ImageView
-                            android:id="@+id/img"
+                            android:id="@+id/img2"
                             android:layout_width="137dp"
                             android:layout_height="137dp"
                             android:layout_gravity="center_horizontal"
