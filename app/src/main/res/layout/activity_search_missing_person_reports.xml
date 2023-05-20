@@ -18,7 +18,7 @@
         <androidx.cardview.widget.CardView
             android:id="@+id/cv1"
             android:layout_width="match_parent"
-            android:layout_height="420dp"
+            android:layout_height="505dp"
             android:layout_marginTop="4dp"
             app:cardBackgroundColor="@color/white"
             app:cardCornerRadius="20dp"
@@ -142,8 +142,8 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                android:layout_marginBottom="28dp">
+                android:layout_marginBottom="28dp"
+                android:layout_marginTop="328dp">
 
 
                 <!--  "Status" text view  -->
@@ -191,10 +191,18 @@
                 android:id="@+id/img"
                 android:layout_width="137dp"
                 android:layout_height="137dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="50dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="170dp"
                 android:contentDescription="Crime image"
                 android:src="@drawable/user_icon_1" />
+
+            <Button
+                android:id="@+id/button1"
+                android:layout_width="320dp"
+                android:layout_height="wrap_content"
+                android:text="More Details"
+                android:layout_gravity="center_horizontal|bottom"
+                android:layout_marginBottom="28dp"/>
 
         </androidx.cardview.widget.CardView>
         <!--  End of Card View  -->
@@ -203,7 +211,7 @@
         <!--  Card View 2  -->
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="420dp"
+            android:layout_height="505dp"
             app:cardBackgroundColor="@color/white"
             app:cardCornerRadius="20dp"
             app:cardElevation="10dp"
@@ -324,8 +332,8 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                android:layout_marginBottom="28dp">
+                android:layout_marginBottom="28dp"
+                android:layout_marginTop="328dp">
 
 
                 <!--  "Status" text view  -->
@@ -373,10 +381,18 @@
                 android:id="@+id/img2"
                 android:layout_width="137dp"
                 android:layout_height="137dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="50dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="170dp"
                 android:contentDescription="Crime image"
                 android:src="@drawable/ic_launcher_background" />
+
+            <Button
+                android:id="@+id/button2"
+                android:layout_width="320dp"
+                android:layout_height="wrap_content"
+                android:text="More Details"
+                android:layout_gravity="center_horizontal|bottom"
+                android:layout_marginBottom="28dp"/>
 
         </androidx.cardview.widget.CardView>
         <!--  End of Card View  -->
