@@ -45,7 +45,7 @@
 
     <EditText
         android:id="@+id/etPersonName"
-        android:layout_width="250dp"
+        android:layout_width="240dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="48dp"
         android:ems="10"
@@ -62,7 +62,7 @@
         android:id="@+id/textView6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="58dp"
         android:text="Age:"
         android:fontFamily="@font/poppins"
         android:textColor="#FFFF"
@@ -75,7 +75,7 @@
 
     <EditText
         android:id="@+id/etPersonAge"
-        android:layout_width="250dp"
+        android:layout_width="240dp"
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="Enter age"
@@ -93,7 +93,7 @@
         android:id="@+id/textView13"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="50dp"
         android:fontFamily="@font/poppins"
         android:text="Gender:"
         android:textColor="#FFFF"
@@ -139,9 +139,9 @@
 
     <TextView
         android:id="@+id/textView11"
-        android:layout_width="wrap_content"
+        android:layout_width="60dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="52dp"
+        android:layout_marginTop="35dp"
         android:text="Last seen:"
         android:fontFamily="@font/poppins"
         android:textColor="#FFFF"
@@ -153,15 +153,15 @@
 
     <EditText
         android:id="@+id/etLastSeen"
-        android:layout_width="220dp"
+        android:layout_width="240dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:ems="10"
         android:fontFamily="@font/poppins_light"
         android:hint="Enter last seen location"
-        android:inputType="textPersonName"
+        android:inputType="text"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.602"
+        app:layout_constraintHorizontal_bias="0.702"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/radioGroup1" />
 
@@ -169,7 +169,7 @@
         android:id="@+id/textView12"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="52dp"
+        android:layout_marginTop="57dp"
         android:text="Details:"
         android:fontFamily="@font/poppins_light"
         android:textColor="#FFFF"
@@ -209,40 +209,42 @@
 
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/imageViewPersonImage"
         android:layout_width="329dp"
         android:layout_height="167dp"
         android:layout_marginTop="20dp"
+        android:background="#FFFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView14"
         tools:src="@tools:sample/avatars" />
 
     <Button
-        android:id="@+id/browse"
+        android:id="@+id/browseBtn"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="4dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="20dp"
         android:text="Browse"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/submit"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+        app:layout_constraintTop_toBottomOf="@+id/imageViewPersonImage" />
 
     <Button
-        android:id="@+id/submit"
+        android:id="@+id/submitBtn"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:text="Submit Report"
         android:layout_marginTop="50dp"
+        android:layout_marginBottom="50dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/browse"
+        app:layout_constraintTop_toBottomOf="@+id/browseBtn"
         app:layout_constraintVertical_bias="1.0" />
 
 
