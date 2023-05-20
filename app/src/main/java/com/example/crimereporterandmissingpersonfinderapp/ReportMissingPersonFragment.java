@@ -169,7 +169,7 @@ public class ReportMissingPersonFragment extends Fragment {
                     Toast.makeText(getView().getContext(), "Report submitted!", Toast.LENGTH_LONG).show();
 
                     // Show missing person reports fragment
-                    
+
                 }
 
             }
