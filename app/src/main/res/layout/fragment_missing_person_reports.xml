@@ -90,7 +90,7 @@
                         android:id="@+id/tv4"
                         android:layout_width="180dp"
                         android:layout_height="25dp"
-                        android:layout_marginStart="28dp"
+                        android:layout_marginStart="8dp"
                         android:layout_marginTop="20dp"
                         android:fontFamily="@font/poppins_light"
                         android:text="Lane 9, People Colony"
@@ -203,17 +203,17 @@
 
                     <Button
                         android:id="@+id/viewBtn"
-                        android:layout_width="100dp"
+                        android:layout_width="80dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="20dp"
+                        android:layout_marginLeft="14dp"
                         android:layout_marginBottom="28dp"
                         android:text="View" />
 
                     <Button
                         android:id="@+id/updateBtn"
-                        android:layout_width="100dp"
-                        android:layout_marginLeft="25dp"
-                        android:layout_marginRight="20dp"
+                        android:layout_width="95dp"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="10dp"
                         android:layout_height="wrap_content"
                         android:text="Update"
                         android:layout_marginBottom="28dp"/>
@@ -306,7 +306,7 @@
                                 android:textSize="15sp"
                                 android:textStyle="bold"
                                 app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toBottomOf="@+id/tv1" />
+                                app:layout_constraintTop_toBottomOf="@+id/tv10" />
 
                             <!--  "street name" text view  -->
                             <TextView
@@ -321,8 +321,8 @@
                                 android:textSize="15sp"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintHorizontal_bias="0.326"
-                                app:layout_constraintStart_toEndOf="@+id/tv3"
-                                app:layout_constraintTop_toBottomOf="@+id/tv2" />
+                                app:layout_constraintStart_toEndOf="@+id/tv12"
+                                app:layout_constraintTop_toBottomOf="@+id/tv11" />
 
                             <!--  "Details" text view  -->
                             <TextView
@@ -337,7 +337,7 @@
                                 android:textSize="15sp"
                                 android:textStyle="bold"
                                 app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toBottomOf="@+id/tv3" />
+                                app:layout_constraintTop_toBottomOf="@+id/tv13" />
 
                             <!--  "details description" text view  -->
                             <TextView
@@ -352,8 +352,8 @@
                                 android:textSize="15sp"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintHorizontal_bias="0.515"
-                                app:layout_constraintStart_toEndOf="@+id/tv5"
-                                app:layout_constraintTop_toBottomOf="@+id/tv4" />
+                                app:layout_constraintStart_toEndOf="@+id/tv14"
+                                app:layout_constraintTop_toBottomOf="@+id/tv13" />
 
 
                         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -399,7 +399,7 @@
                                 android:textSize="15sp"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintHorizontal_bias="0.393"
-                                app:layout_constraintStart_toEndOf="@+id/tv7"
+                                app:layout_constraintStart_toEndOf="@+id/tv16"
                                 app:layout_constraintTop_toTopOf="parent" />
 
 
@@ -420,7 +420,7 @@
 
                         <Button
                             android:id="@+id/button1"
-                            android:layout_width="320dp"
+                            android:layout_width="300dp"
                             android:layout_height="wrap_content"
                             android:text="More Details"
                             android:layout_gravity="center_horizontal|bottom"
