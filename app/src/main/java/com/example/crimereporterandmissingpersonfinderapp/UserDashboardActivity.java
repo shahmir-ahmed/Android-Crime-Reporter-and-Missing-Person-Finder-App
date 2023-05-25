@@ -68,3 +68,81 @@ public class UserDashboardActivity extends AppCompatActivity {
 
     }
 }
+
+//package com.example.crimereporterandmissingpersonfinderapp;
+//
+//import androidx.appcompat.app.AppCompatActivity;
+//import androidx.appcompat.widget.Toolbar;
+//import androidx.viewpager.widget.ViewPager;
+//
+//import android.annotation.SuppressLint;
+//import android.os.Bundle;
+//import android.view.MotionEvent;
+//import android.view.View;
+//
+//import com.google.android.material.tabs.TabLayout;
+//
+//public class UserDashboardActivity extends AppCompatActivity {
+//
+//    private DraggableTabLayout tabLayout;
+//    private ViewPager viewPager;
+//
+//    @SuppressLint("ClickableViewAccessibility")
+//    @Override
+//    protected void onCreate(Bundle savedInstanceState) {
+//        super.onCreate(savedInstanceState);
+//        setContentView(R.layout.activity_user_dashboard);
+//
+//        Toolbar toolbar = findViewById(R.id.toolbar);
+//        setSupportActionBar(toolbar);
+//
+//        tabLayout = findViewById(R.id.tab_layout);
+//
+//        // Set the text for each tab.
+//        tabLayout.getTabAt(0).setText(R.string.tab_label1);
+//        tabLayout.getTabAt(1).setText(R.string.tab_label2);
+//        tabLayout.getTabAt(2).setText(R.string.tab_label3);
+//        tabLayout.getTabAt(3).setText(R.string.tab_label4);
+//        tabLayout.getTabAt(4).setText(R.string.tab_label5);
+//        tabLayout.getTabAt(5).setText(R.string.tab_label6);
+//
+//        viewPager = findViewById(R.id.pager);
+//
+//        final PagerAdapter adapter = new PagerAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
+//        viewPager.setAdapter(adapter);
+//
+//        tabLayout.setupWithViewPager(viewPager);
+//
+//        // Enable dragging behavior on the tabs
+//        tabLayout.setOnTouchListener(new View.OnTouchListener() {
+//            private float startX;
+//            private boolean isDragging = false;
+//
+//            @Override
+//            public boolean onTouch(View v, MotionEvent event) {
+//                switch (event.getAction()) {
+//                    case MotionEvent.ACTION_DOWN:
+//                        startX = event.getX();
+//                        isDragging = false;
+//                        break;
+//                    case MotionEvent.ACTION_MOVE:
+//                        float newX = event.getX();
+//                        float deltaX = newX - startX;
+//
+//                        if (Math.abs(deltaX) >= 20) {
+//                            isDragging = true;
+//                        }
+//                        break;
+//                    case MotionEvent.ACTION_UP:
+//                        if (!isDragging) {
+//                            // Click event on the tab, handle accordingly
+//                            int position = tabLayout.getSelectedTabPosition();
+//                            viewPager.setCurrentItem(position);
+//                        }
+//                        break;
+//                }
+//                return false;
+//            }
+//        });
+//    }
+//}
