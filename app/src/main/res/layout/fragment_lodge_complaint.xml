@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+<androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#240e71"
@@ -12,7 +17,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/poppins_light"
-        android:text="Lodge Complaint:"
+        android:text="Lodge Complaint"
         android:textColor="#FFFFFF"
         android:textSize="20sp"
         android:textStyle="bold"
@@ -30,18 +35,18 @@
         android:fontFamily="@font/poppins_light"
         android:text="Address:"
         android:textColor="#FFFFFF"
-        android:textSize="20sp"
+        android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.049"
+        app:layout_constraintHorizontal_bias="0.047"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.151" />
+        app:layout_constraintVertical_bias="0.16" />
 
     <EditText
         android:id="@+id/editTextAddress"
-        android:layout_width="248dp"
+        android:layout_width="238dp"
         android:layout_height="57dp"
         android:layout_below="@id/textViewAddress"
         android:fontFamily="@font/poppins_light"
@@ -49,10 +54,10 @@
         android:textColor="#FFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.766"
+        app:layout_constraintHorizontal_bias="0.797"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.143"
+        app:layout_constraintVertical_bias="0.142"
         tools:ignore="DuplicateClickableBoundsCheck" />
 
     <TextView
@@ -63,14 +68,14 @@
         android:fontFamily="@font/poppins_light"
         android:text="City:"
         android:textColor="#FFFFFF"
-        android:textSize="20sp"
+        android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.092"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewAddress"
-        app:layout_constraintVertical_bias="0.119" />
+        app:layout_constraintVertical_bias="0.115" />
 
     <EditText
         android:id="@+id/editTextCity"
@@ -83,7 +88,7 @@
         android:textColor="#FFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.766"
+        app:layout_constraintHorizontal_bias="0.797"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextAddress"
         app:layout_constraintVertical_bias="0.02" />
@@ -96,18 +101,18 @@
         android:fontFamily="@font/poppins_light"
         android:text="Pincode:"
         android:textColor="#FFFFFF"
-        android:textSize="20sp"
+        android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.048"
+        app:layout_constraintHorizontal_bias="0.047"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewCity"
-        app:layout_constraintVertical_bias="0.115" />
+        app:layout_constraintVertical_bias="0.125" />
 
     <EditText
         android:id="@+id/editTextPincode"
-        android:layout_width="248dp"
+        android:layout_width="238dp"
         android:layout_height="57dp"
         android:layout_below="@id/textViewPincode"
         android:fontFamily="@font/poppins_light"
@@ -116,10 +121,10 @@
         android:textColor="#FFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.766"
+        app:layout_constraintHorizontal_bias="0.751"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextCity"
-        app:layout_constraintVertical_bias="0.105" />
+        app:layout_constraintVertical_bias="0.083" />
 
     <TextView
         android:id="@+id/textViewSubject"
@@ -129,18 +134,18 @@
         android:fontFamily="@font/poppins_light"
         android:text="Subject:"
         android:textColor="#FFFFFF"
-        android:textSize="20sp"
+        android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.069"
+        app:layout_constraintHorizontal_bias="0.064"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewPincode"
-        app:layout_constraintVertical_bias="0.189" />
+        app:layout_constraintVertical_bias="0.188" />
 
     <EditText
         android:id="@+id/editTextSubject"
-        android:layout_width="248dp"
+        android:layout_width="238dp"
         android:layout_height="57dp"
         android:layout_below="@id/textViewSubject"
         android:fontFamily="@font/poppins_light"
@@ -148,53 +153,57 @@
         android:textColor="#FFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.766"
+        app:layout_constraintHorizontal_bias="0.797"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextPincode"
-        app:layout_constraintVertical_bias="0.115" />
+        app:layout_constraintVertical_bias="0.134" />
 
     <Button
         android:id="@+id/buttonRegisterComplaint"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="30dp"
         android:layout_below="@id/editTextComplaint"
         android:text="Register Complaint"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.483"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.89" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextComplaint"
+        app:layout_constraintVertical_bias="0.976" />
 
     <TextView
         android:id="@+id/textViewComplaint"
-        android:layout_width="100dp"
+        android:layout_width="wrap_content"
         android:layout_height="22dp"
         android:layout_below="@id/editTextSubject"
         android:fontFamily="@font/poppins_light"
         android:text="Complaint:"
         android:textColor="#FFFFFF"
-        android:textSize="18sp"
+        android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.051"
+        app:layout_constraintHorizontal_bias="0.072"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewSubject"
-        app:layout_constraintVertical_bias="0.262" />
+        app:layout_constraintVertical_bias="0.212" />
 
     <EditText
         android:id="@+id/editTextComplaint"
-        android:layout_width="253dp"
-        android:layout_height="81dp"
+        android:layout_width="327dp"
+        android:layout_height="86dp"
         android:layout_below="@id/textViewComplaint"
         android:fontFamily="@font/poppins_light"
         android:hint="Please enter your Complaint"
         android:textColor="#FFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.791"
+        app:layout_constraintHorizontal_bias="0.407"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextSubject"
-        app:layout_constraintVertical_bias="0.173" />
+        app:layout_constraintVertical_bias="0.50" />
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

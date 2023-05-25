@@ -41,7 +41,8 @@
         <activity
             android:name=".UserDashboardActivity"
             android:exported="false"
-            android:theme="@style/DashboardTheme" /> <!-- <activity -->
+            android:theme="@style/DashboardTheme"
+            android:windowSoftInputMode="adjustPan"/> <!-- <activity -->
         <!-- android:name=".SearchCrimeActivity" -->
         <!-- android:exported="false" /> -->
         <activity
