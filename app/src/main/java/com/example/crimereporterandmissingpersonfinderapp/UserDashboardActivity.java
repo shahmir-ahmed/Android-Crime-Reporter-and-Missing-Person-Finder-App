@@ -4,7 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.viewpager.widget.ViewPager;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.View;
 import android.view.Window;
 
 import com.google.android.material.tabs.TabLayout;
@@ -65,6 +69,27 @@ public class UserDashboardActivity extends AppCompatActivity {
             public void onTabReselected(TabLayout.Tab tab) {
             }
         });
+
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        MenuInflater inflater = getMenuInflater();
+
+        inflater.inflate(R.menu.user_dashboard_menu, menu);
+
+//        return super.onCreateOptionsMenu(menu);
+
+        return true;
+    }
+
+    // Function to logout the user
+    public void logout(View view){
+        
+        Intent intent = new Intent(this, LoginActivity.class);
+
+        startActivity(intent);
 
     }
 }
