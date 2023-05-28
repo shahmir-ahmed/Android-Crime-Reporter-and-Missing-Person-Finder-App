@@ -1,10 +1,15 @@
 package com.example.crimereporterandmissingpersonfinderapp;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.viewpager.widget.ViewPager;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.Window;
 
 import com.google.android.material.tabs.TabLayout;
@@ -63,6 +68,40 @@ public class AdminDashboardActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    // Options Menu
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        MenuInflater inflater = getMenuInflater();
+
+        inflater.inflate(R.menu.dashboard_menu, menu);
+
+//        return super.onCreateOptionsMenu(menu);
+
+        return true;
+    }
+
+    // On click event handler on options menu
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        switch (item.getItemId()) {
+            case R.id.dashboard_menu:
+                Intent intent = new Intent(this, LoginActivity.class);
+
+                // destroys all the activities in the stack except the first main activity
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
+                // starting the login activity over the main activity
+                startActivity(intent);
+
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }
 

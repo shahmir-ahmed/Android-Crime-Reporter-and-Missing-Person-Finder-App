@@ -43,7 +43,10 @@ public class LoginActivity extends AppCompatActivity {
                     Toast.makeText(LoginActivity.this, "Logged in successfully", Toast.LENGTH_SHORT).show();
 
                     // send intent to user dashboard activity
-                    Intent intent = new Intent(LoginActivity.this, UserDashboardActivity.class);
+//                    Intent intent = new Intent(LoginActivity.this, UserDashboardActivity.class);
+
+                    // send intent to admin dashboard activity
+                    Intent intent = new Intent(LoginActivity.this, AdminDashboardActivity.class);
 
                     startActivity(intent);
                 }
