@@ -13,14 +13,27 @@
             android:background="#240e71"
             tools:context=".MissingPersonReportsFragment">
 
-
+            <!--  Title for Fragment -->
+            <TextView
+                android:id="@+id/textView17"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/poppins_light"
+                android:text="My Missing Person Reports"
+                android:textColor="#FFFFFF"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <!--  Card View  -->
             <androidx.cardview.widget.CardView
                 android:id="@+id/cv1"
                 android:layout_width="match_parent"
                 android:layout_height="505dp"
-                android:layout_marginTop="4dp"
+                android:layout_marginTop="60dp"
                 app:cardBackgroundColor="@color/white"
                 app:cardCornerRadius="20dp"
                 app:cardElevation="10dp"
