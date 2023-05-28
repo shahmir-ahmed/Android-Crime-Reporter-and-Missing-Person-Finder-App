@@ -77,17 +77,19 @@ public class UserDashboardActivity extends AppCompatActivity {
 
         MenuInflater inflater = getMenuInflater();
 
-        inflater.inflate(R.menu.user_dashboard_menu, menu);
+        inflater.inflate(R.menu.dashboard_menu, menu);
 
 //        return super.onCreateOptionsMenu(menu);
 
         return true;
     }
 
-    // Function to logout the user
+    // Function to logout the user/admin
     public void logout(View view){
-        
+
         Intent intent = new Intent(this, LoginActivity.class);
+
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
         startActivity(intent);
 
