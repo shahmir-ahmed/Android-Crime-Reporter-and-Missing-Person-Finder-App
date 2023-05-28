@@ -1,5 +1,6 @@
 package com.example.crimereporterandmissingpersonfinderapp;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.viewpager.widget.ViewPager;
@@ -8,6 +9,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 
@@ -41,6 +43,9 @@ public class UserDashboardActivity extends AppCompatActivity {
 
         // Set the tabs to fill the entire layout.
         tabLayout.setTabGravity(TabLayout.GRAVITY_START);
+
+        // For scrollable tabs
+        tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
 
         // Use PagerAdapter to manage page views in fragments.
         // Each page is represented by its own fragment.
@@ -84,16 +89,38 @@ public class UserDashboardActivity extends AppCompatActivity {
         return true;
     }
 
-    // Function to logout the user/admin
-    public void logout(View view){
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
-        Intent intent = new Intent(this, LoginActivity.class);
+        switch(item.getItemId()){
+            case R.id.dashboard_menu:
+                Intent intent = new Intent(this, LoginActivity.class);
 
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                // destroys all the activities in the stack except the first main activity
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
-        startActivity(intent);
+                // starting the login activity over the main activity
+                startActivity(intent);
+
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+
 
     }
+
+    // Function to logout the user/admin
+//    public void logout(View view){
+//
+//        Intent intent = new Intent(this, LoginActivity.class);
+//
+//        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//
+//        startActivity(intent);
+//
+//    }
 }
 
 //package com.example.crimereporterandmissingpersonfinderapp;
