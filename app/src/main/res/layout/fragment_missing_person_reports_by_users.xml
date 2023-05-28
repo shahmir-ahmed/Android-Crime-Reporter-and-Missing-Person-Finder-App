@@ -19,10 +19,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="28dp"
             android:text="List of Missing Persons"
-            android:textColor="@color/black"
-            android:textSize="33sp"
+            android:textColor="@color/white"
+            android:fontFamily="@font/poppins_light"
+            android:textSize="24sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.496"
@@ -33,9 +34,9 @@
         <!--  Card View  -->
         <androidx.cardview.widget.CardView
             android:id="@+id/cv1"
-            android:layout_width="408dp"
+            android:layout_width="358dp"
             android:layout_height="478dp"
-            android:layout_marginTop="52dp"
+            android:layout_marginTop="70dp"
             app:cardBackgroundColor="@color/white"
             app:cardCornerRadius="20dp"
             app:cardElevation="10dp"
@@ -43,7 +44,7 @@
             app:cardPreventCornerOverlap="true"
             app:cardUseCompatPadding="true"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintHorizontal_bias="0.49"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
@@ -81,9 +82,10 @@
                     android:textSize="15sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.614"
+                    app:layout_constraintHorizontal_bias="0.415"
                     app:layout_constraintStart_toEndOf="@+id/tv1"
                     app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.682"
                     tools:ignore="HardcodedText" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -159,22 +161,20 @@
 
                 <Button
                     android:id="@+id/viewBtn"
-                    android:layout_width="100dp"
+                    android:layout_width="80dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
+                    android:layout_marginLeft="14dp"
                     android:layout_marginBottom="28dp"
-                    android:text="View"
-                    tools:ignore="ButtonStyle,HardcodedText,RtlHardcoded" />
+                    android:text="View" />
 
                 <Button
                     android:id="@+id/updateBtn"
-                    android:layout_width="100dp"
+                    android:layout_width="95dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="25dp"
-                    android:layout_marginRight="20dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="10dp"
                     android:layout_marginBottom="28dp"
-                    android:text="Update"
-                    tools:ignore="ButtonStyle,HardcodedText,RtlHardcoded" />
+                    android:text="Update" />
 
                 <Button
                     android:id="@+id/deleteBtn"
@@ -183,8 +183,7 @@
                     android:layout_marginLeft="6dp"
                     android:layout_marginRight="80dp"
                     android:layout_marginBottom="28dp"
-                    android:text="Delete"
-                    tools:ignore="ButtonStyle,HardcodedText,RtlHardcoded" />
+                    android:text="Delete" />
 
             </LinearLayout>
 
