@@ -17,7 +17,7 @@ public class PagerAdapterAdmin extends FragmentStatePagerAdapter {
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
-                return new ReportMissingPersonFragment();
+                return new MissingPersonReportsByUsersFragment();
             case 1:
                 return new CrimeReportsByUsersFragment();
             case 2:
