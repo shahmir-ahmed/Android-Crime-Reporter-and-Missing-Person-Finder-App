@@ -6,6 +6,78 @@
     <string name="tab_label4">Missing Person Reports</string>
     <string name="tab_label5">Crime Reports</string>
     <string name="tab_label6">Lodged Complaints</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string-array name="city_array">
+        <item>Abbottabad</item>
+        <item>Ahmadpur East</item>
+        <item>Bahawalnagar</item>
+        <item>Bahawalpur</item>
+        <item>Burewala</item>
+        <item>Chakwal</item>
+        <item>Charsada</item>
+        <item>Chichawatni</item>
+        <item>Chiniot</item>
+        <item>Chishtian</item>
+        <item>Dadu</item>
+        <item>Daska</item>
+        <item>Dera Ghazi Khan</item>
+        <item>Dera Ismail Khan</item>
+        <item>Faisalabad</item>
+        <item>Farooka</item>
+        <item>Gojra</item>
+        <item>Gujranwala</item>
+        <item>Gujrat</item>
+        <item>Hafizabad</item>
+        <item>Hyderabad</item>
+        <item>Islamabad</item>
+        <item>Jacobabad</item>
+        <item>Jaranwala</item>
+        <item>Jhelum</item>
+        <item>Kamalia</item>
+        <item>Kamoke</item>
+        <item>Kandhkot</item>
+        <item>Karachi</item>
+        <item>Kasur</item>
+        <item>Khairpur</item>
+        <item>Khanewal</item>
+        <item>Khanpur</item>
+        <item>Khushab</item>
+        <item>Khuzdar</item>
+        <item>Kohat</item>
+        <item>Kot Adu</item>
+        <item>Lahore</item>
+        <item>Larkana</item>
+        <item>Mandi Bahauddin</item>
+        <item>Mansehra</item>
+        <item>Mardan</item>
+        <item>Mianwali</item>
+        <item>Mingora</item>
+        <item>Mirpur Khas</item>
+        <item>Multan</item>
+        <item>Muridke</item>
+        <item>Muzaffargarh</item>
+        <item>Narowal</item>
+        <item>Nawabshah</item>
+        <item>Nowshera</item>
+        <item>Okara</item>
+        <item>Pakpattan</item>
+        <item>Peshawar</item>
+        <item>Quetta</item>
+        <item>Rahim Yar Khan</item>
+        <item>Rawalakot</item>
+        <item>Rawalpindi</item>
+        <item>Sahiwal</item>
+        <item>Sargodha</item>
+        <item>Sheikhupura</item>
+        <item>Shikarpur</item>
+        <item>Sialkot</item>
+        <item>Sukkur</item>
+        <item>Swabi</item>
+        <item>Tando Adam</item>
+        <item>Tando Allahyar</item>
+        <item>Vehari</item>
+        <item>Wah Cantonment</item>
+        <item>Wazirabad</item>
+    </string-array>
+
 </resources>
