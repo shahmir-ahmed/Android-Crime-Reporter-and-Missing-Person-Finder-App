@@ -91,7 +91,7 @@
                     android:id="@+id/tv4"
                     android:layout_width="180dp"
                     android:layout_height="25dp"
-                    android:layout_marginStart="28dp"
+                    android:layout_marginStart="8dp"
                     android:layout_marginTop="20dp"
                     android:fontFamily="@font/poppins_light"
                     android:text="Lane 9, People Colony"
@@ -122,7 +122,7 @@
                     android:id="@+id/tv6"
                     android:layout_width="180dp"
                     android:layout_height="25dp"
-                    android:layout_marginStart="10dp"
+                    android:layout_marginStart="12dp"
                     android:layout_marginTop="24dp"
                     android:fontFamily="@font/poppins_light"
                     android:text="Person has been miss..."
@@ -198,7 +198,7 @@
 
             <Button
                 android:id="@+id/button1"
-                android:layout_width="320dp"
+                android:layout_width="290dp"
                 android:layout_height="wrap_content"
                 android:text="More Details"
                 android:layout_gravity="center_horizontal|bottom"
@@ -281,7 +281,7 @@
                     android:id="@+id/tv14"
                     android:layout_width="180dp"
                     android:layout_height="25dp"
-                    android:layout_marginStart="28dp"
+                    android:layout_marginStart="8dp"
                     android:layout_marginTop="20dp"
                     android:fontFamily="@font/poppins_light"
                     android:text="Street 32, Rehmanabad"
@@ -312,7 +312,7 @@
                     android:id="@+id/tv16"
                     android:layout_width="180dp"
                     android:layout_height="25dp"
-                    android:layout_marginStart="10dp"
+                    android:layout_marginStart="12dp"
                     android:layout_marginTop="24dp"
                     android:fontFamily="@font/poppins_light"
                     android:text="Contact on this number.. if found"
@@ -388,7 +388,7 @@
 
             <Button
                 android:id="@+id/button2"
-                android:layout_width="320dp"
+                android:layout_width="290dp"
                 android:layout_height="wrap_content"
                 android:text="More Details"
                 android:layout_gravity="center_horizontal|bottom"
