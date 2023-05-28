@@ -155,6 +155,14 @@ public class ReportCrimeFragment extends Fragment {
         Button buttonBrowse = view.findViewById(R.id.buttonBrowse);
         Button buttonRegisterCrime = view.findViewById(R.id.buttonRegisterCrime);
 
+        // Retrieve the array from the XML file
+        String[] cityArray = getResources().getStringArray(R.array.city_array);
+
+        // Create ArrayAdapter and set it as the adapter for the Spinner
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_spinner_item, cityArray);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
+        spinnerCity.setAdapter(adapter);
+
         // Set up browse button click listener
         buttonBrowse.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -215,26 +223,26 @@ public class ReportCrimeFragment extends Fragment {
     }
 
     private void registerForm() {
+
         String streetNumber = editTextStreetNumber.getText().toString().trim();
         String zipCode = editTextZipCode.getText().toString().trim();
         String crimeDescription = editTextCrimeDescription.getText().toString().trim();
 
-        // Retrieve the array from the XML file
-        String[] cityArray = getResources().getStringArray(R.array.city_array);
-
-        // Create ArrayAdapter and set it as the adapter for the Spinner
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_spinner_item, cityArray);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerCity.setAdapter(adapter);
-
         if (streetNumber.isEmpty()) {
-            editTextStreetNumber.setError("Street number is required");
+            editTextStreetNumber.setError("Street details are required");
             editTextStreetNumber.requestFocus();
             return;
         }
-        else if (!isValidStreetNumber(streetNumber)) {
-            editTextStreetNumber.setError("Invalid! Enter your street number between 1 - 30");
-            editTextStreetNumber.requestFocus();
+//        else if (!isValidStreetNumber(streetNumber)) {
+//            editTextStreetNumber.setError("Invalid! Enter your street number between 1 - 30");
+//            editTextStreetNumber.requestFocus();
+//            return;
+//        }
+
+        String selectedCity = spinnerCity.getSelectedItem().toString();
+        System.out.println(selectedCity);
+        if (selectedCity.equals("Select city")) {
+            Toast.makeText(getContext(), "Please select a city", Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -249,12 +257,6 @@ public class ReportCrimeFragment extends Fragment {
             return;
         }
 
-        String selectedCity = spinnerCity.getSelectedItem().toString();
-        if (selectedCity.isEmpty()) {
-            Toast.makeText(getContext(), "Please select a city", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
         if (crimeDescription.isEmpty()) {
             editTextCrimeDescription.setError("Please enter crime description");
             return;
@@ -262,10 +264,11 @@ public class ReportCrimeFragment extends Fragment {
 
         if (selectedImageBitmap == null) {
             Toast.makeText(getContext(), "Please select an image", Toast.LENGTH_SHORT).show();
+            return;
         }
 
         // Display toast message for successful registration
-        Toast.makeText(getContext(), "Registration Successful", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), "Crime reported successfully", Toast.LENGTH_SHORT).show();
     }
 
     private boolean isValidZipCode(String zipCode) {
