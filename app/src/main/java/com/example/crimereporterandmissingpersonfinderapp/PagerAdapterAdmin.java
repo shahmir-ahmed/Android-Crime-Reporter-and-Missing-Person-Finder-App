@@ -21,7 +21,7 @@ public class PagerAdapterAdmin extends FragmentStatePagerAdapter {
             case 1:
                 return new CrimeReportsByUsersFragment();
             case 2:
-                return new LodgeComplaintFragment();
+                return new ComplaintsLodgedByUsersFragment();
             default:
                 return null;
         }
