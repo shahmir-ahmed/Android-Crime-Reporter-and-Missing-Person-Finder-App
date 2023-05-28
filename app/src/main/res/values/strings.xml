@@ -1,10 +1,18 @@
 <resources>
+<!--    App Name-->
     <string name="app_name">Police System</string>
+
+    <!--    User Dashboard Tab Layout Titles-->
     <string name="tab_label1">Report Missing Person</string>
     <string name="tab_label2">Report Crime</string>
     <string name="tab_label3">Lodge Complaint</string>
     <string name="tab_label4">Missing Person Reports</string>
     <string name="tab_label5">Crime Reports</string>
     <string name="tab_label6">Lodged Complaints</string>
+
+    <!--    Admin Dashboard Tab Layout Titles-->
+    <string name="tab_label7">Missing Person Reports</string>
+    <string name="tab_label8">Crime Reports</string>
+    <string name="tab_label9">Lodged Complaints</string>
 
 </resources>

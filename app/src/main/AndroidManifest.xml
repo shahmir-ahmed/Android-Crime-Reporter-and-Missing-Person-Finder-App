@@ -12,6 +12,9 @@
         android:theme="@style/Theme.CrimeReporterAndMissingPersonFinderApp"
         tools:targetApi="31">
         <activity
+            android:name=".AdminDashboard"
+            android:exported="false" />
+        <activity
             android:name=".SearchMissingPersonReportsActivity"
             android:exported="false" />
         <activity
@@ -42,7 +45,7 @@
             android:name=".UserDashboardActivity"
             android:exported="false"
             android:theme="@style/DashboardTheme"
-            android:windowSoftInputMode="adjustPan"/> <!-- <activity -->
+            android:windowSoftInputMode="adjustPan" /> <!-- <activity -->
         <!-- android:name=".SearchCrimeActivity" -->
         <!-- android:exported="false" /> -->
         <activity
