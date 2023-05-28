@@ -6,7 +6,10 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -40,12 +43,15 @@ public class AdminDashboardActivity extends AppCompatActivity {
         // Set the tabs to fill the entire layout.
         tabLayout.setTabGravity(TabLayout.GRAVITY_START);
 
+        // For scrollable tabs
+        tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
+
         // Use PagerAdapter to manage page views in fragments.
         // Each page is represented by its own fragment.
         // This is another example of the adapter pattern.
         final ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
-        // create pager adapter
-        final PagerAdapter adapter = new PagerAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
+        // create pager adapter for admin
+        final PagerAdapterAdmin adapter = new PagerAdapterAdmin(getSupportFragmentManager(), tabLayout.getTabCount());
         // set adapter on the view pager
         viewPager.setAdapter(adapter);
 
@@ -78,7 +84,11 @@ public class AdminDashboardActivity extends AppCompatActivity {
 
         inflater.inflate(R.menu.dashboard_menu, menu);
 
-//        return super.onCreateOptionsMenu(menu);
+        int positionOfMenuItem = 0; // or whatever...
+        MenuItem item = menu.getItem(positionOfMenuItem);
+        SpannableString s = new SpannableString("Logout");
+        s.setSpan(new ForegroundColorSpan(Color.WHITE), 0, s.length(), 0);
+        item.setTitle(s);
 
         return true;
     }
