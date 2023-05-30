@@ -2,7 +2,10 @@ package com.example.crimereporterandmissingpersonfinderapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.ContentValues;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -28,6 +31,53 @@ public class LoginActivity extends AppCompatActivity {
         btnForgotPassword = (Button) findViewById(R.id.btn_forgot_password);
         btnSignUp = (Button) findViewById(R.id.btn_signup);
 
+
+        /*
+        // dummy user data
+        // creating database helper class object
+        DBHelper dbHelper = new DBHelper(getApplicationContext());
+
+        // creating sqlite database object and getting the readable repository of database in the object
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+
+        values.put(DatabaseContract.Users.COL_NAME, "Shahmir Ahmed");
+        values.put(DatabaseContract.Users.COL_CNIC, "76678667867");
+        values.put(DatabaseContract.Users.COL_CONTACT, "03452129816");
+        values.put(DatabaseContract.Users.COL_GENDER, "Male");
+        values.put(DatabaseContract.Users.COL_USERNAME, "ahmed1212514@gmail.com");
+        values.put(DatabaseContract.Users.COL_PASSWORD, "12345678");
+
+        long id = db.insert(DatabaseContract.Users.TABLE_NAME, null, values);
+
+        if(id>0){
+            Toast.makeText(LoginActivity.this, "inserted:"+id, Toast.LENGTH_SHORT).show();
+        }
+        else{
+            Toast.makeText(LoginActivity.this, "Err 1", Toast.LENGTH_SHORT).show();
+        }
+
+        ContentValues values1 = new ContentValues();
+
+        values1.put(DatabaseContract.Users.COL_NAME, "Shehryar Ahmed");
+        values1.put(DatabaseContract.Users.COL_CNIC, "878979779");
+        values1.put(DatabaseContract.Users.COL_CONTACT, "03215102450");
+        values1.put(DatabaseContract.Users.COL_GENDER, "Male");
+        values1.put(DatabaseContract.Users.COL_USERNAME, "sheryara17@gmail.com");
+        values1.put(DatabaseContract.Users.COL_PASSWORD, "88888888");
+
+        long id1 = db.insert(DatabaseContract.Users.TABLE_NAME, null, values1);
+
+        if(id1>0){
+            Toast.makeText(LoginActivity.this, "inserted:"+id1, Toast.LENGTH_SHORT).show();
+        }
+        else{
+            Toast.makeText(LoginActivity.this, "Err 2", Toast.LENGTH_SHORT).show();
+        }
+        */
+
+
         // Set click listeners
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -40,15 +90,58 @@ public class LoginActivity extends AppCompatActivity {
                     Toast.makeText(LoginActivity.this, "Please enter username and password", Toast.LENGTH_SHORT).show();
                 } else {
                     // Perform actual login logic here, such as authentication against a server
-                    Toast.makeText(LoginActivity.this, "Logged in successfully", Toast.LENGTH_SHORT).show();
 
-                    // send intent to user dashboard activity
-//                    Intent intent = new Intent(LoginActivity.this, UserDashboardActivity.class);
+                    // creating database helper class object
+                    DBHelper dbHelper = new DBHelper(getApplicationContext());
 
-                    // send intent to admin dashboard activity
-                    Intent intent = new Intent(LoginActivity.this, AdminDashboardActivity.class);
+                    // creating sqlite database object and getting the readable repository of database in the object
+                    SQLiteDatabase db = dbHelper.getReadableDatabase();
 
-                    startActivity(intent);
+                    // columns for which data needs to be retrieved
+                    String columns[] = {DatabaseContract.Users.COL_USERNAME, DatabaseContract.Users.COL_PASSWORD};
+
+                    // where clause
+                    String whereClause = DatabaseContract.Users.COL_USERNAME+"=? AND "+DatabaseContract.Users.COL_PASSWORD+"=?";
+
+                    // where clause args
+                    String whereArgs[] = {username, password};
+
+                    // query to check user trying to login exists
+                    Cursor result = db.query(DatabaseContract.Users.TABLE_NAME, columns, whereClause, whereArgs, null, null, null);
+
+                    // if user exists
+
+                    // query() method returns an Empty Cursor if there is not record found
+                    // You can use getCount() to confirm if the Cursor is empty or check if moveToFirst() returns false (i.e., it could not move to the first row).
+                    if(result.moveToFirst()){
+
+                        Toast.makeText(LoginActivity.this, "Logged in successfully, Welcome"+username, Toast.LENGTH_SHORT).show();
+
+                        // send intent to user dashboard activity
+                        Intent intent = new Intent(LoginActivity.this, UserDashboardActivity.class);
+
+                        startActivity(intent);
+
+                        result.close(); // close the cursor
+
+                    }
+
+                    // Check if the user trying to login is admin
+                    else{
+                        // Here when we know that the user trying to login is not registered user
+                        Toast.makeText(LoginActivity.this, "You are not registered user!", Toast.LENGTH_SHORT).show();
+
+                        // check user credentials are present as admin or not from database
+
+                        // send intent to admin dashboard activity
+//                        Intent intent = new Intent(LoginActivity.this, AdminDashboardActivity.class);
+//
+//                        startActivity(intent);
+                    }
+
+                    db.close(); // close the sqlite database object
+
+
                 }
             }
         });
