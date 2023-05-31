@@ -32,7 +32,7 @@ public class LoginActivity extends AppCompatActivity {
         btnSignUp = (Button) findViewById(R.id.btn_signup);
 
 
-        
+        /*
         // dummy user data
         // creating database helper class object
         DBHelper dbHelper = new DBHelper(getApplicationContext());
@@ -75,7 +75,7 @@ public class LoginActivity extends AppCompatActivity {
         else{
             Toast.makeText(LoginActivity.this, "Err 2", Toast.LENGTH_SHORT).show();
         }
-
+        */
 
 
         // Set click listeners
