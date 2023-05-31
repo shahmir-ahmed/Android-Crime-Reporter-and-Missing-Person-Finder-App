@@ -32,7 +32,7 @@ public class LoginActivity extends AppCompatActivity {
         btnSignUp = (Button) findViewById(R.id.btn_signup);
 
 
-        /*
+        
         // dummy user data
         // creating database helper class object
         DBHelper dbHelper = new DBHelper(getApplicationContext());
@@ -75,7 +75,7 @@ public class LoginActivity extends AppCompatActivity {
         else{
             Toast.makeText(LoginActivity.this, "Err 2", Toast.LENGTH_SHORT).show();
         }
-        */
+
 
 
         // Set click listeners
@@ -85,6 +85,10 @@ public class LoginActivity extends AppCompatActivity {
                 // Perform login logic here
                 String username = etUsername.getText().toString();
                 String password = etPassword.getText().toString();
+
+                // trimming username and password
+                username = username.trim();
+                password = password.trim();
 
                 if (username.isEmpty() || password.isEmpty()) {
                     Toast.makeText(LoginActivity.this, "Please enter username and password", Toast.LENGTH_SHORT).show();
