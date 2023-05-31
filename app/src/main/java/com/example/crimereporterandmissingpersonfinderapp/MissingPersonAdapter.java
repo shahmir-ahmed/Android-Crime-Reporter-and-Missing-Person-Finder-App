@@ -49,7 +49,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
         @Override
         public int getItemCount() {
-            return missingPersonData.length;
+            if (missingPersonData != null) {
+                return missingPersonData.length;
+            } else {
+                return 0; // or any other appropriate value
+            }
         }
 
 

@@ -7,7 +7,6 @@ public class MissingPersonData {
         private String missingPersonGender;
         private String missingPersonZipCode;
         private String missingPersonLastSeenLocation;
-
         private String missingPersonReportStatus;
         private String missingPersonReportDetails;
         private Integer missingPersonImage;
