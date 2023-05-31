@@ -21,6 +21,17 @@ public class DBHelper extends SQLiteOpenHelper {
             + DatabaseContract.Users.COL_CONTACT + " TEXT, "
             + DatabaseContract.Users.COL_GENDER + " TEXT)";
 
+    private static final String CREATE_TABLE_MISSING_PERSONS="CREATE TABLE "
+            + DatabaseContract.MissingPersons.TABLE_NAME + " ("
+            + DatabaseContract.MissingPersons._ID +" INTEGER PRIMARY KEY AUTOINCREMENT, "
+            + DatabaseContract.MissingPersons.COL_NAME + " TEXT, "
+            + DatabaseContract.MissingPersons.COL_AGE + " TEXT, "
+            + DatabaseContract.MissingPersons.COL_GENDER + " TEXT, "
+            + DatabaseContract.MissingPersons.COL_LAST_SEEN + " TEXT, "
+            + DatabaseContract.MissingPersons.COL_ZIPCODE + " TEXT, "
+            + DatabaseContract.MissingPersons.COL_REPORT_DETAILS + " TEXT, "
+            + DatabaseContract.MissingPersons.COL_PERSON_IMAGE + " BLOB)";
+
     public DBHelper(@Nullable Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory, int version) {
         super(context, name, factory, version);
     }
@@ -33,6 +44,8 @@ public class DBHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         // create users table when db is created for first time
         sqLiteDatabase.execSQL(CREATE_TABLE_USERS);
+        // create missing persons table when db is created for first time
+        sqLiteDatabase.execSQL(CREATE_TABLE_MISSING_PERSONS);
     }
 
     @Override

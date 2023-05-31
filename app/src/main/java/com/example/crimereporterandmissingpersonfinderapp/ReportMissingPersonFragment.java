@@ -2,9 +2,14 @@ package com.example.crimereporterandmissingpersonfinderapp;
 
 import static android.app.Activity.RESULT_OK;
 
+import android.content.ContentValues;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.VectorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -21,7 +26,10 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import java.io.ByteArrayOutputStream;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStream;
 
 /**
@@ -42,7 +50,7 @@ public class ReportMissingPersonFragment extends Fragment {
     private String mParam2;
 
     // UI Controls
-    EditText etPersonName, etPersonAge, etLastSeen, etDetails;
+    EditText etPersonName, etPersonAge, etLastSeen, etZipCode, etDetails;
 
     RadioGroup radioGroup;
 
@@ -102,7 +110,10 @@ public class ReportMissingPersonFragment extends Fragment {
         etPersonName = (EditText) getView().findViewById(R.id.etPersonName);
         etPersonAge = (EditText) getView().findViewById(R.id.etPersonAge);
         radioGroup = (RadioGroup) getView().findViewById(R.id.radioGroup1);
+        rbMale = (RadioButton)  getView().findViewById(R.id.rbMale);
+        rbFemale = (RadioButton)  getView().findViewById(R.id.rbFemale);
         etLastSeen = (EditText) getView().findViewById(R.id.etLastSeen);
+        etZipCode = (EditText) getView().findViewById(R.id.editTextZipCode);
         etDetails = (EditText) getView().findViewById(R.id.etDetails);
         imageViewPersonImage = (ImageView) getView().findViewById(R.id.imageViewPersonImage);
 
@@ -126,13 +137,15 @@ public class ReportMissingPersonFragment extends Fragment {
             public void onClick(View v) {
 
                 // getting form details
-                String name, age, gender, lastSeen, reportDetails;
+                String name, age, gender, lastSeen, zipCode, reportDetails;
 
                 name = etPersonName.getText().toString();
 
                 age = etPersonAge.getText().toString();
 
                 lastSeen = etLastSeen.getText().toString();
+
+                zipCode = etZipCode.getText().toString();
 
                 reportDetails = etDetails.getText().toString();
 
@@ -145,6 +158,10 @@ public class ReportMissingPersonFragment extends Fragment {
                 else if(age.trim().isEmpty()){
                     Toast.makeText(getView().getContext(), "Please enter age!", Toast.LENGTH_LONG).show();
                 }
+                // if age is not entered
+                else if(age.length()>2){
+                    Toast.makeText(getView().getContext(), "Invalid age!", Toast.LENGTH_LONG).show();
+                }
                 // if no radio button is selected
                 else if(radioGroup.getCheckedRadioButtonId()==-1){
                     Toast.makeText(getView().getContext(), "Please select gender!", Toast.LENGTH_LONG).show();
@@ -152,6 +169,13 @@ public class ReportMissingPersonFragment extends Fragment {
                 // last seen field is not filled
                 else if(lastSeen.trim().isEmpty()){
                     Toast.makeText(getView().getContext(), "Please enter last seen location!", Toast.LENGTH_LONG).show();
+                }
+                // zip code field
+                else if(zipCode.trim().isEmpty()){
+                    Toast.makeText(getView().getContext(), "Please enter zip code!", Toast.LENGTH_LONG).show();
+                }
+                else if(zipCode.length()>5 || zipCode.length()<5){
+                    Toast.makeText(getView().getContext(), "Zip code must be 5 digits!", Toast.LENGTH_LONG).show();
                 }
                 // report details are not entered
                 else if(reportDetails.trim().isEmpty()){
@@ -164,9 +188,51 @@ public class ReportMissingPersonFragment extends Fragment {
                 // if form is valid
                 else{
 
-                    // save form data in database
+                    // checking the gender
+                    if(rbMale.isSelected()){
+                        gender = "Male";
+                    }
+                    else{
+                        gender = "Female";
+                    }
 
-                    Toast.makeText(getView().getContext(), "Report submitted!", Toast.LENGTH_LONG).show();
+                    // save form data in database
+                    DBHelper dbHelper = new DBHelper(getActivity().getApplicationContext());
+
+                    SQLiteDatabase db = dbHelper.getWritableDatabase();
+
+                    // data preparing to send
+                    ContentValues values = new ContentValues();
+
+                    // putting key value pairs in object
+                    values.put(DatabaseContract.MissingPersons.COL_NAME, name);
+                    values.put(DatabaseContract.MissingPersons.COL_AGE, age);
+                    values.put(DatabaseContract.MissingPersons.COL_GENDER, gender);
+                    values.put(DatabaseContract.MissingPersons.COL_LAST_SEEN, lastSeen);
+                    values.put(DatabaseContract.MissingPersons.COL_ZIPCODE, zipCode);
+                    values.put(DatabaseContract.MissingPersons.COL_REPORT_DETAILS, reportDetails);
+
+                    // missing person image
+                    // Get the Bitmap from the ImageView
+                    Bitmap bitmap = ((BitmapDrawable) imageViewPersonImage.getDrawable()).getBitmap();
+
+                    // Convert the Bitmap to a byte array
+                    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                    bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
+                    byte[] personImage = baos.toByteArray();
+
+                    // content value --> missing person image
+                    values.put(DatabaseContract.MissingPersons.COL_PERSON_IMAGE, personImage);
+
+                    // saving form data in DB
+                    long rowId= db.insert(DatabaseContract.MissingPersons.TABLE_NAME, null,  values);
+
+                    if(rowId == -1){
+                        Toast.makeText(getView().getContext(), "Report not submitted!", Toast.LENGTH_LONG).show();
+                    } else{
+                        Toast.makeText(getView().getContext(), "Report submitted successfully!", Toast.LENGTH_LONG).show();
+                    }
+
 
                     // Show missing person reports fragment
 
