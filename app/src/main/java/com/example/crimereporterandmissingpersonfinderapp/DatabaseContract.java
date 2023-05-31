@@ -39,5 +39,7 @@ public final class DatabaseContract {
         public static final String COL_REPORT_DETAILS="report_details";
         public static final String COL_PERSON_IMAGE="image";
 
+        public static final String COL_REPORT_STATUS="report_status";
+
     }
 }

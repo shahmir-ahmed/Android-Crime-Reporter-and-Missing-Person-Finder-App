@@ -30,7 +30,8 @@ public class DBHelper extends SQLiteOpenHelper {
             + DatabaseContract.MissingPersons.COL_LAST_SEEN + " TEXT, "
             + DatabaseContract.MissingPersons.COL_ZIPCODE + " TEXT, "
             + DatabaseContract.MissingPersons.COL_REPORT_DETAILS + " TEXT, "
-            + DatabaseContract.MissingPersons.COL_PERSON_IMAGE + " BLOB)";
+            + DatabaseContract.MissingPersons.COL_PERSON_IMAGE + " BLOB, "
+            + DatabaseContract.MissingPersons.COL_REPORT_STATUS + " TEXT)";
 
     public DBHelper(@Nullable Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory, int version) {
         super(context, name, factory, version);
