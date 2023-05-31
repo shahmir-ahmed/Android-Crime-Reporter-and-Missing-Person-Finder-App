@@ -2,10 +2,14 @@ package com.example.crimereporterandmissingpersonfinderapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ScrollView;
 import android.widget.Toast;
 
 public class SearchMissingPersonReportsActivity extends AppCompatActivity {
@@ -14,6 +18,23 @@ public class SearchMissingPersonReportsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_missing_person_reports);
+
+        // creating recycler view object
+        RecyclerView recyclerView = findViewById(R.id.recyclerView);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        MissingPersonData[] myMovieData = new MissingPersonData[]{
+                new MissingPersonData("Asim", "27", "Female", "234", "Cantt Fawara Chowk", "Seen","Missing Person from last 2 days",  R.drawable.person_1),
+                new MissingPersonData("B", "37", "Male", "2324", "Cantt Fawara Chowk", "Resolved","Missing Person from last 3 days",  R.drawable.person_2),
+                new MissingPersonData("C", "47", "Female", "23324", "Cantt Fawara Chowk", "Submitted","Missing Person from last 4 days",  R.drawable.person_3),
+                new MissingPersonData("D", "57", "Male", "23434", "Cantt Fawara Chowk", "Rejected","Missing Person from last 5 days",  R.drawable.person_4),
+                new MissingPersonData("ER", "67", "Female", "23234", "Cantt Fawara Chowk",  "Submitted", "Missing Person from last 6 days",R.drawable.person_5),
+                new MissingPersonData("F", "77", "Male", "5646", "Cantt Fawara Chowk", "Resolved","Missing Person from last 7 days",  R.drawable.person),
+        };
+
+        MissingPersonAdapter myMovieAdapter = new MissingPersonAdapter(myMovieData,SearchMissingPersonReportsActivity.this);
+        recyclerView.setAdapter(myMovieAdapter);
     }
 
     @Override
