@@ -231,6 +231,15 @@ public class ReportMissingPersonFragment extends Fragment {
                         Toast.makeText(getView().getContext(), "Report not submitted!", Toast.LENGTH_LONG).show();
                     } else{
                         Toast.makeText(getView().getContext(), "Report submitted successfully!", Toast.LENGTH_LONG).show();
+
+                        // reset all the fields
+                        etPersonName.setText("");
+                        etPersonAge.setText("");
+                        radioGroup.clearCheck();
+                        etLastSeen.setText("");
+                        etZipCode.setText("");
+                        etDetails.setText("");
+                        imageViewPersonImage.setImageDrawable(null);
                     }
 
 
