@@ -91,10 +91,13 @@ public class SearchMissingPersonReportsActivity extends AppCompatActivity {
 //        };
 
 
-        missingPersonAdapter = new MissingPersonAdapter(missingPersonData,SearchMissingPersonReportsActivity.this);
-        recyclerView.setAdapter(missingPersonAdapter);
+        if(result.getCount()>0) {
+            missingPersonAdapter = new MissingPersonAdapter(missingPersonData, SearchMissingPersonReportsActivity.this);
+            recyclerView.setAdapter(missingPersonAdapter);
 
-        if(missingPersonAdapter.getItemCount()==0){
+            Toast.makeText(this, "Enter zip/postal code to search for missing persons!", Toast.LENGTH_SHORT).show();
+        }
+        else{
             Toast.makeText(this, "No reports found!", Toast.LENGTH_SHORT).show();
         }
     }
@@ -102,7 +105,7 @@ public class SearchMissingPersonReportsActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
-        // inflating the menu on activity tooLbar
+        // inflating the menu on activity toolbar
         getMenuInflater().inflate(R.menu.menu, menu);
 
         // getting the menu item from the xml file
@@ -118,8 +121,11 @@ public class SearchMissingPersonReportsActivity extends AppCompatActivity {
 
                 // Validating the query
                 // If the query is empty
-                if(query.isEmpty()){
+                if(query.trim().isEmpty()){
                     Toast.makeText(SearchMissingPersonReportsActivity.this, "Please enter code!", Toast.LENGTH_SHORT).show();
+                }
+                else if(query.length()>5 || query.length()<5){
+                    Toast.makeText(SearchMissingPersonReportsActivity.this, "Zip code must be of 5 digits!", Toast.LENGTH_SHORT).show();
                 }
                 else{
 
@@ -127,13 +133,70 @@ public class SearchMissingPersonReportsActivity extends AppCompatActivity {
                     // try-catch will catch exception if the zip code entered is not an integer
                     try{
 
-                        int zipCode = Integer.parseInt(query);
+                        // to check that zip code is in integer only
+                        int searchZipCodeInt = Integer.parseInt(query);
 
                         // correct zipcode
+                        // retrieve all the missing person reports from DB for the zipcode
+                        DBHelper dbHelper = new DBHelper(getApplicationContext());
 
+                        SQLiteDatabase db = dbHelper.getReadableDatabase();
+
+                        String columns[] = {DatabaseContract.MissingPersons.COL_NAME, DatabaseContract.MissingPersons.COL_AGE, DatabaseContract.MissingPersons.COL_GENDER, DatabaseContract.MissingPersons.COL_LAST_SEEN, DatabaseContract.MissingPersons.COL_ZIPCODE, DatabaseContract.MissingPersons.COL_REPORT_DETAILS, DatabaseContract.MissingPersons.COL_PERSON_IMAGE, DatabaseContract.MissingPersons.COL_REPORT_STATUS};
+
+                        String whereClause = DatabaseContract.MissingPersons.COL_ZIPCODE+"=?";
+
+                        String whereArgs[] = {query};
+
+                        Cursor result = db.query(DatabaseContract.MissingPersons.TABLE_NAME, columns, whereClause, whereArgs, null, null, null);
+
+                        // if there are reports
+                        if(result.moveToFirst()){
+                            // reset to initial position
+                            result.moveToPosition(-1);
+
+                            // get the number of rows
+                            int count = result.getCount();
+                            missingPersonData = new MissingPersonData[count]; // Initialize the array with the appropriate size
+
+                            int i = 0;
+
+                            // while there are next cursor positions to move
+                            while(result.moveToNext()){
+
+                                // getting all the data
+                                String name = result.getString(result.getColumnIndexOrThrow(DatabaseContract.MissingPersons.COL_NAME));
+                                String age = result.getString(result.getColumnIndexOrThrow(DatabaseContract.MissingPersons.COL_AGE));
+                                String gender = result.getString(result.getColumnIndexOrThrow(DatabaseContract.MissingPersons.COL_GENDER));
+                                String zipCode = result.getString(result.getColumnIndexOrThrow(DatabaseContract.MissingPersons.COL_ZIPCODE));
+                                String lastSeen = result.getString(result.getColumnIndexOrThrow(DatabaseContract.MissingPersons.COL_LAST_SEEN));
+                                String reportDetails = result.getString(result.getColumnIndexOrThrow(DatabaseContract.MissingPersons.COL_REPORT_DETAILS));
+                                String reportStatus = result.getString(result.getColumnIndexOrThrow(DatabaseContract.MissingPersons.COL_REPORT_STATUS));
+                                byte[] image = result.getBlob(result.getColumnIndexOrThrow(DatabaseContract.MissingPersons.COL_PERSON_IMAGE));
+
+                                // Convert byte array to Bitmap
+                                Bitmap bitmap = BitmapFactory.decodeByteArray(image, 0, image.length);
+
+                                missingPersonData[i] = new MissingPersonData(name, age, gender, zipCode, lastSeen, reportStatus, reportDetails, bitmap);
+
+                                i++;
+                            }
+
+                        }
+
+                        if(result.getCount()>0) {
+                            missingPersonAdapter = new MissingPersonAdapter(missingPersonData, SearchMissingPersonReportsActivity.this);
+                            recyclerView.setAdapter(missingPersonAdapter);
+
+                            Toast.makeText(SearchMissingPersonReportsActivity.this, "Reports found for: " + query + " zip code!", Toast.LENGTH_SHORT).show();
+                        }
+                        else{
+                            Toast.makeText(SearchMissingPersonReportsActivity.this, "No reports found for: "+query+" zip code!", Toast.LENGTH_SHORT).show();
+                        }
 
                         // if the zip code is an integer then this code will run
-                        Toast.makeText(SearchMissingPersonReportsActivity.this, "Code: "+zipCode, Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(SearchMissingPersonReportsActivity.this, "Code: "+searchZipCode, Toast.LENGTH_SHORT).show();
+
                     }
                     catch(Exception e){
                         Toast.makeText(SearchMissingPersonReportsActivity.this, "Zip/postal code should contain only numbers!", Toast.LENGTH_SHORT).show();
@@ -145,6 +208,60 @@ public class SearchMissingPersonReportsActivity extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextChange(String s) {
+
+                // changed and the query text is empty
+                if(s.length()==0){
+
+                    // retrieve all the missing person reports from DB
+                    DBHelper dbHelper = new DBHelper(getApplicationContext());
+
+                    SQLiteDatabase db = dbHelper.getReadableDatabase();
+
+                    String columns[] = {DatabaseContract.MissingPersons.COL_NAME, DatabaseContract.MissingPersons.COL_AGE, DatabaseContract.MissingPersons.COL_GENDER, DatabaseContract.MissingPersons.COL_LAST_SEEN, DatabaseContract.MissingPersons.COL_ZIPCODE, DatabaseContract.MissingPersons.COL_REPORT_DETAILS, DatabaseContract.MissingPersons.COL_PERSON_IMAGE, DatabaseContract.MissingPersons.COL_REPORT_STATUS};
+
+                    Cursor result = db.query(DatabaseContract.MissingPersons.TABLE_NAME, columns, null, null, null, null, null);
+
+                    // if there are reports
+                    if(result.moveToFirst()) {
+                        // reset to intial position
+                        result.moveToPosition(-1);
+
+                        // get the number of rows
+                        int count = result.getCount();
+                        missingPersonData = new MissingPersonData[count]; // Initialize the array with the appropriate size
+
+                        int i = 0;
+
+                        // while there are next cursor positions to move
+                        while (result.moveToNext()) {
+
+                            // getting all the data
+                            String name = result.getString(result.getColumnIndexOrThrow(DatabaseContract.MissingPersons.COL_NAME));
+                            String age = result.getString(result.getColumnIndexOrThrow(DatabaseContract.MissingPersons.COL_AGE));
+                            String gender = result.getString(result.getColumnIndexOrThrow(DatabaseContract.MissingPersons.COL_GENDER));
+                            String zipCode = result.getString(result.getColumnIndexOrThrow(DatabaseContract.MissingPersons.COL_ZIPCODE));
+                            String lastSeen = result.getString(result.getColumnIndexOrThrow(DatabaseContract.MissingPersons.COL_LAST_SEEN));
+                            String reportDetails = result.getString(result.getColumnIndexOrThrow(DatabaseContract.MissingPersons.COL_REPORT_DETAILS));
+                            String reportStatus = result.getString(result.getColumnIndexOrThrow(DatabaseContract.MissingPersons.COL_REPORT_STATUS));
+                            byte[] image = result.getBlob(result.getColumnIndexOrThrow(DatabaseContract.MissingPersons.COL_PERSON_IMAGE));
+
+                            // Convert byte array to Bitmap
+                            Bitmap bitmap = BitmapFactory.decodeByteArray(image, 0, image.length);
+
+                            missingPersonData[i] = new MissingPersonData(name, age, gender, zipCode, lastSeen, reportStatus, reportDetails, bitmap);
+
+                            i++;
+                        }
+                    }
+
+                    missingPersonAdapter = new MissingPersonAdapter(missingPersonData,SearchMissingPersonReportsActivity.this);
+                    recyclerView.setAdapter(missingPersonAdapter);
+
+                    if(missingPersonAdapter.getItemCount()==0){
+                        Toast.makeText(SearchMissingPersonReportsActivity.this, "No reports found!", Toast.LENGTH_SHORT).show();
+                    }
+
+                }
                 return false;
             }
         });
