@@ -143,6 +143,8 @@ public class ReportMissingPersonFragment extends Fragment {
 
                 age = etPersonAge.getText().toString();
 
+                int radioButtonId = radioGroup.getCheckedRadioButtonId();
+
                 lastSeen = etLastSeen.getText().toString();
 
                 zipCode = etZipCode.getText().toString();
@@ -163,7 +165,7 @@ public class ReportMissingPersonFragment extends Fragment {
                     Toast.makeText(getView().getContext(), "Invalid age!", Toast.LENGTH_LONG).show();
                 }
                 // if no radio button is selected
-                else if(radioGroup.getCheckedRadioButtonId()==-1){
+                else if(radioButtonId==-1){
                     Toast.makeText(getView().getContext(), "Please select gender!", Toast.LENGTH_LONG).show();
                 }
                 // last seen field is not filled
@@ -189,7 +191,7 @@ public class ReportMissingPersonFragment extends Fragment {
                 else{
 
                     // checking the gender
-                    if(rbMale.isSelected()){
+                    if(radioButtonId == R.id.rbMale){
                         gender = "Male";
                     }
                     else{
@@ -211,6 +213,10 @@ public class ReportMissingPersonFragment extends Fragment {
                     values.put(DatabaseContract.MissingPersons.COL_LAST_SEEN, lastSeen);
                     values.put(DatabaseContract.MissingPersons.COL_ZIPCODE, zipCode);
                     values.put(DatabaseContract.MissingPersons.COL_REPORT_DETAILS, reportDetails);
+
+                    // Status intially set to submitted
+                    values.put(DatabaseContract.MissingPersons.COL_REPORT_STATUS, "Submitted");
+
 
                     // missing person image
                     // Get the Bitmap from the ImageView
