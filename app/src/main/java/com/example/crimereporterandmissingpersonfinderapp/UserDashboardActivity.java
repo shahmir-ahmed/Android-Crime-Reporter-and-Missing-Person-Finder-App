@@ -6,7 +6,10 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -83,6 +86,12 @@ public class UserDashboardActivity extends AppCompatActivity {
         MenuInflater inflater = getMenuInflater();
 
         inflater.inflate(R.menu.dashboard_menu, menu);
+
+        int positionOfMenuItem = 0; // or whatever...
+        MenuItem item = menu.getItem(positionOfMenuItem);
+        SpannableString s = new SpannableString("Logout");
+        s.setSpan(new ForegroundColorSpan(Color.WHITE), 0, s.length(), 0);
+        item.setTitle(s);
 
 //        return super.onCreateOptionsMenu(menu);
 

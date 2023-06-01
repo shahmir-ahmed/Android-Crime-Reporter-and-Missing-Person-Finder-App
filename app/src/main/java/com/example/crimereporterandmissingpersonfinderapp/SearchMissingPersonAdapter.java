@@ -13,12 +13,12 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
-    public class MissingPersonAdapter extends RecyclerView.Adapter<MissingPersonAdapter.ViewHolder> {
+    public class SearchMissingPersonAdapter extends RecyclerView.Adapter<SearchMissingPersonAdapter.ViewHolder> {
 
         MissingPersonData[] missingPersonData;
         Context context;
 
-        public MissingPersonAdapter(MissingPersonData[] missingPersonData,SearchMissingPersonReportsActivity activity) {
+        public SearchMissingPersonAdapter(MissingPersonData[] missingPersonData,SearchMissingPersonReportsActivity activity) {
             this.missingPersonData = missingPersonData;
             this.context = activity;
         }
@@ -27,7 +27,7 @@ import androidx.recyclerview.widget.RecyclerView;
         @Override
         public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
             LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-            View view = layoutInflater.inflate(R.layout.missing_person_list,parent,false);
+            View view = layoutInflater.inflate(R.layout.search_missing_person_list,parent,false);
             ViewHolder viewHolder = new ViewHolder(view);
             return viewHolder;
         }

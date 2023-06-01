@@ -22,7 +22,7 @@ public class SearchMissingPersonReportsActivity extends AppCompatActivity {
 
     MissingPersonData[] missingPersonData;
 
-    MissingPersonAdapter missingPersonAdapter;
+    SearchMissingPersonAdapter searchMissingPersonAdapter;
 
     RecyclerView recyclerView;
     @Override
@@ -92,8 +92,8 @@ public class SearchMissingPersonReportsActivity extends AppCompatActivity {
 
 
         if(result.getCount()>0) {
-            missingPersonAdapter = new MissingPersonAdapter(missingPersonData, SearchMissingPersonReportsActivity.this);
-            recyclerView.setAdapter(missingPersonAdapter);
+            searchMissingPersonAdapter = new SearchMissingPersonAdapter(missingPersonData, SearchMissingPersonReportsActivity.this);
+            recyclerView.setAdapter(searchMissingPersonAdapter);
 
             Toast.makeText(this, "Enter zip/postal code to search for missing persons!", Toast.LENGTH_SHORT).show();
         }
@@ -185,8 +185,8 @@ public class SearchMissingPersonReportsActivity extends AppCompatActivity {
                         }
 
                         if(result.getCount()>0) {
-                            missingPersonAdapter = new MissingPersonAdapter(missingPersonData, SearchMissingPersonReportsActivity.this);
-                            recyclerView.setAdapter(missingPersonAdapter);
+                            searchMissingPersonAdapter = new SearchMissingPersonAdapter(missingPersonData, SearchMissingPersonReportsActivity.this);
+                            recyclerView.setAdapter(searchMissingPersonAdapter);
 
                             Toast.makeText(SearchMissingPersonReportsActivity.this, "Reports found for: " + query + " zip code!", Toast.LENGTH_SHORT).show();
                         }
@@ -254,10 +254,11 @@ public class SearchMissingPersonReportsActivity extends AppCompatActivity {
                         }
                     }
 
-                    missingPersonAdapter = new MissingPersonAdapter(missingPersonData,SearchMissingPersonReportsActivity.this);
-                    recyclerView.setAdapter(missingPersonAdapter);
-
-                    if(missingPersonAdapter.getItemCount()==0){
+                    if(result.getCount()>0) {
+                        searchMissingPersonAdapter = new SearchMissingPersonAdapter(missingPersonData, SearchMissingPersonReportsActivity.this);
+                        recyclerView.setAdapter(searchMissingPersonAdapter);
+                    }
+                    else{
                         Toast.makeText(SearchMissingPersonReportsActivity.this, "No reports found!", Toast.LENGTH_SHORT).show();
                     }
 
