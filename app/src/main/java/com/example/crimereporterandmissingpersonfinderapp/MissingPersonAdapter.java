@@ -4,11 +4,13 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
     public class MissingPersonAdapter extends RecyclerView.Adapter<MissingPersonAdapter.ViewHolder> {
@@ -37,12 +39,25 @@ import androidx.recyclerview.widget.RecyclerView;
             holder.textViewLastSeenLocation.setText(missingPersonDataList.getMissingPersonLastSeenLocation());
             holder.textViewReportDetails.setText(missingPersonDataList.getMissingPersonReportDetails());
             holder.textViewReportStatus.setText(missingPersonDataList.getMissingPersonReportStatus());
-            holder.missingPersonImage.setImageResource(missingPersonDataList.getMissingPersonImage());
-
+            holder.missingPersonImage.setImageBitmap(missingPersonDataList.getMissingPersonImage());
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(context, missingPersonDataList.getMissingPersonName(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "Zip code: "+missingPersonDataList.getMissingPersonZipCode(), Toast.LENGTH_SHORT).show();
+                }
+            });
+
+            holder.btnDetails.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                    builder.setTitle("Missing Person Details");
+                    builder.setMessage("Name: " + missingPersonDataList.getMissingPersonName() + "\nAge: " + missingPersonDataList.getMissingPersonAge()+ "\nGender: " +missingPersonDataList.getMissingPersonGender()+ "\nLast Seen: " + missingPersonDataList.getMissingPersonLastSeenLocation()+ "\nZip Code: " +missingPersonDataList.getMissingPersonZipCode()+ "\nDetails: " +missingPersonDataList.getMissingPersonReportDetails()+ "\nStatus: " +missingPersonDataList.getMissingPersonReportStatus());
+                    // Add more details to the message as needed
+
+                    builder.setPositiveButton("OK", null);
+                    AlertDialog dialog = builder.create();
+                    dialog.show();
                 }
             });
         }
@@ -64,6 +79,8 @@ import androidx.recyclerview.widget.RecyclerView;
             TextView textViewReportStatus;
             ImageView missingPersonImage;
 
+            Button btnDetails;
+
             public ViewHolder(@NonNull View itemView) {
                 super(itemView);
                 textViewPersonName = itemView.findViewById(R.id.tvPersonName);
@@ -71,6 +88,7 @@ import androidx.recyclerview.widget.RecyclerView;
                 textViewReportDetails = itemView.findViewById(R.id.tvReportDetails);
                 textViewReportStatus = itemView.findViewById(R.id.tvReportStatus);
                 missingPersonImage = itemView.findViewById(R.id.imgMissingPerson);
+                btnDetails = (Button) itemView.findViewById(R.id.detailsBtn);
             }
         }
 

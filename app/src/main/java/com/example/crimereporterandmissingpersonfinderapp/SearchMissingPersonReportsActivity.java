@@ -13,6 +13,8 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ScrollView;
 import android.widget.Toast;
 
@@ -44,15 +46,17 @@ public class SearchMissingPersonReportsActivity extends AppCompatActivity {
 
         // if there are reports
         if(result.moveToFirst()){
+            // reset to intial position
             result.moveToPosition(-1);
 
+            // get the number of rows
             int count = result.getCount();
             missingPersonData = new MissingPersonData[count]; // Initialize the array with the appropriate size
 
+            int i = 0;
+
             // while there are next cursor positions to move
             while(result.moveToNext()){
-                // loop from 0 till the size of result-1
-                for(int i = 0; i<result.getCount(); i++){
 
                     // getting all the data
                     String name = result.getString(result.getColumnIndexOrThrow(DatabaseContract.MissingPersons.COL_NAME));
@@ -68,10 +72,11 @@ public class SearchMissingPersonReportsActivity extends AppCompatActivity {
                     Bitmap bitmap = BitmapFactory.decodeByteArray(image, 0, image.length);
 
                     // Convert Bitmap to integer representation
-                    int imageInt = bitmap.hashCode();
+//                    int imageInt = bitmap.getGenerationId();
 
-                    missingPersonData[i] = new MissingPersonData(name, age, gender, zipCode, lastSeen, reportStatus, reportDetails, imageInt);
-                }
+                    missingPersonData[i] = new MissingPersonData(name, age, gender, zipCode, lastSeen, reportStatus, reportDetails, bitmap);
+
+                    i++;
             }
 
         }

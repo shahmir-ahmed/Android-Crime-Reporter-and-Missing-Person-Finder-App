@@ -1,5 +1,7 @@
 package com.example.crimereporterandmissingpersonfinderapp;
 
+import android.graphics.Bitmap;
+
 public class MissingPersonData {
 
         private String missingPersonName;
@@ -9,10 +11,10 @@ public class MissingPersonData {
         private String missingPersonLastSeenLocation;
         private String missingPersonReportStatus;
         private String missingPersonReportDetails;
-        private Integer missingPersonImage;
+        private Bitmap missingPersonImage;
 
 
-    public MissingPersonData(String missingPersonName, String missingPersonAge, String missingPersonGender, String missingPersonZipCode, String missingPersonLastSeenLocation, String missingPersonReportStatus, String missingPersonReportDetails, Integer missingPersonImage) {
+    public MissingPersonData(String missingPersonName, String missingPersonAge, String missingPersonGender, String missingPersonZipCode, String missingPersonLastSeenLocation, String missingPersonReportStatus, String missingPersonReportDetails, Bitmap missingPersonImage) {
         this.missingPersonName = missingPersonName;
         this.missingPersonAge = missingPersonAge;
         this.missingPersonGender = missingPersonGender;
@@ -80,11 +82,11 @@ public class MissingPersonData {
         this.missingPersonReportDetails = missingPersonReportDetails;
     }
 
-    public Integer getMissingPersonImage() {
+    public Bitmap getMissingPersonImage() {
         return missingPersonImage;
     }
 
-    public void setMissingPersonImage(Integer missingPersonImage) {
+    public void setMissingPersonImage(Bitmap missingPersonImage) {
         this.missingPersonImage = missingPersonImage;
     }
 }
