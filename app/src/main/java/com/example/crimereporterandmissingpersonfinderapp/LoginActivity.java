@@ -3,7 +3,9 @@ package com.example.crimereporterandmissingpersonfinderapp;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -20,6 +22,11 @@ public class LoginActivity extends AppCompatActivity {
     // login, forgot password and sign up buttons
     Button btnLogin, btnForgotPassword, btnSignUp;
 
+    // shared preferences for user session
+    public static final String MyPREFERENCES = "MyPrefs" ;
+    public static final String userIdKey = "idKey";
+    SharedPreferences sharedpreferences;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,6 +37,8 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin = (Button) findViewById(R.id.btn_login);
         btnForgotPassword = (Button) findViewById(R.id.btn_forgot_password);
         btnSignUp = (Button) findViewById(R.id.btn_signup);
+
+        sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
 
 
         /*
@@ -122,15 +131,24 @@ public class LoginActivity extends AppCompatActivity {
                         Toast.makeText(LoginActivity.this, "Logged in successfully, Welcome"+username, Toast.LENGTH_SHORT).show();
 
                         // send intent to user dashboard activity
+//                        Intent intent = new Intent(LoginActivity.this, UserDashboardActivity.class);
+
+                        // saving user id in shared preferences
+                        String userID = String.valueOf(result.getInt(result.getColumnIndexOrThrow(DatabaseContract.Users._ID))); // getting the id
+
+                        SharedPreferences.Editor editor = sharedpreferences.edit(); // getting editor object ti edit the shared pref.
+
+                        editor.putString(userIdKey, userID); // putting the user id in shared preferences
+                        editor.commit(); // committing the changes
+
+
                         Intent intent = new Intent(LoginActivity.this, UserDashboardActivity.class);
 
-                        // sending user id with the intent
-
-                        int userID = result.getInt(result.getColumnIndexOrThrow(DatabaseContract.Users._ID)); // getting the id
-
-                        intent.putExtra("userId", userID); // putting in intent
-
                         startActivity(intent); // starting activity using intent
+
+//                        intent.putExtra("userId", userID); // putting in intent
+//
+//                        startActivity(intent); // starting activity using intent
 
                         result.close(); // close the cursor
 

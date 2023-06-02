@@ -2,7 +2,9 @@ package com.example.crimereporterandmissingpersonfinderapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -13,6 +15,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button crimesSearchButton;
     private Button missingPersonsSearchButton;
     private Button loginButton;
+
+    // shared preferences for user session
+    public static final String MyPREFERENCES = "MyPrefs" ;
+    public static final String userIdKey = "idKey";
+    SharedPreferences sharedpreferences;
+    String userID;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,6 +30,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         crimesSearchButton = (Button) findViewById(R.id.crimesSearch);
         missingPersonsSearchButton = (Button) findViewById(R.id.missingPersonsSearch);
         loginButton = (Button) findViewById(R.id.login);
+
+        // Initializing shared preferences
+        sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+
+        // retrieiving the user id key from
+        userID = sharedpreferences.getString(userIdKey, "");
+
+        // if no session exists
+        if(userID.equals("")){
+            // do nothing
+        }
+        else{
+            loginButton.setText("Home");
+        }
 
         // Setting event listener
         crimesSearchButton.setOnClickListener(this);
@@ -67,6 +89,32 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             startActivity(intent);
 
         }
+        // if login button with "Home" text is clicked
+        else if(text.equals("Home")){
+
+            Toast.makeText(this, "Welcome back! user id:"+userID, Toast.LENGTH_SHORT).show();
+
+            // Sending intent to User Dashboard Activity
+            Intent intent = new Intent(this, UserDashboardActivity.class);
+
+            startActivity(intent);
+        }
     }
 
+    // on start method calling beacuse when logout from dashboard the login activity is shown and the main activity is in the back stack so when backed the main activity will have the home icon set so when backed from login after logout the main activity will be restarted from stopped state (after restart, start method will be called) so checking the shared preferences again to initialize the view
+    @Override
+    protected void onStart() {
+//        System.out.println("HERE!!");
+        // retrieving the user id key from shared preferences
+        userID = sharedpreferences.getString(userIdKey, "");
+
+        // if no session exists
+        if (userID.equals("")) {
+            // do nothing
+        } else {
+            loginButton.setText("Home");
+        }
+
+        super.onStart();
+    }
 }

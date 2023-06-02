@@ -5,7 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.viewpager.widget.ViewPager;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.SpannableString;
@@ -15,22 +17,17 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
+import android.widget.Toast;
 
 import com.google.android.material.tabs.TabLayout;
 
 public class UserDashboardActivity extends AppCompatActivity {
 
+    int backPressedCount = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_dashboard);
-
-        // getting the user id from login activity
-
-        Intent intent = getIntent();
-
-        int userId = Integer.parseInt(intent.getStringExtra("userId"));
-
 
 
         // hiding the default action bar
@@ -111,6 +108,15 @@ public class UserDashboardActivity extends AppCompatActivity {
 
         switch(item.getItemId()){
             case R.id.dashboard_menu:
+
+                // clear the shared preferences
+                SharedPreferences sharedpreferences = getSharedPreferences(LoginActivity.MyPREFERENCES, Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedpreferences.edit();
+                editor.clear();
+                editor.commit();
+
+                finish(); // finishes the dashboard activity // dont know why it needs to be finished when login activity intent is sent clearing all the activities except main activity
+
                 Intent intent = new Intent(this, LoginActivity.class);
 
                 // destroys all the activities in the stack except the first main activity
@@ -119,13 +125,53 @@ public class UserDashboardActivity extends AppCompatActivity {
                 // starting the login activity over the main activity
                 startActivity(intent);
 
+                Toast.makeText(this, "Logged out successfully!", Toast.LENGTH_SHORT).show();
+
                 return true;
 
             default:
                 return super.onOptionsItemSelected(item);
         }
 
+    }
 
+    @Override
+    public void onBackPressed() {
+//        if(backPressedCount==0){
+//            Toast.makeText(this, "Press again to logout", Toast.LENGTH_LONG).show();
+//            backPressedCount++;
+//        }
+//        // logout
+//        else if(backPressedCount==2){
+//
+//            // clear the shared preferences
+//            SharedPreferences sharedpreferences = getSharedPreferences(LoginActivity.MyPREFERENCES, Context.MODE_PRIVATE);
+//            SharedPreferences.Editor editor = sharedpreferences.edit();
+//            editor.clear();
+//            editor.commit();
+
+//            Intent intent = new Intent(this, UserDashboardActivity.class);
+//
+//            // destroys all the activities in the stack except the first main activity
+//            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//
+//            // starting the login activity over the main activity
+//            startActivity(intent);
+
+//            Toast.makeText(this, "Logged out successfully!", Toast.LENGTH_SHORT).show();
+
+//        }
+
+//        finish(); // end the dashboard activity
+
+        // intent to main activity
+        Intent intent = new Intent(this, MainActivity.class);
+
+        // destroys all the activities in the stack except the first main activity
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
+        // starting the login activity over the main activity
+        startActivity(intent);
     }
 
     // Function to logout the user/admin
