@@ -1,195 +1,231 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:fillViewport="true">
 
-    <!-- Main Constraint Layout for the Fragment -->
-    <androidx.constraintlayout.widget.ConstraintLayout
+<!-- Main Linear Layout for the Activity -->
+<LinearLayout android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#240e71"
+    android:orientation="vertical"
+    tools:context=".MissingPersonReportsFragment"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!--    <TextView-->
+    <!--        android:id="@+id/textView17"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginTop="20dp"-->
+    <!--        android:layout_marginBottom="5dp"-->
+    <!--        android:fontFamily="@font/poppins_light"-->
+    <!--        android:text="My Missing Person Reports"-->
+    <!--        android:textColor="#FFFFFF"-->
+    <!--        android:textSize="24sp"-->
+    <!--        android:textStyle="bold"-->
+    <!--        android:layout_gravity="center"/>-->
+
+
+    <!--Recycler View-->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#240e71"
-        tools:context=".ManageMissingPersonsAdmin"
-        tools:ignore="ScrollViewSize">
+        android:scrollbars="vertical"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools" />
 
-        <!--  List of Missing Persons  -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="28dp"
-            android:text="List of Missing Persons"
-            android:textColor="@color/white"
-            android:fontFamily="@font/poppins_light"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.496"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="HardcodedText,MissingConstraints" />
+</LinearLayout>
 
-        <!--  Card View  -->
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cv1"
-            android:layout_width="358dp"
-            android:layout_height="478dp"
-            android:layout_marginTop="70dp"
-            app:cardBackgroundColor="@color/white"
-            app:cardCornerRadius="20dp"
-            app:cardElevation="10dp"
-            app:cardMaxElevation="12dp"
-            app:cardPreventCornerOverlap="true"
-            app:cardUseCompatPadding="true"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.49"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+<!--<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    xmlns:app="http://schemas.android.com/apk/res-auto"-->
+<!--    xmlns:tools="http://schemas.android.com/tools"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="match_parent"-->
+<!--    android:fillViewport="true">-->
 
+<!--    &lt;!&ndash; Main Constraint Layout for the Fragment &ndash;&gt;-->
+<!--    <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:background="#240e71"-->
+<!--        tools:context=".ManageMissingPersonsAdmin"-->
+<!--        tools:ignore="ScrollViewSize">-->
 
-            <!--  Inner Constraint Layout 1 inside the Card View for the Card View Content on top  -->
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="374dp"
-                android:layout_height="66dp">
+<!--        &lt;!&ndash;  List of Missing Persons  &ndash;&gt;-->
+<!--        <TextView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_gravity="center"-->
+<!--            android:layout_marginTop="28dp"-->
+<!--            android:text="List of Missing Persons"-->
+<!--            android:textColor="@color/white"-->
+<!--            android:fontFamily="@font/poppins_light"-->
+<!--            android:textSize="24sp"-->
+<!--            android:textStyle="bold"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintHorizontal_bias="0.496"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent"-->
+<!--            tools:ignore="HardcodedText,MissingConstraints" />-->
 
-                <!--  "Name" text view  -->
-                <TextView
-                    android:id="@+id/tv1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="36dp"
-                    android:layout_marginTop="28dp"
-                    android:fontFamily="@font/poppins_light"
-                    android:text="Name:"
-                    android:textColor="@color/black"
-                    android:textSize="15sp"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:ignore="HardcodedText" />
-
-                <!--  "person name" text view  -->
-                <TextView
-                    android:id="@+id/tv2"
-                    android:layout_width="180dp"
-                    android:layout_height="25dp"
-                    android:layout_marginStart="10dp"
-                    android:fontFamily="@font/poppins_light"
-                    android:text="Ashraf Khan"
-                    android:textColor="@color/black"
-                    android:textSize="15sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.415"
-                    app:layout_constraintStart_toEndOf="@+id/tv1"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.682"
-                    tools:ignore="HardcodedText" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-            <!--  End of inner constraint layout 1  -->
-
-            <!--  Missing person image Image View inside card view -->
-            <!-- Missing person image -->
-
-            <!--  Start of inner constraint layout 2 inside card view for the content on bottom  -->
-            <ImageView
-                android:id="@+id/img"
-                android:layout_width="200dp"
-                android:layout_height="200dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="75dp"
-                android:contentDescription="Missing person image"
-                android:src="@drawable/ic_launcher_background"
-                tools:ignore="HardcodedText" />
-            <!--  End of inner constraint layout 2 -->
+<!--        &lt;!&ndash;  Card View  &ndash;&gt;-->
+<!--        <androidx.cardview.widget.CardView-->
+<!--            android:id="@+id/cv1"-->
+<!--            android:layout_width="358dp"-->
+<!--            android:layout_height="478dp"-->
+<!--            android:layout_marginTop="70dp"-->
+<!--            app:cardBackgroundColor="@color/white"-->
+<!--            app:cardCornerRadius="20dp"-->
+<!--            app:cardElevation="10dp"-->
+<!--            app:cardMaxElevation="12dp"-->
+<!--            app:cardPreventCornerOverlap="true"-->
+<!--            app:cardUseCompatPadding="true"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintHorizontal_bias="0.49"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent">-->
 
 
-            <!--                Linear Layout for action buttons for report-->
+<!--            &lt;!&ndash;  Inner Constraint Layout 1 inside the Card View for the Card View Content on top  &ndash;&gt;-->
+<!--            <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                android:layout_width="374dp"-->
+<!--                android:layout_height="66dp">-->
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="300dp"
-                android:layout_marginBottom="28dp">
+<!--                &lt;!&ndash;  "Name" text view  &ndash;&gt;-->
+<!--                <TextView-->
+<!--                    android:id="@+id/tv1"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginStart="36dp"-->
+<!--                    android:layout_marginTop="28dp"-->
+<!--                    android:fontFamily="@font/poppins_light"-->
+<!--                    android:text="Name:"-->
+<!--                    android:textColor="@color/black"-->
+<!--                    android:textSize="15sp"-->
+<!--                    android:textStyle="bold"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toTopOf="parent"-->
+<!--                    tools:ignore="HardcodedText" />-->
 
-                <!--  "Status" text view  -->
-                <TextView
-                    android:id="@+id/tv7"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginStart="36dp"
-                    android:layout_marginTop="4dp"
-                    android:fontFamily="@font/poppins_light"
-                    android:text="Status:"
-                    android:textColor="@color/black"
-                    android:textSize="15sp"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:ignore="HardcodedText" />
+<!--                &lt;!&ndash;  "person name" text view  &ndash;&gt;-->
+<!--                <TextView-->
+<!--                    android:id="@+id/tv2"-->
+<!--                    android:layout_width="180dp"-->
+<!--                    android:layout_height="25dp"-->
+<!--                    android:layout_marginStart="10dp"-->
+<!--                    android:fontFamily="@font/poppins_light"-->
+<!--                    android:text="Ashraf Khan"-->
+<!--                    android:textColor="@color/black"-->
+<!--                    android:textSize="15sp"-->
+<!--                    app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:layout_constraintHorizontal_bias="0.415"-->
+<!--                    app:layout_constraintStart_toEndOf="@+id/tv1"-->
+<!--                    app:layout_constraintTop_toTopOf="parent"-->
+<!--                    app:layout_constraintVertical_bias="0.682"-->
+<!--                    tools:ignore="HardcodedText" />-->
+
+<!--            </androidx.constraintlayout.widget.ConstraintLayout>-->
+<!--            &lt;!&ndash;  End of inner constraint layout 1  &ndash;&gt;-->
+
+<!--            &lt;!&ndash;  Missing person image Image View inside card view &ndash;&gt;-->
+<!--            &lt;!&ndash; Missing person image &ndash;&gt;-->
+
+<!--            &lt;!&ndash;  Start of inner constraint layout 2 inside card view for the content on bottom  &ndash;&gt;-->
+<!--            <ImageView-->
+<!--                android:id="@+id/img"-->
+<!--                android:layout_width="200dp"-->
+<!--                android:layout_height="200dp"-->
+<!--                android:layout_gravity="center_horizontal"-->
+<!--                android:layout_marginTop="75dp"-->
+<!--                android:contentDescription="Missing person image"-->
+<!--                android:src="@drawable/ic_launcher_background"-->
+<!--                tools:ignore="HardcodedText" />-->
+<!--            &lt;!&ndash;  End of inner constraint layout 2 &ndash;&gt;-->
 
 
-                <!--  "status description" text view  -->
-                <TextView
-                    android:id="@+id/tv8"
-                    android:layout_width="160dp"
-                    android:layout_height="25dp"
-                    android:layout_marginStart="32dp"
-                    android:layout_marginTop="4dp"
-                    android:layout_marginEnd="16dp"
-                    android:fontFamily="@font/poppins_light"
-                    android:text="Submitted"
-                    android:textColor="@color/design_default_color_error"
-                    android:textSize="15sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.393"
-                    app:layout_constraintStart_toEndOf="@+id/tv7"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:ignore="HardcodedText" />
+<!--            &lt;!&ndash;                Linear Layout for action buttons for report&ndash;&gt;-->
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+<!--            <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="300dp"-->
+<!--                android:layout_marginBottom="28dp">-->
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="78dp"
-                android:layout_gravity="bottom"
-                android:orientation="horizontal">
+<!--                &lt;!&ndash;  "Status" text view  &ndash;&gt;-->
+<!--                <TextView-->
+<!--                    android:id="@+id/tv7"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_gravity="center_horizontal"-->
+<!--                    android:layout_marginStart="36dp"-->
+<!--                    android:layout_marginTop="4dp"-->
+<!--                    android:fontFamily="@font/poppins_light"-->
+<!--                    android:text="Status:"-->
+<!--                    android:textColor="@color/black"-->
+<!--                    android:textSize="15sp"-->
+<!--                    android:textStyle="bold"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toTopOf="parent"-->
+<!--                    tools:ignore="HardcodedText" />-->
 
-                <Button
-                    android:id="@+id/viewBtn"
-                    android:layout_width="80dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="14dp"
-                    android:layout_marginBottom="28dp"
-                    android:text="View" />
 
-                <Button
-                    android:id="@+id/updateBtn"
-                    android:layout_width="95dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginBottom="28dp"
-                    android:text="Update" />
+<!--                &lt;!&ndash;  "status description" text view  &ndash;&gt;-->
+<!--                <TextView-->
+<!--                    android:id="@+id/tv8"-->
+<!--                    android:layout_width="160dp"-->
+<!--                    android:layout_height="25dp"-->
+<!--                    android:layout_marginStart="32dp"-->
+<!--                    android:layout_marginTop="4dp"-->
+<!--                    android:layout_marginEnd="16dp"-->
+<!--                    android:fontFamily="@font/poppins_light"-->
+<!--                    android:text="Submitted"-->
+<!--                    android:textColor="@color/design_default_color_error"-->
+<!--                    android:textSize="15sp"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:layout_constraintHorizontal_bias="0.393"-->
+<!--                    app:layout_constraintStart_toEndOf="@+id/tv7"-->
+<!--                    app:layout_constraintTop_toTopOf="parent"-->
+<!--                    tools:ignore="HardcodedText" />-->
 
-                <Button
-                    android:id="@+id/deleteBtn"
-                    android:layout_width="90dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="6dp"
-                    android:layout_marginRight="80dp"
-                    android:layout_marginBottom="28dp"
-                    android:text="Delete" />
+<!--            </androidx.constraintlayout.widget.ConstraintLayout>-->
 
-            </LinearLayout>
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="78dp"-->
+<!--                android:layout_gravity="bottom"-->
+<!--                android:orientation="horizontal">-->
 
-        </androidx.cardview.widget.CardView>
-        <!--  End of Card View  -->
+<!--                <Button-->
+<!--                    android:id="@+id/viewBtn"-->
+<!--                    android:layout_width="80dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginLeft="14dp"-->
+<!--                    android:layout_marginBottom="28dp"-->
+<!--                    android:text="View" />-->
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+<!--                <Button-->
+<!--                    android:id="@+id/updateBtn"-->
+<!--                    android:layout_width="95dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginLeft="15dp"-->
+<!--                    android:layout_marginRight="10dp"-->
+<!--                    android:layout_marginBottom="28dp"-->
+<!--                    android:text="Update" />-->
 
-</ScrollView>
+<!--                <Button-->
+<!--                    android:id="@+id/deleteBtn"-->
+<!--                    android:layout_width="90dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginLeft="6dp"-->
+<!--                    android:layout_marginRight="80dp"-->
+<!--                    android:layout_marginBottom="28dp"-->
+<!--                    android:text="Delete" />-->
+
+<!--            </LinearLayout>-->
+
+<!--        </androidx.cardview.widget.CardView>-->
+<!--        &lt;!&ndash;  End of Card View  &ndash;&gt;-->
+
+<!--    </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+<!--</ScrollView>-->

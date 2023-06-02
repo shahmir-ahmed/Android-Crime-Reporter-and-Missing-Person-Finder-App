@@ -162,9 +162,9 @@ public class LoginActivity extends AppCompatActivity {
                         // check user credentials are present as admin or not from database
 
                         // send intent to admin dashboard activity
-//                        Intent intent = new Intent(LoginActivity.this, AdminDashboardActivity.class);
+                        Intent intent = new Intent(LoginActivity.this, AdminDashboardActivity.class);
 //
-//                        startActivity(intent);
+                        startActivity(intent);
                     }
 
                     db.close(); // close the sqlite database object
