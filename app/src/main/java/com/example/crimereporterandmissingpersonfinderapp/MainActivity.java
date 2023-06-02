@@ -107,7 +107,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onStart() {
 //        System.out.println("HERE!!");
-        Toast.makeText(this, "HERE!!", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, "HERE!!", Toast.LENGTH_SHORT).show();
         // retrieving the user id key from shared preferences
         userID = sharedpreferences.getString(userIdKey, "");
 

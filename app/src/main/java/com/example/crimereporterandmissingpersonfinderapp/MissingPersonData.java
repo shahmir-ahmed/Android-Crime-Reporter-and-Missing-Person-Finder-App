@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 
 public class MissingPersonData {
 
+        private String missingPersonId;
         private String missingPersonName;
         private String missingPersonAge;
         private String missingPersonGender;
@@ -25,7 +26,27 @@ public class MissingPersonData {
         this.missingPersonImage = missingPersonImage;
     }
 
+    // constructor with missing person id for user dashboard to delete and update the missing person report against this id
+    public MissingPersonData(String missingPersonId, String missingPersonName, String missingPersonAge, String missingPersonGender, String missingPersonZipCode, String missingPersonLastSeenLocation, String missingPersonReportStatus, String missingPersonReportDetails, Bitmap missingPersonImage) {
+        this.missingPersonId = missingPersonId;
+        this.missingPersonName = missingPersonName;
+        this.missingPersonAge = missingPersonAge;
+        this.missingPersonGender = missingPersonGender;
+        this.missingPersonZipCode = missingPersonZipCode;
+        this.missingPersonLastSeenLocation = missingPersonLastSeenLocation;
+        this.missingPersonReportStatus = missingPersonReportStatus;
+        this.missingPersonReportDetails = missingPersonReportDetails;
+        this.missingPersonImage = missingPersonImage;
+    }
 
+
+    public String getMissingPersonId() {
+        return missingPersonId;
+    }
+
+    public void setMissingPersonId(String missingPersonId) {
+        this.missingPersonId = missingPersonId;
+    }
     public String getMissingPersonName() {
         return missingPersonName;
     }

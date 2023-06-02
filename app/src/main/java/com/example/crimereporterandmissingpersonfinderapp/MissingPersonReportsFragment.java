@@ -95,17 +95,19 @@ public class MissingPersonReportsFragment extends Fragment {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity().getApplicationContext()));
 
+
         // intializing shared preferences
         sharedpreferences = getActivity().getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
 
         int userId = Integer.parseInt(sharedpreferences.getString(userIdKey, ""));
+
 
         // retrieve all the missing person reports from DB reported by the user
         DBHelper dbHelper = new DBHelper(getActivity().getApplicationContext());
 
         SQLiteDatabase db = dbHelper.getReadableDatabase();
 
-        String columns[] = {DatabaseContract.MissingPersons.COL_NAME, DatabaseContract.MissingPersons.COL_AGE, DatabaseContract.MissingPersons.COL_GENDER, DatabaseContract.MissingPersons.COL_LAST_SEEN, DatabaseContract.MissingPersons.COL_ZIPCODE, DatabaseContract.MissingPersons.COL_REPORT_DETAILS, DatabaseContract.MissingPersons.COL_PERSON_IMAGE, DatabaseContract.MissingPersons.COL_REPORT_STATUS};
+        String columns[] = {DatabaseContract.MissingPersons._ID, DatabaseContract.MissingPersons.COL_NAME, DatabaseContract.MissingPersons.COL_AGE, DatabaseContract.MissingPersons.COL_GENDER, DatabaseContract.MissingPersons.COL_LAST_SEEN, DatabaseContract.MissingPersons.COL_ZIPCODE, DatabaseContract.MissingPersons.COL_REPORT_DETAILS, DatabaseContract.MissingPersons.COL_PERSON_IMAGE, DatabaseContract.MissingPersons.COL_REPORT_STATUS};
 
         String whereClause = DatabaseContract.MissingPersons.COL_USER_ID+"=?";
 
@@ -128,6 +130,7 @@ public class MissingPersonReportsFragment extends Fragment {
             while(result.moveToNext()){
 
                 // getting all the data
+                String id = result.getString(result.getColumnIndexOrThrow(DatabaseContract.MissingPersons._ID));
                 String name = result.getString(result.getColumnIndexOrThrow(DatabaseContract.MissingPersons.COL_NAME));
                 String age = result.getString(result.getColumnIndexOrThrow(DatabaseContract.MissingPersons.COL_AGE));
                 String gender = result.getString(result.getColumnIndexOrThrow(DatabaseContract.MissingPersons.COL_GENDER));
@@ -143,7 +146,7 @@ public class MissingPersonReportsFragment extends Fragment {
                 // Convert Bitmap to integer representation
 //                    int imageInt = bitmap.getGenerationId();
 
-                missingPersonData[i] = new MissingPersonData(name, age, gender, zipCode, lastSeen, reportStatus, reportDetails, bitmap);
+                missingPersonData[i] = new MissingPersonData(id, name, age, gender, zipCode, lastSeen, reportStatus, reportDetails, bitmap);
 
                 i++;
             }
