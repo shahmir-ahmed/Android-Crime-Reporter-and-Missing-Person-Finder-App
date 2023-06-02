@@ -11,6 +11,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -40,12 +41,16 @@ public class SearchMissingPersonReportsActivity extends AppCompatActivity {
 
         SQLiteDatabase db = dbHelper.getReadableDatabase();
 
-        String columns[] = {DatabaseContract.MissingPersons.COL_NAME, DatabaseContract.MissingPersons.COL_AGE, DatabaseContract.MissingPersons.COL_GENDER, DatabaseContract.MissingPersons.COL_LAST_SEEN, DatabaseContract.MissingPersons.COL_ZIPCODE, DatabaseContract.MissingPersons.COL_REPORT_DETAILS, DatabaseContract.MissingPersons.COL_PERSON_IMAGE, DatabaseContract.MissingPersons.COL_REPORT_STATUS};
+        String table = DatabaseContract.Users.TABLE_NAME+" u"+","+ DatabaseContract.MissingPersons.TABLE_NAME+" m";
 
-        Cursor result = db.query(DatabaseContract.MissingPersons.TABLE_NAME, columns, null, null, null, null, null);
+        String columns[] = {"m."+DatabaseContract.MissingPersons.COL_NAME+" AS missing_person_name", "m."+DatabaseContract.MissingPersons.COL_AGE, "m."+DatabaseContract.MissingPersons.COL_GENDER, "m."+DatabaseContract.MissingPersons.COL_LAST_SEEN, "m."+DatabaseContract.MissingPersons.COL_ZIPCODE, "m."+DatabaseContract.MissingPersons.COL_REPORT_DETAILS, "m."+DatabaseContract.MissingPersons.COL_PERSON_IMAGE, "m."+DatabaseContract.MissingPersons.COL_REPORT_STATUS, "u."+DatabaseContract.Users.COL_NAME+" AS user_name", "u."+DatabaseContract.Users.COL_CONTACT};
+
+        String whereClause = "m."+DatabaseContract.MissingPersons.COL_USER_ID+"="+"u."+DatabaseContract.Users._ID;
+
+        Cursor result = db.query(table, columns, whereClause, null, null, null, null);
 
         // if there are reports
-        if(result.moveToFirst()){
+        if(result.moveToFirst()) {
             // reset to intial position
             result.moveToPosition(-1);
 
@@ -56,27 +61,29 @@ public class SearchMissingPersonReportsActivity extends AppCompatActivity {
             int i = 0;
 
             // while there are next cursor positions to move
-            while(result.moveToNext()){
+            while (result.moveToNext()) {
 
-                    // getting all the data
-                    String name = result.getString(result.getColumnIndexOrThrow(DatabaseContract.MissingPersons.COL_NAME));
-                    String age = result.getString(result.getColumnIndexOrThrow(DatabaseContract.MissingPersons.COL_AGE));
-                    String gender = result.getString(result.getColumnIndexOrThrow(DatabaseContract.MissingPersons.COL_GENDER));
-                    String zipCode = result.getString(result.getColumnIndexOrThrow(DatabaseContract.MissingPersons.COL_ZIPCODE));
-                    String lastSeen = result.getString(result.getColumnIndexOrThrow(DatabaseContract.MissingPersons.COL_LAST_SEEN));
-                    String reportDetails = result.getString(result.getColumnIndexOrThrow(DatabaseContract.MissingPersons.COL_REPORT_DETAILS));
-                    String reportStatus = result.getString(result.getColumnIndexOrThrow(DatabaseContract.MissingPersons.COL_REPORT_STATUS));
-                    byte[] image = result.getBlob(result.getColumnIndexOrThrow(DatabaseContract.MissingPersons.COL_PERSON_IMAGE));
+                // getting all the data
+                String name = result.getString(result.getColumnIndexOrThrow("missing_person_name"));
+                String age = result.getString(result.getColumnIndexOrThrow(DatabaseContract.MissingPersons.COL_AGE));
+                String gender = result.getString(result.getColumnIndexOrThrow(DatabaseContract.MissingPersons.COL_GENDER));
+                String zipCode = result.getString(result.getColumnIndexOrThrow(DatabaseContract.MissingPersons.COL_ZIPCODE));
+                String lastSeen = result.getString(result.getColumnIndexOrThrow(DatabaseContract.MissingPersons.COL_LAST_SEEN));
+                String reportDetails = result.getString(result.getColumnIndexOrThrow(DatabaseContract.MissingPersons.COL_REPORT_DETAILS));
+                String reportStatus = result.getString(result.getColumnIndexOrThrow(DatabaseContract.MissingPersons.COL_REPORT_STATUS));
+                byte[] image = result.getBlob(result.getColumnIndexOrThrow(DatabaseContract.MissingPersons.COL_PERSON_IMAGE));
 
-                    // Convert byte array to Bitmap
-                    Bitmap bitmap = BitmapFactory.decodeByteArray(image, 0, image.length);
+                // user data
+                String userName = result.getString(result.getColumnIndexOrThrow("user_name"));
 
-                    // Convert Bitmap to integer representation
-//                    int imageInt = bitmap.getGenerationId();
+                String userContact = result.getString(result.getColumnIndexOrThrow(DatabaseContract.Users.COL_CONTACT));
+                            System.out.println(userName+userContact);
+                // Convert byte array to Bitmap
+                Bitmap bitmap = BitmapFactory.decodeByteArray(image, 0, image.length);
 
-                    missingPersonData[i] = new MissingPersonData(name, age, gender, zipCode, lastSeen, reportStatus, reportDetails, bitmap);
+                missingPersonData[i] = new MissingPersonData(userName, userContact, name, age, gender, zipCode, lastSeen, reportStatus, reportDetails, bitmap);
 
-                    i++;
+                i++;
             }
 
         }
@@ -112,6 +119,9 @@ public class SearchMissingPersonReportsActivity extends AppCompatActivity {
         MenuItem menuItem = menu.findItem(R.id.action_search);
         SearchView searchView = (SearchView) menuItem.getActionView();
         searchView.setQueryHint("Type zip/postal code here");
+
+        // Set the keyboard type
+        searchView.setInputType(InputType.TYPE_CLASS_NUMBER);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {
@@ -124,7 +134,7 @@ public class SearchMissingPersonReportsActivity extends AppCompatActivity {
                 if(query.trim().isEmpty()){
                     Toast.makeText(SearchMissingPersonReportsActivity.this, "Please enter code!", Toast.LENGTH_SHORT).show();
                 }
-                else if(query.length()>5 || query.length()<5){
+                else if(query.length() != 5){
                     Toast.makeText(SearchMissingPersonReportsActivity.this, "Zip code must be of 5 digits!", Toast.LENGTH_SHORT).show();
                 }
                 else{
@@ -132,6 +142,8 @@ public class SearchMissingPersonReportsActivity extends AppCompatActivity {
                     // casting the zip code to integer to check if zip code entered is an integer or not
                     // try-catch will catch exception if the zip code entered is not an integer
                     try{
+
+//                        System.out.println(query);
 
                         // to check that zip code is in integer only
                         int searchZipCodeInt = Integer.parseInt(query);
@@ -142,13 +154,16 @@ public class SearchMissingPersonReportsActivity extends AppCompatActivity {
 
                         SQLiteDatabase db = dbHelper.getReadableDatabase();
 
-                        String columns[] = {DatabaseContract.MissingPersons.COL_NAME, DatabaseContract.MissingPersons.COL_AGE, DatabaseContract.MissingPersons.COL_GENDER, DatabaseContract.MissingPersons.COL_LAST_SEEN, DatabaseContract.MissingPersons.COL_ZIPCODE, DatabaseContract.MissingPersons.COL_REPORT_DETAILS, DatabaseContract.MissingPersons.COL_PERSON_IMAGE, DatabaseContract.MissingPersons.COL_REPORT_STATUS};
+                        String table = DatabaseContract.Users.TABLE_NAME+" u"+","+ DatabaseContract.MissingPersons.TABLE_NAME+" m";
 
-                        String whereClause = DatabaseContract.MissingPersons.COL_ZIPCODE+"=?";
+                        String columns[] = {"m."+DatabaseContract.MissingPersons.COL_NAME+" AS missing_person_name", "m."+DatabaseContract.MissingPersons.COL_AGE, "m."+DatabaseContract.MissingPersons.COL_GENDER, "m."+DatabaseContract.MissingPersons.COL_LAST_SEEN, "m."+DatabaseContract.MissingPersons.COL_ZIPCODE, "m."+DatabaseContract.MissingPersons.COL_REPORT_DETAILS, "m."+DatabaseContract.MissingPersons.COL_PERSON_IMAGE, "m."+DatabaseContract.MissingPersons.COL_REPORT_STATUS, "u."+DatabaseContract.Users.COL_NAME+" AS user_name", "u."+DatabaseContract.Users.COL_CONTACT};
+
+                        String whereClause = "m."+DatabaseContract.MissingPersons.COL_USER_ID+"="+"u."+DatabaseContract.Users._ID+" AND "+"m."+DatabaseContract.MissingPersons.COL_ZIPCODE+"=?";
 
                         String whereArgs[] = {query};
 
-                        Cursor result = db.query(DatabaseContract.MissingPersons.TABLE_NAME, columns, whereClause, whereArgs, null, null, null);
+                        Cursor result = db.query(table, columns, whereClause, whereArgs, null, null, null);
+
 
                         // if there are reports
                         if(result.moveToFirst()){
@@ -165,7 +180,7 @@ public class SearchMissingPersonReportsActivity extends AppCompatActivity {
                             while(result.moveToNext()){
 
                                 // getting all the data
-                                String name = result.getString(result.getColumnIndexOrThrow(DatabaseContract.MissingPersons.COL_NAME));
+                                String name = result.getString(result.getColumnIndexOrThrow("missing_person_name"));
                                 String age = result.getString(result.getColumnIndexOrThrow(DatabaseContract.MissingPersons.COL_AGE));
                                 String gender = result.getString(result.getColumnIndexOrThrow(DatabaseContract.MissingPersons.COL_GENDER));
                                 String zipCode = result.getString(result.getColumnIndexOrThrow(DatabaseContract.MissingPersons.COL_ZIPCODE));
@@ -174,10 +189,15 @@ public class SearchMissingPersonReportsActivity extends AppCompatActivity {
                                 String reportStatus = result.getString(result.getColumnIndexOrThrow(DatabaseContract.MissingPersons.COL_REPORT_STATUS));
                                 byte[] image = result.getBlob(result.getColumnIndexOrThrow(DatabaseContract.MissingPersons.COL_PERSON_IMAGE));
 
+                                // user data
+                                String userName = result.getString(result.getColumnIndexOrThrow("user_name"));
+
+                                String userContact = result.getString(result.getColumnIndexOrThrow(DatabaseContract.Users.COL_CONTACT));
+
                                 // Convert byte array to Bitmap
                                 Bitmap bitmap = BitmapFactory.decodeByteArray(image, 0, image.length);
 
-                                missingPersonData[i] = new MissingPersonData(name, age, gender, zipCode, lastSeen, reportStatus, reportDetails, bitmap);
+                                missingPersonData[i] = new MissingPersonData(userName, userContact, name, age, gender, zipCode, lastSeen, reportStatus, reportDetails, bitmap);
 
                                 i++;
                             }
@@ -217,9 +237,13 @@ public class SearchMissingPersonReportsActivity extends AppCompatActivity {
 
                     SQLiteDatabase db = dbHelper.getReadableDatabase();
 
-                    String columns[] = {DatabaseContract.MissingPersons.COL_NAME, DatabaseContract.MissingPersons.COL_AGE, DatabaseContract.MissingPersons.COL_GENDER, DatabaseContract.MissingPersons.COL_LAST_SEEN, DatabaseContract.MissingPersons.COL_ZIPCODE, DatabaseContract.MissingPersons.COL_REPORT_DETAILS, DatabaseContract.MissingPersons.COL_PERSON_IMAGE, DatabaseContract.MissingPersons.COL_REPORT_STATUS};
+                    String table = DatabaseContract.Users.TABLE_NAME+" u"+","+ DatabaseContract.MissingPersons.TABLE_NAME+" m";
 
-                    Cursor result = db.query(DatabaseContract.MissingPersons.TABLE_NAME, columns, null, null, null, null, null);
+                    String columns[] = {"m."+DatabaseContract.MissingPersons.COL_NAME+" AS missing_person_name", "m."+DatabaseContract.MissingPersons.COL_AGE, "m."+DatabaseContract.MissingPersons.COL_GENDER, "m."+DatabaseContract.MissingPersons.COL_LAST_SEEN, "m."+DatabaseContract.MissingPersons.COL_ZIPCODE, "m."+DatabaseContract.MissingPersons.COL_REPORT_DETAILS, "m."+DatabaseContract.MissingPersons.COL_PERSON_IMAGE, "m."+DatabaseContract.MissingPersons.COL_REPORT_STATUS, "u."+DatabaseContract.Users.COL_NAME+" AS user_name", "u."+DatabaseContract.Users.COL_CONTACT};
+
+                    String whereClause = "m."+DatabaseContract.MissingPersons.COL_USER_ID+"="+"u."+DatabaseContract.Users._ID;
+
+                    Cursor result = db.query(table, columns, whereClause, null, null, null, null);
 
                     // if there are reports
                     if(result.moveToFirst()) {
@@ -236,7 +260,7 @@ public class SearchMissingPersonReportsActivity extends AppCompatActivity {
                         while (result.moveToNext()) {
 
                             // getting all the data
-                            String name = result.getString(result.getColumnIndexOrThrow(DatabaseContract.MissingPersons.COL_NAME));
+                            String name = result.getString(result.getColumnIndexOrThrow("missing_person_name"));
                             String age = result.getString(result.getColumnIndexOrThrow(DatabaseContract.MissingPersons.COL_AGE));
                             String gender = result.getString(result.getColumnIndexOrThrow(DatabaseContract.MissingPersons.COL_GENDER));
                             String zipCode = result.getString(result.getColumnIndexOrThrow(DatabaseContract.MissingPersons.COL_ZIPCODE));
@@ -245,10 +269,15 @@ public class SearchMissingPersonReportsActivity extends AppCompatActivity {
                             String reportStatus = result.getString(result.getColumnIndexOrThrow(DatabaseContract.MissingPersons.COL_REPORT_STATUS));
                             byte[] image = result.getBlob(result.getColumnIndexOrThrow(DatabaseContract.MissingPersons.COL_PERSON_IMAGE));
 
+                            // user data
+                            String userName = result.getString(result.getColumnIndexOrThrow("user_name"));
+
+                            String userContact = result.getString(result.getColumnIndexOrThrow(DatabaseContract.Users.COL_CONTACT));
+//                            System.out.println(userName+userContact);
                             // Convert byte array to Bitmap
                             Bitmap bitmap = BitmapFactory.decodeByteArray(image, 0, image.length);
 
-                            missingPersonData[i] = new MissingPersonData(name, age, gender, zipCode, lastSeen, reportStatus, reportDetails, bitmap);
+                            missingPersonData[i] = new MissingPersonData(userName, userContact, name, age, gender, zipCode, lastSeen, reportStatus, reportDetails, bitmap);
 
                             i++;
                         }

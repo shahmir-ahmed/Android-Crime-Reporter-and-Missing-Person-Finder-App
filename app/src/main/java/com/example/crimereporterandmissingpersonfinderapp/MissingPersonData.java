@@ -14,6 +14,9 @@ public class MissingPersonData {
         private String missingPersonReportDetails;
         private Bitmap missingPersonImage;
 
+        private String userName;
+
+        private String userContact;
 
     public MissingPersonData(String missingPersonName, String missingPersonAge, String missingPersonGender, String missingPersonZipCode, String missingPersonLastSeenLocation, String missingPersonReportStatus, String missingPersonReportDetails, Bitmap missingPersonImage) {
         this.missingPersonName = missingPersonName;
@@ -39,6 +42,24 @@ public class MissingPersonData {
         this.missingPersonImage = missingPersonImage;
     }
 
+    // constructor with user and missing person report details
+
+    public MissingPersonData(String userName, String userContact, String missingPersonName, String missingPersonAge, String missingPersonGender, String missingPersonZipCode, String missingPersonLastSeenLocation, String missingPersonReportStatus, String missingPersonReportDetails, Bitmap missingPersonImage) {
+//        System.out.println("here"+userName+userContact);
+
+//        System.out.println("here"+missingPersonName);
+        this.userName = userName;
+        this.userContact = userContact;
+        this.missingPersonName = missingPersonName;
+        this.missingPersonAge = missingPersonAge;
+        this.missingPersonGender = missingPersonGender;
+        this.missingPersonZipCode = missingPersonZipCode;
+        this.missingPersonLastSeenLocation = missingPersonLastSeenLocation;
+        this.missingPersonReportStatus = missingPersonReportStatus;
+        this.missingPersonReportDetails = missingPersonReportDetails;
+        this.missingPersonImage = missingPersonImage;
+    }
+
 
     public String getMissingPersonId() {
         return missingPersonId;
@@ -48,7 +69,7 @@ public class MissingPersonData {
         this.missingPersonId = missingPersonId;
     }
     public String getMissingPersonName() {
-        return missingPersonName;
+        return this.missingPersonName;
     }
 
     public void setMissingPersonName(String missingPersonName) {
@@ -109,5 +130,21 @@ public class MissingPersonData {
 
     public void setMissingPersonImage(Bitmap missingPersonImage) {
         this.missingPersonImage = missingPersonImage;
+    }
+
+    public String getUserName() {
+        return this.userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getUserContact() {
+        return userContact;
+    }
+
+    public void setUserContact(String userContact) {
+        this.userContact = userContact;
     }
 }

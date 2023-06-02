@@ -35,6 +35,9 @@ import androidx.recyclerview.widget.RecyclerView;
         @Override
         public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
             final MissingPersonData missingPersonDataList = missingPersonData[position];
+
+            System.out.println(missingPersonDataList.getMissingPersonName()+missingPersonDataList.getUserName());
+
             holder.textViewPersonName.setText(missingPersonDataList.getMissingPersonName());
             holder.textViewLastSeenLocation.setText(missingPersonDataList.getMissingPersonLastSeenLocation());
             holder.textViewReportDetails.setText(missingPersonDataList.getMissingPersonReportDetails());
@@ -52,7 +55,7 @@ import androidx.recyclerview.widget.RecyclerView;
                 public void onClick(View v) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(context);
                     builder.setTitle("Missing Person Details");
-                    builder.setMessage("Name: " + missingPersonDataList.getMissingPersonName() + "\nAge: " + missingPersonDataList.getMissingPersonAge()+ "\nGender: " +missingPersonDataList.getMissingPersonGender()+ "\nLast Seen: " + missingPersonDataList.getMissingPersonLastSeenLocation()+ "\nZip Code: " +missingPersonDataList.getMissingPersonZipCode()+ "\nDetails: " +missingPersonDataList.getMissingPersonReportDetails()+ "\nStatus: " +missingPersonDataList.getMissingPersonReportStatus()+ "\n\n\nReported By:\n"+"\nName: "+"\nContact: ");
+                    builder.setMessage("Name: " + missingPersonDataList.getMissingPersonName() + "\nAge: " + missingPersonDataList.getMissingPersonAge()+ "\nGender: " +missingPersonDataList.getMissingPersonGender()+ "\nLast Seen: " + missingPersonDataList.getMissingPersonLastSeenLocation()+ "\nZip Code: " +missingPersonDataList.getMissingPersonZipCode()+ "\nDetails: " +missingPersonDataList.getMissingPersonReportDetails()+ "\nStatus: " +missingPersonDataList.getMissingPersonReportStatus()+ "\n\n\nReported By:\n"+"\nName: "+missingPersonDataList.getUserName()+"\nContact: "+missingPersonDataList.getUserContact());
                     // Add more details to the message as needed
 
                     builder.setPositiveButton("OK", null);
