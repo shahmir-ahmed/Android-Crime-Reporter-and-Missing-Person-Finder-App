@@ -31,7 +31,9 @@ public class DBHelper extends SQLiteOpenHelper {
             + DatabaseContract.MissingPersons.COL_ZIPCODE + " TEXT, "
             + DatabaseContract.MissingPersons.COL_REPORT_DETAILS + " TEXT, "
             + DatabaseContract.MissingPersons.COL_PERSON_IMAGE + " BLOB, "
-            + DatabaseContract.MissingPersons.COL_REPORT_STATUS + " TEXT)";
+            + DatabaseContract.MissingPersons.COL_REPORT_STATUS + " TEXT, "
+            + DatabaseContract.MissingPersons.COL_USER_ID + " INTEGER, " +
+            + " FOREIGN KEY ("+DatabaseContract.MissingPersons.COL_USER_ID+") REFERENCES "+DatabaseContract.Users.TABLE_NAME+"("+DatabaseContract.Users._ID+"));";
 
     public DBHelper(@Nullable Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory, int version) {
         super(context, name, factory, version);

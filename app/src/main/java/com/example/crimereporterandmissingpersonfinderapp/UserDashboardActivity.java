@@ -25,6 +25,14 @@ public class UserDashboardActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_dashboard);
 
+        // getting the user id from login activity
+
+        Intent intent = getIntent();
+
+        int userId = Integer.parseInt(intent.getStringExtra("userId"));
+
+
+
         // hiding the default action bar
 //        getSupportActionBar().hide();
         // disabled by creating a custom style tag with dashboard theme in styles.xml and used that theme in manifest file dashboard activity tag theme attribute

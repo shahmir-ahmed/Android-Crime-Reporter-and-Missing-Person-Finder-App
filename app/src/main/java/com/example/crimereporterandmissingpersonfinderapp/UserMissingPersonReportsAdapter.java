@@ -18,7 +18,7 @@ public class UserMissingPersonReportsAdapter extends RecyclerView.Adapter<UserMi
     MissingPersonData[] missingPersonData;
     Context context;
 
-    public UserMissingPersonReportsAdapter(MissingPersonData[] missingPersonData,SearchMissingPersonReportsActivity activity) {
+    public UserMissingPersonReportsAdapter(MissingPersonData[] missingPersonData,UserDashboardActivity activity) {
         this.missingPersonData = missingPersonData;
         this.context = activity;
     }
@@ -41,6 +41,20 @@ public class UserMissingPersonReportsAdapter extends RecyclerView.Adapter<UserMi
         holder.textViewReportStatus.setText(missingPersonDataList.getMissingPersonReportStatus());
         holder.missingPersonImage.setImageBitmap(missingPersonDataList.getMissingPersonImage());
 
+        // Getting the status because based on the status displaying view, update, delete button or more details button
+
+        String status = missingPersonDataList.getMissingPersonReportStatus();
+
+        // if status is submitted then hide the more details button
+        if(status.equals("Submitted")){
+            holder.moreDetailsBtn.setVisibility(View.INVISIBLE);
+        }
+        // if status is other then submitted i.e. submitted, seen, processing, completed or rejected then hide the view, update and delete buttons
+        else{
+            holder.viewBtn.setVisibility(View.INVISIBLE);
+            holder.updateBtn.setVisibility(View.INVISIBLE);
+            holder.deleteBtn.setVisibility(View.INVISIBLE);
+        }
         holder.viewBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -73,7 +87,7 @@ public class UserMissingPersonReportsAdapter extends RecyclerView.Adapter<UserMi
         TextView textViewReportStatus;
         ImageView missingPersonImage;
 
-        Button viewBtn, updateBtn, deleteBtn;
+        Button viewBtn, updateBtn, deleteBtn, moreDetailsBtn;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -85,6 +99,7 @@ public class UserMissingPersonReportsAdapter extends RecyclerView.Adapter<UserMi
             viewBtn = (Button) itemView.findViewById(R.id.viewBtn);
             updateBtn = (Button) itemView.findViewById(R.id.updateBtn);
             deleteBtn = (Button) itemView.findViewById(R.id.deleteBtn);
+            moreDetailsBtn = (Button) itemView.findViewById(R.id.moreDetailsBtn);
         }
     }
 

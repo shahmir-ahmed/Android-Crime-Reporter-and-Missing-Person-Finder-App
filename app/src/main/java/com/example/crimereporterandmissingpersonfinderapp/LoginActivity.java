@@ -102,7 +102,7 @@ public class LoginActivity extends AppCompatActivity {
                     SQLiteDatabase db = dbHelper.getReadableDatabase();
 
                     // columns for which data needs to be retrieved
-                    String columns[] = {DatabaseContract.Users.COL_USERNAME, DatabaseContract.Users.COL_PASSWORD};
+                    String columns[] = {DatabaseContract.Users._ID, DatabaseContract.Users.COL_USERNAME, DatabaseContract.Users.COL_PASSWORD};
 
                     // where clause
                     String whereClause = DatabaseContract.Users.COL_USERNAME+"=? AND "+DatabaseContract.Users.COL_PASSWORD+"=?";
@@ -124,7 +124,13 @@ public class LoginActivity extends AppCompatActivity {
                         // send intent to user dashboard activity
                         Intent intent = new Intent(LoginActivity.this, UserDashboardActivity.class);
 
-                        startActivity(intent);
+                        // sending user id with the intent
+
+                        int userID = result.getInt(result.getColumnIndexOrThrow(DatabaseContract.Users._ID)); // getting the id
+
+                        intent.putExtra("userId", userID); // putting in intent
+
+                        startActivity(intent); // starting activity using intent
 
                         result.close(); // close the cursor
 

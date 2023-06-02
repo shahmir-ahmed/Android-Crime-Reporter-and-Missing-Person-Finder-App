@@ -191,6 +191,7 @@
             android:orientation="horizontal"
             android:layout_gravity="bottom">
 
+<!--            View , update and delete buttons-->
             <Button
                 android:id="@+id/viewBtn"
                 android:layout_width="80dp"
@@ -217,7 +218,17 @@
                 android:text="Delete"
                 android:layout_marginBottom="28dp"/>
 
+
         </LinearLayout>
+
+        <!--            More details button-->
+        <Button
+            android:id="@+id/moreDetailsBtn"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:text="More Details"
+            android:layout_gravity="center_horizontal|bottom"
+            android:layout_marginBottom="28dp"/>
 
 
     </androidx.cardview.widget.CardView>
