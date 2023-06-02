@@ -15,8 +15,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
     public class SearchMissingPersonAdapter extends RecyclerView.Adapter<SearchMissingPersonAdapter.ViewHolder> {
 
-        MissingPersonData[] missingPersonData;
-        Context context;
+        MissingPersonData[] missingPersonData; // data of all missing persons
+        Context context; // context of the activity in which adapter is
 
         public SearchMissingPersonAdapter(MissingPersonData[] missingPersonData,SearchMissingPersonReportsActivity activity) {
             this.missingPersonData = missingPersonData;

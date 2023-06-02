@@ -1,20 +1,40 @@
 package com.example.crimereporterandmissingpersonfinderapp;
 
+import static android.app.Activity.RESULT_OK;
+
+import android.app.Activity;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.io.ByteArrayOutputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -23,9 +43,18 @@ public class UserMissingPersonReportsAdapter extends RecyclerView.Adapter<UserMi
     MissingPersonData[] missingPersonData; // the missing person data array (array of objects) based on which the adapter binds the individual v=cards views with the data in the object at each position of array
     Context context; // the activity context in which the adapter is
 
+    private static final int RESULT_LOAD_IMG = 0;
+
+    // update dialog box image
+    ImageView imageViewPersonImage;
+
     public UserMissingPersonReportsAdapter(MissingPersonData[] missingPersonData,UserDashboardActivity activity) {
         this.missingPersonData = missingPersonData;
         this.context = activity;
+    }
+
+    public UserMissingPersonReportsAdapter(){
+
     }
 
     @NonNull
@@ -79,6 +108,195 @@ public class UserMissingPersonReportsAdapter extends RecyclerView.Adapter<UserMi
                 dialog.show();
             }
         });
+
+        // update button
+        holder.updateBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+//                builder.setTitle("Missing Person Details");
+
+                // Create a custom layout for the AlertDialog
+                View dialogView = LayoutInflater.from(context).inflate(R.layout.dialog_update_missing_person_details, null);
+                builder.setView(dialogView);
+
+                // Get references to the views in the custom layout
+                // Creating bridge
+                EditText etPersonName = (EditText) dialogView.findViewById(R.id.etPersonName);
+                EditText etPersonAge = (EditText) dialogView.findViewById(R.id.etPersonAge);
+
+                RadioGroup radioGroup = (RadioGroup) dialogView.findViewById(R.id.radioGroup1);
+                RadioButton rbMale = (RadioButton) dialogView.findViewById(R.id.rbMale);
+                RadioButton rbFemale = (RadioButton) dialogView.findViewById(R.id.rbFemale);
+
+                EditText etLastSeen = (EditText) dialogView.findViewById(R.id.etLastSeen);
+                EditText etZipCode = (EditText) dialogView.findViewById(R.id.editTextZipCode);
+                EditText etDetails = (EditText) dialogView.findViewById(R.id.etDetails);
+                imageViewPersonImage = (ImageView) dialogView.findViewById(R.id.imageViewPersonImage);
+
+                // setting the report data on form
+                etPersonName.setText(missingPersonDataList.getMissingPersonName());
+                etPersonAge.setText(missingPersonDataList.getMissingPersonAge());
+
+                // check the gender
+                String gender = missingPersonDataList.getMissingPersonGender();
+
+                // based on the gender check the radio button
+                if(gender.equals("Male")){
+                    rbMale.setChecked(true);
+                }
+                else{
+                    rbFemale.setChecked(true);
+                }
+
+                etLastSeen.setText(missingPersonDataList.getMissingPersonLastSeenLocation());
+                etZipCode.setText(missingPersonDataList.getMissingPersonZipCode());
+                etDetails.setText(missingPersonDataList.getMissingPersonReportDetails());
+
+                imageViewPersonImage.setImageBitmap(missingPersonDataList.getMissingPersonImage());
+
+
+                Button browseBtn = (Button) dialogView.findViewById(R.id.browseBtn);
+
+
+                // on click listener on browse image button
+                browseBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        getImageFromGallery();
+
+                    }
+                });
+
+                builder.setPositiveButton("Update", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        // getting form details
+                        String name, age, gender, lastSeen, zipCode, reportDetails;
+
+                        name = etPersonName.getText().toString();
+
+                        age = etPersonAge.getText().toString();
+
+                        int radioButtonId = radioGroup.getCheckedRadioButtonId();
+
+                        lastSeen = etLastSeen.getText().toString();
+
+                        zipCode = etZipCode.getText().toString();
+
+                        reportDetails = etDetails.getText().toString();
+
+                        // validation
+                        // if name is not entered
+                        if (name.trim().isEmpty()) {
+                            // Show a Toast over the Dialog
+                            // Display a Toast message
+                            Toast toast = Toast.makeText(context, "Please enter name!", Toast.LENGTH_SHORT);
+                            toast.setGravity(Gravity.CENTER, 0, 0);
+                            toast.show();
+                        }
+                        // if age is not entered
+                        else if (age.trim().isEmpty()) {
+                            Toast.makeText(dialogView.getContext(), "Please enter age!", Toast.LENGTH_LONG).show();
+                        }
+                        // if age is greater than 2 digits
+                        else if (age.length() > 2) {
+                            Toast.makeText(dialogView.getContext(), "Invalid age!", Toast.LENGTH_LONG).show();
+                        }
+                        // if no radio button is selected
+                        else if (radioButtonId == -1) {
+                            Toast.makeText(dialogView.getContext(), "Please select gender!", Toast.LENGTH_LONG).show();
+                        }
+                        // last seen field is not filled
+                        else if (lastSeen.trim().isEmpty()) {
+                            Toast.makeText(dialogView.getContext(), "Please enter last seen location!", Toast.LENGTH_LONG).show();
+                        }
+                        // zip code field
+                        else if (zipCode.trim().isEmpty()) {
+                            Toast.makeText(dialogView.getContext(), "Please enter zip code!", Toast.LENGTH_LONG).show();
+                        }
+                        else if (zipCode.length() != 5) {
+                            Toast.makeText(dialogView.getContext(), "Zip code must be 5 digits!", Toast.LENGTH_LONG).show();
+                        }
+                        // report details are not entered
+                        else if (reportDetails.trim().isEmpty()) {
+                            Toast.makeText(dialogView.getContext(), "Please enter report details!", Toast.LENGTH_LONG).show();
+                        }
+                        // if image is not selected
+                        else if (imageViewPersonImage.getDrawable() == null) {
+                            Toast.makeText(dialogView.getContext(), "Please choose an image!", Toast.LENGTH_LONG).show();
+                        }
+                        // if form is valid
+                        else {
+
+                            // checking the gender
+                            if (radioButtonId == R.id.rbMale) {
+                                gender = "Male";
+                            } else {
+                                gender = "Female";
+                            }
+
+                            // save form data in database
+                            DBHelper dbHelper = new DBHelper(context);
+
+                            SQLiteDatabase db = dbHelper.getWritableDatabase();
+
+                            // data preparing to send
+                            ContentValues values = new ContentValues();
+
+                            // putting key value pairs in object
+                            values.put(DatabaseContract.MissingPersons.COL_NAME, name);
+                            values.put(DatabaseContract.MissingPersons.COL_AGE, age);
+                            values.put(DatabaseContract.MissingPersons.COL_GENDER, gender);
+                            values.put(DatabaseContract.MissingPersons.COL_LAST_SEEN, lastSeen);
+                            values.put(DatabaseContract.MissingPersons.COL_ZIPCODE, zipCode);
+                            values.put(DatabaseContract.MissingPersons.COL_REPORT_DETAILS, reportDetails);
+
+                            // getting the report id from list to update the report
+                            String reportId = missingPersonDataList.getMissingPersonId();
+
+                            // missing person image
+                            // Get the Bitmap from the ImageView
+                            Bitmap bitmap = ((BitmapDrawable) imageViewPersonImage.getDrawable()).getBitmap();
+
+                            // Convert the Bitmap to a byte array
+                            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                            bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
+                            byte[] personImage = baos.toByteArray();
+
+                            // content value --> missing person image
+                            values.put(DatabaseContract.MissingPersons.COL_PERSON_IMAGE, personImage);
+
+                            String whereClause = DatabaseContract.MissingPersons._ID + "=?";
+
+                            String whereArgs[] = {String.valueOf(reportId)};
+
+                            // saving form data in DB
+                            long updatedRows = db.update(DatabaseContract.MissingPersons.TABLE_NAME, values, whereClause, whereArgs);
+
+                            // check the returned updated rows
+                            if (updatedRows != 1) {
+                                Toast.makeText(context, "Report not updated!", Toast.LENGTH_LONG).show();
+                            } else {
+                                Toast.makeText(context, "Report updated successfully!", Toast.LENGTH_LONG).show();
+
+                            }
+                        }
+                    }
+                });
+
+
+                builder.setNegativeButton("Cancel",  null);
+
+                AlertDialog dialog = builder.create();
+                dialog.show();
+
+
+            }
+        });
+
 
         // delete button
         holder.deleteBtn.setOnClickListener(new View.OnClickListener() {
@@ -139,8 +357,7 @@ public class UserMissingPersonReportsAdapter extends RecyclerView.Adapter<UserMi
                 dialog.show();
             }
         });
-
-    }
+            }
 
     @Override
     public int getItemCount() {
@@ -152,13 +369,25 @@ public class UserMissingPersonReportsAdapter extends RecyclerView.Adapter<UserMi
     }
 
 
+    // Used to start gallery activity
+    public void getImageFromGallery(){
+        Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
+        photoPickerIntent.setType("image/*");
+        ((Activity) context).startActivityForResult(photoPickerIntent, RESULT_LOAD_IMG);
+    }
+
+    // handles the gallery result from activity
+    public void handleGalleryResult(Bitmap image) {
+        Toast.makeText(context, "here", Toast.LENGTH_SHORT).show();
+        imageViewPersonImage.setImageBitmap(image);
+    }
+
     public class ViewHolder extends RecyclerView.ViewHolder{
         TextView textViewPersonName;
         TextView textViewLastSeenLocation;
         TextView textViewReportDetails;
         TextView textViewReportStatus;
         ImageView missingPersonImage;
-
         Button viewBtn, updateBtn, deleteBtn, moreDetailsBtn;
 
         public ViewHolder(@NonNull View itemView) {
@@ -177,5 +406,8 @@ public class UserMissingPersonReportsAdapter extends RecyclerView.Adapter<UserMi
             moreDetailsBtn = (Button) itemView.findViewById(R.id.moreDetailsBtn);
         }
     }
-
 }
+
+
+
+

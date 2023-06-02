@@ -27,8 +27,8 @@
         <option value="resourceFile" />
         <option value="valueResourceFile" />
         <option value="layoutResourceFile_vertical" />
-        <option value="layoutResourceFile" />
         <option value="Class" />
+        <option value="layoutResourceFile" />
       </list>
     </option>
   </component>
@@ -69,6 +69,9 @@
   </component>
   <component name="RecentsManager">
     <key name="android.template.-29275481">
+      <recent name="com.example.crimereporterandmissingpersonfinderapp" />
+    </key>
+    <key name="android.template.-366191425">
       <recent name="com.example.crimereporterandmissingpersonfinderapp" />
     </key>
     <key name="android.template.-2056493719">

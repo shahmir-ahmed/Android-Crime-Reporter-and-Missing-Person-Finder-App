@@ -1,11 +1,16 @@
 package com.example.crimereporterandmissingpersonfinderapp;
 
+import static android.app.Activity.RESULT_OK;
+
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -17,7 +22,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.Toast;
+
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -47,6 +56,11 @@ public class MissingPersonReportsFragment extends Fragment {
     public static final String MyPREFERENCES = "MyPrefs" ;
     public static final String userIdKey = "idKey";
     SharedPreferences sharedpreferences;
+
+    // global variable image view to store the refernce of the image in dialog box
+    public static ImageView imageView;
+
+    private static final int RESULT_LOAD_IMG = 0;
 
     public MissingPersonReportsFragment() {
         // Required empty public constructor
@@ -101,7 +115,6 @@ public class MissingPersonReportsFragment extends Fragment {
 
         int userId = Integer.parseInt(sharedpreferences.getString(userIdKey, ""));
 
-
         // retrieve all the missing person reports from DB reported by the user
         DBHelper dbHelper = new DBHelper(getActivity().getApplicationContext());
 
@@ -113,7 +126,9 @@ public class MissingPersonReportsFragment extends Fragment {
 
         String whereArgs[] = {String.valueOf(userId)};
 
+
         Cursor result = db.query(DatabaseContract.MissingPersons.TABLE_NAME, columns, whereClause, whereArgs, null, null, null);
+
 
         // if there are reports
         if(result.moveToFirst()){
@@ -160,6 +175,30 @@ public class MissingPersonReportsFragment extends Fragment {
         }
         else{
             Toast.makeText(getActivity().getApplicationContext(), "No reports found!", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    // get the gallery result in here
+    @Override
+    public void onActivityResult(int reqCode, int resultCode, Intent data) {
+        super.onActivityResult(reqCode, resultCode, data);
+
+
+        if (resultCode == RESULT_OK) {
+            try {
+                final Uri imageUri = data.getData();
+                final InputStream imageStream = requireActivity().getContentResolver().openInputStream(imageUri);
+                final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
+
+                Toast.makeText(getView().getContext(), "Image selected!", Toast.LENGTH_LONG).show();
+
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+                Toast.makeText(getView().getContext(), "Something went wrong", Toast.LENGTH_LONG).show();
+            }
+
+        }else {
+            Toast.makeText(getView().getContext(), "You haven't picked Image",Toast.LENGTH_LONG).show();
         }
     }
 }
