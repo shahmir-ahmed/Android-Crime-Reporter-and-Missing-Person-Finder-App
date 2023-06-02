@@ -4,6 +4,7 @@ import static android.app.Activity.RESULT_OK;
 
 import android.content.ContentValues;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -59,6 +60,11 @@ public class ReportMissingPersonFragment extends Fragment {
     ImageView imageViewPersonImage;
 
     Button browseBtn, submitBtn;
+
+    // shared preferences for user session
+    public static final String MyPREFERENCES = "MyPrefs" ;
+    public static final String userIdKey = "idKey";
+    SharedPreferences sharedpreferences;
 
     public ReportMissingPersonFragment() {
         // Required empty public constructor
@@ -119,6 +125,9 @@ public class ReportMissingPersonFragment extends Fragment {
 
         browseBtn = (Button) getView().findViewById(R.id.browseBtn);
         submitBtn = (Button) getView().findViewById(R.id.submitBtn);
+
+        // initailzing shared preferences
+        sharedpreferences = getActivity().getSharedPreferences(MyPREFERENCES, getContext().MODE_PRIVATE);
 
         // on click listener on browse image button
         browseBtn.setOnClickListener(new View.OnClickListener() {
@@ -217,6 +226,10 @@ public class ReportMissingPersonFragment extends Fragment {
                     // Status intially set to submitted
                     values.put(DatabaseContract.MissingPersons.COL_REPORT_STATUS, "Submitted");
 
+                    // getting the user id from shared preferences
+                    int userId = Integer.parseInt(sharedpreferences.getString(userIdKey, ""));
+
+                    values.put(DatabaseContract.MissingPersons.COL_USER_ID, userId);
 
                     // missing person image
                     // Get the Bitmap from the ImageView

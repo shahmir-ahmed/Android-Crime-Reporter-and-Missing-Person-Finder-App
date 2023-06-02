@@ -92,7 +92,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         // if login button with "Home" text is clicked
         else if(text.equals("Home")){
 
-            Toast.makeText(this, "Welcome back! user id:"+userID, Toast.LENGTH_SHORT).show();
+//            Toast.makeText(this, "Welcome back! user id:"+userID, Toast.LENGTH_SHORT).show();
+
+            Toast.makeText(this, "Welcome back!", Toast.LENGTH_SHORT).show();
 
             // Sending intent to User Dashboard Activity
             Intent intent = new Intent(this, UserDashboardActivity.class);
@@ -105,12 +107,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onStart() {
 //        System.out.println("HERE!!");
+        Toast.makeText(this, "HERE!!", Toast.LENGTH_SHORT).show();
         // retrieving the user id key from shared preferences
         userID = sharedpreferences.getString(userIdKey, "");
 
         // if no session exists
         if (userID.equals("")) {
-            // do nothing
+//            Toast.makeText(this, "no session", Toast.LENGTH_SHORT).show();
+            loginButton.setText("Login");
         } else {
             loginButton.setText("Home");
         }

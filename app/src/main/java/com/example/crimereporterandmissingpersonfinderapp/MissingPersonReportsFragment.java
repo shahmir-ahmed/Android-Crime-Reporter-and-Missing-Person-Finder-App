@@ -1,5 +1,7 @@
 package com.example.crimereporterandmissingpersonfinderapp;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
@@ -33,11 +35,18 @@ public class MissingPersonReportsFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
+
+
     MissingPersonData[] missingPersonData;
 
     UserMissingPersonReportsAdapter userMissingPersonReportsAdapter;
 
     RecyclerView recyclerView;
+
+    // shared preferences for user session
+    public static final String MyPREFERENCES = "MyPrefs" ;
+    public static final String userIdKey = "idKey";
+    SharedPreferences sharedpreferences;
 
     public MissingPersonReportsFragment() {
         // Required empty public constructor
@@ -86,18 +95,27 @@ public class MissingPersonReportsFragment extends Fragment {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity().getApplicationContext()));
 
-        // retrieve all the missing person reports from DB
+        // intializing shared preferences
+        sharedpreferences = getActivity().getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+
+        int userId = Integer.parseInt(sharedpreferences.getString(userIdKey, ""));
+
+        // retrieve all the missing person reports from DB reported by the user
         DBHelper dbHelper = new DBHelper(getActivity().getApplicationContext());
 
         SQLiteDatabase db = dbHelper.getReadableDatabase();
 
         String columns[] = {DatabaseContract.MissingPersons.COL_NAME, DatabaseContract.MissingPersons.COL_AGE, DatabaseContract.MissingPersons.COL_GENDER, DatabaseContract.MissingPersons.COL_LAST_SEEN, DatabaseContract.MissingPersons.COL_ZIPCODE, DatabaseContract.MissingPersons.COL_REPORT_DETAILS, DatabaseContract.MissingPersons.COL_PERSON_IMAGE, DatabaseContract.MissingPersons.COL_REPORT_STATUS};
 
-        Cursor result = db.query(DatabaseContract.MissingPersons.TABLE_NAME, columns, null, null, null, null, null);
+        String whereClause = DatabaseContract.MissingPersons.COL_USER_ID+"=?";
+
+        String whereArgs[] = {String.valueOf(userId)};
+
+        Cursor result = db.query(DatabaseContract.MissingPersons.TABLE_NAME, columns, whereClause, whereArgs, null, null, null);
 
         // if there are reports
         if(result.moveToFirst()){
-            // reset to intial position
+            // reset to initial position
             result.moveToPosition(-1);
 
             // get the number of rows

@@ -47,13 +47,16 @@ public class UserMissingPersonReportsAdapter extends RecyclerView.Adapter<UserMi
 
         // if status is submitted then hide the more details button
         if(status.equals("Submitted")){
-            holder.moreDetailsBtn.setVisibility(View.INVISIBLE);
+            holder.moreDetailsBtn.setVisibility(View.GONE);
+
+//            ViewGroup parent = (ViewGroup) holder.moreDetailsBtn.getParent();
+//            parent.removeView(holder.moreDetailsBtn);
         }
         // if status is other then submitted i.e. submitted, seen, processing, completed or rejected then hide the view, update and delete buttons
         else{
-            holder.viewBtn.setVisibility(View.INVISIBLE);
-            holder.updateBtn.setVisibility(View.INVISIBLE);
-            holder.deleteBtn.setVisibility(View.INVISIBLE);
+            holder.viewBtn.setVisibility(View.GONE);
+            holder.updateBtn.setVisibility(View.GONE);
+            holder.deleteBtn.setVisibility(View.GONE);
         }
         holder.viewBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -96,9 +99,11 @@ public class UserMissingPersonReportsAdapter extends RecyclerView.Adapter<UserMi
             textViewReportDetails = itemView.findViewById(R.id.tvReportDetails);
             textViewReportStatus = itemView.findViewById(R.id.tvReportStatus);
             missingPersonImage = itemView.findViewById(R.id.imgMissingPerson);
+
             viewBtn = (Button) itemView.findViewById(R.id.viewBtn);
             updateBtn = (Button) itemView.findViewById(R.id.updateBtn);
             deleteBtn = (Button) itemView.findViewById(R.id.deleteBtn);
+
             moreDetailsBtn = (Button) itemView.findViewById(R.id.moreDetailsBtn);
         }
     }
