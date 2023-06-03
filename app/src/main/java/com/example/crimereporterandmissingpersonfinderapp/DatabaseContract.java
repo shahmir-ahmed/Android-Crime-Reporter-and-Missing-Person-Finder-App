@@ -31,6 +31,16 @@ public final class DatabaseContract {
 
 
     // Crimes table
+    public static class Crimes implements BaseColumns {
+        public static final String TABLE_NAME = "crimes";
+        public static final String COLUMN_TYPE = "crime_type";
+        public static final String COLUMN_STREET_NUMBER = "street_number";
+        public static final String COLUMN_CITY = "city";
+        public static final String COLUMN_ZIPCODE = "zipcode";
+        public static final String COLUMN_CRIME_DETAILS = "crime_details";
+        public static final String COLUMN_IMAGE = "image";
+    }
+
 
 
     // Admins table

@@ -68,6 +68,8 @@ package com.example.crimereporterandmissingpersonfinderapp;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -107,6 +109,9 @@ public class ReportCrimeFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+
+    // sqlite database object
+    private SQLiteDatabase database;
 
     public ReportCrimeFragment() {
         // Required empty public constructor
@@ -160,16 +165,16 @@ public class ReportCrimeFragment extends Fragment {
         String[] cityArray = getResources().getStringArray(R.array.city_array);
 
         // Create ArrayAdapter and set it as the adapter for the Spinner
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_spinner_item, cityArray);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_list_item_1, cityArray);
+//        adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
         spinnerCity.setAdapter(adapter);
 
         // Retrieve the array from the XML file
         String[] crimeArray = getResources().getStringArray(R.array.crime_array);
 
         // Create ArrayAdapter and set it as the adapter for the Spinner
-        ArrayAdapter<String> adapter1 = new ArrayAdapter<>(requireContext(), android.R.layout.simple_spinner_item, crimeArray);
-        adapter1.setDropDownViewResource(android.R.layout.simple_spinner_item);
+        ArrayAdapter<String> adapter1 = new ArrayAdapter<>(requireContext(), android.R.layout.simple_list_item_1, crimeArray);
+//        adapter1.setDropDownViewResource(android.R.layout.simple_spinner_item);
         spinnerCrime.setAdapter(adapter1);
 
         // Set up browse button click listener
@@ -186,6 +191,9 @@ public class ReportCrimeFragment extends Fragment {
                 registerForm();
             }
         });
+
+        DBHelper dbHelper = new DBHelper(getActivity());
+        database = dbHelper.getWritableDatabase();
 
         return view;
     }
@@ -237,10 +245,10 @@ public class ReportCrimeFragment extends Fragment {
         String zipCode = editTextZipCode.getText().toString().trim();
         String crimeDescription = editTextCrimeDescription.getText().toString().trim();
 
-        String selectedCrime = spinnerCrime.getSelectedItem().toString();
+        String selectedCrimeType = spinnerCrime.getSelectedItem().toString();
 //        System.out.println(selectedCrime);
-        if (selectedCrime.equals("Select crime")) {
-            Toast.makeText(getContext(), "Please select a city", Toast.LENGTH_SHORT).show();
+        if (selectedCrimeType.equals("Select crime")) {
+            Toast.makeText(getContext(), "Please select crime type", Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -283,8 +291,48 @@ public class ReportCrimeFragment extends Fragment {
             return;
         }
 
-        // Display toast message for successful registration
-        Toast.makeText(getContext(), "Crime reported successfully", Toast.LENGTH_SHORT).show();
+        try {
+            // Save crime in database
+            // Insert the complaint into the database
+            String insertQuery = "INSERT INTO " + DatabaseContract.Crimes.TABLE_NAME + " (" +
+                    DatabaseContract.Crimes.COLUMN_TYPE + ", " +
+                    DatabaseContract.Crimes.COLUMN_STREET_NUMBER + ", " +
+                    DatabaseContract.Crimes.COLUMN_CITY + ", " +
+                    DatabaseContract.Crimes.COLUMN_ZIPCODE + ", " +
+                    DatabaseContract.Crimes.COLUMN_CRIME_DETAILS + ", " +
+                    DatabaseContract.Crimes.COLUMN_IMAGE + ") " +
+                    "VALUES (?, ?, ?, ?, ?, ?)";
+
+            database.execSQL(insertQuery, new String[]{selectedCrimeType, streetNumber, selectedCity, zipCode, crimeDescription, String.valueOf(selectedImageBitmap)});
+
+            // clear all the fields
+            editTextStreetNumber.setText("");
+            editTextZipCode.setText("");
+            editTextCrimeDescription.setText("");
+            imageCrime.setImageBitmap(null);
+
+            // Display success message
+            Toast.makeText(getActivity(), "Crime reported successfully!", Toast.LENGTH_SHORT).show();
+        }
+        catch (SQLiteException e) {
+            // Display error message
+            Toast.makeText(getActivity(), "Failed to register a crime report.", Toast.LENGTH_SHORT).show();
+            e.printStackTrace();
+        }
+    // Display success message
+//        Toast.makeText(getActivity(), "Lodged crime successfully!", Toast.LENGTH_SHORT).show();
+
+    // Close the database connection when the fragment is destroyed
+        if (database != null) {
+        database.close();
+    }
+
+    // Display toast message for successful registration
+//        Toast.makeText(getContext(), "Registration Successful", Toast.LENGTH_SHORT).show();
+
+
+// Display toast message for successful registration
+//        Toast.makeText(getContext(), "Crime reported successfully", Toast.LENGTH_SHORT).show();
     }
 
     private boolean isValidZipCode(String zipCode) {
@@ -292,14 +340,14 @@ public class ReportCrimeFragment extends Fragment {
         return zipCode.matches("[0-9]{5}");
     }
 
-    private boolean isValidStreetNumber(String streetNumber) {
-        if (streetNumber.matches("[0-9]+")) {
-            int number = Integer.parseInt(streetNumber);
-            // - The street number shall be entered through a string and converted into int
-            // - The street number should be greater than 0
-            // - The street number should not exceed 30
-            return number >= 1 && number <= 30;
-        }
-        return false;
-    }
+//    private boolean isValidStreetNumber(String streetNumber) {
+//        if (streetNumber.matches("[0-9]+")) {
+//            int number = Integer.parseInt(streetNumber);
+//            // - The street number shall be entered through a string and converted into int
+//            // - The street number should be greater than 0
+//            // - The street number should not exceed 30
+//            return number >= 1 && number <= 30;
+//        }
+//        return false;
+//    }
 }

@@ -66,6 +66,19 @@ public class DBHelper extends SQLiteOpenHelper {
                     DatabaseContract.Complaints.COL_USER_ID + " INTEGER," +
                     " FOREIGN KEY ("+DatabaseContract.Complaints.COL_USER_ID+") REFERENCES "+DatabaseContract.Users.TABLE_NAME+"("+DatabaseContract.Users._ID+"));";
 
+
+    // crimes table creation query
+
+    private static final String CREATE_TABLE_CRIMES=
+            "CREATE TABLE " + DatabaseContract.Crimes.TABLE_NAME + " ("
+                    + DatabaseContract.Crimes._ID + " INTEGER PRIMARY KEY,"
+                    + DatabaseContract.Crimes.COLUMN_TYPE + " TEXT,"
+                    + DatabaseContract.Crimes.COLUMN_STREET_NUMBER + " TEXT,"
+                    + DatabaseContract.Crimes.COLUMN_CITY + " TEXT,"
+                    + DatabaseContract.Crimes.COLUMN_ZIPCODE + " TEXT,"
+                    + DatabaseContract.Crimes.COLUMN_CRIME_DETAILS + " TEXT,"
+                    + DatabaseContract.Crimes.COLUMN_IMAGE + " BLOB)";
+
     public DBHelper(@Nullable Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory, int version) {
         super(context, name, factory, version);
     }
@@ -89,6 +102,9 @@ public class DBHelper extends SQLiteOpenHelper {
 
         // create complaints table when db is created for first time
         sqLiteDatabase.execSQL(CREATE_TABLE_COMPLAINTS);
+
+        // create crimes table when db is created for first time
+        sqLiteDatabase.execSQL(CREATE_TABLE_CRIMES);
     }
 
     @Override
