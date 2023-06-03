@@ -2,6 +2,7 @@ package com.example.crimereporterandmissingpersonfinderapp;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,31 +37,80 @@ public class ComplaintsAdapter  extends RecyclerView.Adapter<ComplaintsAdapter.C
 
         // Bind the complaint data to the views in the item layout
         holder.subjectTextView.setText(complaint.getSubject());
+        holder.complaintDetailsTextView.setText(complaint.getComplaintDetails());
+        holder.statusTextView.setText(complaint.getStatus());
+
+        // based on the status of report change the colour of status
+        TextView statusTextView = holder.statusTextView;
+
+        String reportStatus = complaint.getStatus();
+
+        int color;
+        switch (reportStatus) {
+            case "Submitted":
+                color = Color.BLUE;
+                break;
+            case "Seen":
+                color = Color.GREEN;
+                break;
+            case "Processing":
+                color = Color.YELLOW;
+                break;
+            case "Completed":
+                color = Color.RED;
+                break;
+            case "Rejected":
+                color = Color.GRAY;
+                break;
+            default:
+                color = Color.BLACK;
+                break;
+        }
+
+        statusTextView.setTextColor(color);
+
+        // Getting the status because based on the status displaying view, update, delete button or more details button
+        String status = complaint.getStatus();
+
+        // if status is submitted then hide the more details button
+        if(status.equals("Submitted")){
+            holder.moreDetailsBtn.setVisibility(View.GONE);
+        }
+        // if status is other then submitted i.e. submitted, seen, processing, completed or rejected then hide the view, update and delete buttons
+        else{
+            holder.viewButton.setVisibility(View.GONE);
+            holder.updateButton.setVisibility(View.GONE);
+            holder.deleteButton.setVisibility(View.GONE);
+        }
+
 //        holder.personNameTextView.setText(complaint.getPersonName());
 
         // Set the initial visibility of additional details views to GONE
-        holder.cityTextView.setVisibility(View.GONE);
-        holder.statusTextView.setVisibility(View.GONE);
-        holder.complaintDetailsTextView.setVisibility(View.GONE);
+//        holder.cityTextView.setVisibility(View.GONE);
+//        holder.statusTextView.setVisibility(View.GONE);
+//        holder.complaintDetailsTextView.setVisibility(View.GONE);
 
         // Handle view, update and delete button clicks
         // Handle view button click to expand the view and show additional details
         holder.viewButton.setOnClickListener(v -> {
-            if (holder.cityTextView.getVisibility() == View.GONE) {
-                // Show additional details
-                holder.cityTextView.setText(complaint.getCity());
-                holder.statusTextView.setText(complaint.getStatus());
-                holder.complaintDetailsTextView.setText(complaint.getComplaintDetails());
+//            if (holder.cityTextView.getVisibility() == View.GONE) {
+//                // Show additional details
+//                holder.cityTextView.setText(complaint.getCity());
+//                holder.statusTextView.setText(complaint.getStatus());
+//                holder.complaintDetailsTextView.setText(complaint.getComplaintDetails());
+//
+//                holder.cityTextView.setVisibility(View.VISIBLE);
+//                holder.statusTextView.setVisibility(View.VISIBLE);
+//                holder.complaintDetailsTextView.setVisibility(View.VISIBLE);
+//            } else {
+//                // Hide additional details
+//                holder.cityTextView.setVisibility(View.GONE);
+//                holder.statusTextView.setVisibility(View.GONE);
+//                holder.complaintDetailsTextView.setVisibility(View.GONE);
+//            }
 
-                holder.cityTextView.setVisibility(View.VISIBLE);
-                holder.statusTextView.setVisibility(View.VISIBLE);
-                holder.complaintDetailsTextView.setVisibility(View.VISIBLE);
-            } else {
-                // Hide additional details
-                holder.cityTextView.setVisibility(View.GONE);
-                holder.statusTextView.setVisibility(View.GONE);
-                holder.complaintDetailsTextView.setVisibility(View.GONE);
-            }
+
+
         });
 
         holder.updateButton.setOnClickListener(new View.OnClickListener() {
@@ -119,10 +169,8 @@ public class ComplaintsAdapter  extends RecyclerView.Adapter<ComplaintsAdapter.C
 //        TextView personNameTextView;
         TextView complaintDetailsTextView;
         TextView statusTextView;
-        TextView cityTextView;
-        Button viewButton;
-        Button updateButton;
-        Button deleteButton;
+//        TextView cityTextView;
+        Button viewButton, updateButton, deleteButton, moreDetailsBtn;
 
         public ComplaintViewHolder(View itemView) {
             super(itemView);
@@ -130,11 +178,13 @@ public class ComplaintsAdapter  extends RecyclerView.Adapter<ComplaintsAdapter.C
 //            personNameTextView = itemView.findViewById(R.id.tv19);
             complaintDetailsTextView = itemView.findViewById(R.id.tv4);
             statusTextView = itemView.findViewById(R.id.tv6);
-            cityTextView = itemView.findViewById(R.id.tv);
+//            cityTextView = itemView.findViewById(R.id.tv);
 
             viewButton = itemView.findViewById(R.id.viewBtn);
             updateButton = itemView.findViewById(R.id.updateBtn);
             deleteButton = itemView.findViewById(R.id.deleteBtn);
+
+            moreDetailsBtn = itemView.findViewById(R.id.moreDetailsBtn);
         }
     }
 
