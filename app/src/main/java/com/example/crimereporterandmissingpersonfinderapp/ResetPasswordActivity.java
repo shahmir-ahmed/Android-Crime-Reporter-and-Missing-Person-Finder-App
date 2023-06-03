@@ -11,12 +11,14 @@ import android.widget.Toast;
 
 public class ResetPasswordActivity extends AppCompatActivity {
 
+    String userEmail; // user email passed from forgot password activity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reset_password);
 
         Intent intent = getIntent();
+        userEmail = intent.getStringExtra("email");
 
         EditText passwordEditText = findViewById(R.id.editTextNewPassword);
         EditText confirmPasswordEditText = findViewById(R.id.editTextConfirmPassword);
@@ -44,7 +46,9 @@ public class ResetPasswordActivity extends AppCompatActivity {
                 confirmPasswordEditText.requestFocus();
             }
             else {
-                Toast.makeText(this, "Record stored successfully.", Toast.LENGTH_SHORT).show();
+                //
+
+                Toast.makeText(this, "Password reset successfully.", Toast.LENGTH_SHORT).show();
             }
         });
 

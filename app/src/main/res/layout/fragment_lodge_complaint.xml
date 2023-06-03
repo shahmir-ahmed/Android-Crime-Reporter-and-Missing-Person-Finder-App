@@ -12,21 +12,21 @@
     android:background="#240e71"
     tools:context=".LodgeComplaintFragment">
 
-    <TextView
-        android:id="@+id/textHeading"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/poppins_light"
-        android:text="Lodge Complaint"
-        android:textColor="#FFFFFF"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.493"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.047" />
+<!--    <TextView-->
+<!--        android:id="@+id/textHeading"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:fontFamily="@font/poppins_light"-->
+<!--        android:text="Lodge Complaint"-->
+<!--        android:textColor="#FFFFFF"-->
+<!--        android:textSize="20sp"-->
+<!--        android:textStyle="bold"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="0.493"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:layout_constraintVertical_bias="0.047" />-->
 
     <TextView
         android:id="@+id/textViewAddress"
@@ -35,14 +35,14 @@
         android:fontFamily="@font/poppins_light"
         android:text="Address:"
         android:textColor="#FFFFFF"
-        android:textSize="18sp"
+        android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.047"
+        app:layout_constraintHorizontal_bias="0.067"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.16" />
+        app:layout_constraintVertical_bias="0.080" />
 
     <EditText
         android:id="@+id/editTextAddress"
@@ -52,12 +52,13 @@
         android:fontFamily="@font/poppins_light"
         android:hint="Please enter your Address"
         android:textColor="#FFFF"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.797"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.142"
+        app:layout_constraintVertical_bias="0.050"
         tools:ignore="DuplicateClickableBoundsCheck" />
 
     <TextView
@@ -68,7 +69,7 @@
         android:fontFamily="@font/poppins_light"
         android:text="City:"
         android:textColor="#FFFFFF"
-        android:textSize="18sp"
+        android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -77,38 +78,54 @@
         app:layout_constraintTop_toBottomOf="@+id/textViewAddress"
         app:layout_constraintVertical_bias="0.115" />
 
-    <EditText
-        android:id="@+id/editTextCity"
-        android:layout_width="248dp"
-        android:layout_height="57dp"
-        android:layout_below="@id/textViewCity"
-        android:layout_marginTop="25dp"
-        android:fontFamily="@font/poppins_light"
-        android:hint="Please enter your City"
+<!--    <EditText-->
+<!--        android:id="@+id/editTextCity"-->
+<!--        android:layout_width="248dp"-->
+<!--        android:layout_height="57dp"-->
+<!--        android:layout_below="@id/textViewCity"-->
+<!--        android:layout_marginTop="25dp"-->
+<!--        android:fontFamily="@font/poppins_light"-->
+<!--        android:hint="Please enter your City"-->
+<!--        android:textColor="#FFFF"-->
+<!--        android:textSize="16sp"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="0.797"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/editTextAddress"-->
+<!--        app:layout_constraintVertical_bias="0.02" />-->
+
+    <Spinner
+        android:id="@+id/spinnerCity"
+        android:layout_width="263dp"
+        android:layout_height="48dp"
         android:textColor="#FFFF"
+        android:textSize="16sp"
+        android:fontFamily="@font/poppins_light"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.797"
+        app:layout_constraintHorizontal_bias="0.864"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextAddress"
-        app:layout_constraintVertical_bias="0.02" />
+        app:layout_constraintVertical_bias="0.070"
+        tools:ignore="SpeakableTextPresentCheck" />
 
     <TextView
         android:id="@+id/textViewPincode"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/editTextCity"
+        android:layout_below="@id/spinnerCity"
         android:fontFamily="@font/poppins_light"
-        android:text="Pincode:"
+        android:text="Zipcode:"
         android:textColor="#FFFFFF"
-        android:textSize="18sp"
+        android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.047"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewCity"
-        app:layout_constraintVertical_bias="0.125" />
+        app:layout_constraintVertical_bias="0.145" />
 
     <EditText
         android:id="@+id/editTextPincode"
@@ -119,11 +136,12 @@
         android:hint="Please enter your Pincode"
         android:inputType="number"
         android:textColor="#FFFF"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.751"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextCity"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerCity"
         app:layout_constraintVertical_bias="0.083" />
 
     <TextView
@@ -134,7 +152,7 @@
         android:fontFamily="@font/poppins_light"
         android:text="Subject:"
         android:textColor="#FFFFFF"
-        android:textSize="18sp"
+        android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -151,6 +169,7 @@
         android:fontFamily="@font/poppins_light"
         android:hint="Please enter your Subject"
         android:textColor="#FFFF"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.797"
@@ -181,7 +200,7 @@
         android:fontFamily="@font/poppins_light"
         android:text="Complaint:"
         android:textColor="#FFFFFF"
-        android:textSize="20sp"
+        android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -196,14 +215,15 @@
         android:layout_height="86dp"
         android:layout_below="@id/textViewComplaint"
         android:fontFamily="@font/poppins_light"
-        android:hint="Please enter your Complaint"
+        android:hint="Please enter your complaint"
         android:textColor="#FFFF"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.407"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextSubject"
-        app:layout_constraintVertical_bias="0.50" />
+        app:layout_constraintVertical_bias="0.40" />
 </androidx.constraintlayout.widget.ConstraintLayout>
 
 </ScrollView>

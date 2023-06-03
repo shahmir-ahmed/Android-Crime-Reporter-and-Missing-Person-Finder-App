@@ -19,6 +19,15 @@ public final class DatabaseContract {
     }
 
     // Complaints table
+    public static class Complaints implements BaseColumns {
+        public static final String TABLE_NAME = "complaints";
+        public static final String COLUMN_ADDRESS = "address";
+        public static final String COLUMN_CITY = "city";
+        public static final String COLUMN_PINCODE = "pincode";
+        public static final String COLUMN_SUBJECT = "subject";
+        public static final String COLUMN_COMPLAINT = "complaint";
+        public static final String COL_USER_ID="user_id";
+    }
 
 
     // Crimes table

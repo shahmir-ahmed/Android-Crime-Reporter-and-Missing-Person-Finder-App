@@ -10,8 +10,10 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 /**
@@ -32,7 +34,7 @@ public class LodgeComplaintFragment extends Fragment {
 
     //
     private EditText editTextAddress;
-    private EditText editTextCity;
+    private Spinner spinnerCity;
     private EditText editTextPincode;
     private EditText editTextSubject;
     private EditText editTextComplaint;
@@ -82,10 +84,20 @@ public class LodgeComplaintFragment extends Fragment {
 
         //
         editTextAddress = (EditText) getView().findViewById(R.id.editTextAddress);
-        editTextCity = (EditText) getView().findViewById(R.id.editTextCity);
+
+        // getting cities to set by adapter on spinner
+        String[] cityArray = getActivity().getResources().getStringArray(R.array.city_array);
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity().getApplicationContext(), android.R.layout.simple_list_item_1, cityArray);
+
+        spinnerCity = (Spinner) getView().findViewById(R.id.spinnerCity);
+        spinnerCity.setAdapter(adapter);
+
+
         editTextPincode = (EditText) getView().findViewById(R.id.editTextPincode);
         editTextSubject = (EditText) getView().findViewById(R.id.editTextSubject);
         editTextComplaint = (EditText) getView().findViewById(R.id.editTextComplaint);
+
         buttonRegisterComplaint = (Button) getView().findViewById(R.id.buttonRegisterComplaint);
 
         buttonRegisterComplaint.setOnClickListener(new View.OnClickListener() {
@@ -99,23 +111,24 @@ public class LodgeComplaintFragment extends Fragment {
     //
     private void registerComplaint() {
         String address = editTextAddress.getText().toString().trim();
-        String city = editTextCity.getText().toString().trim();
+        String city = spinnerCity.getSelectedItem().toString();
         String pincode = editTextPincode.getText().toString().trim();
         String subject = editTextSubject.getText().toString().trim();
         String complaint = editTextComplaint.getText().toString().trim();
 
         if (TextUtils.isEmpty(address)) {
-            editTextAddress.setError("Please enter your Address");
+            editTextAddress.setError("Please enter address");
             return;
         }
 
-        if (TextUtils.isEmpty(city)) {
-            editTextCity.setError("Please enter your City");
+        if (city.equals("Select city")) {
+//            editTextCity.setError("Please enter your City");
+            Toast.makeText(getActivity().getApplicationContext(), "Please select city", Toast.LENGTH_SHORT).show();
             return;
         }
 
         if (TextUtils.isEmpty(pincode)) {
-            editTextPincode.setError("Please enter your Postal Code");
+            editTextPincode.setError("Please enter postal Code");
             return;
         } else if (!TextUtils.isDigitsOnly(pincode)) {
             editTextPincode.setError("Invalid Postal Code");
@@ -131,6 +144,8 @@ public class LodgeComplaintFragment extends Fragment {
             editTextComplaint.setError("Please enter your Complaint");
             return;
         }
+
+
 
         // Display success message
         Toast.makeText(getActivity(), "Complaint registered successfully!", Toast.LENGTH_SHORT).show();

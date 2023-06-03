@@ -11,6 +11,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final int DATABASE_VERSION = 1;
     public static final String DATABASE_NAME = "crmpfa.db";
 
+    // users table creation query
     private static final String CREATE_TABLE_USERS="CREATE TABLE "
             + DatabaseContract.Users.TABLE_NAME + " ("
             + DatabaseContract.Users._ID +" INTEGER PRIMARY KEY AUTOINCREMENT, "
@@ -21,6 +22,7 @@ public class DBHelper extends SQLiteOpenHelper {
             + DatabaseContract.Users.COL_CONTACT + " TEXT, "
             + DatabaseContract.Users.COL_GENDER + " TEXT)";
 
+    // missing persons table creation query
     private static final String CREATE_TABLE_MISSING_PERSONS="CREATE TABLE "
             + DatabaseContract.MissingPersons.TABLE_NAME + " ("
             + DatabaseContract.MissingPersons._ID +" INTEGER PRIMARY KEY AUTOINCREMENT, "
@@ -35,18 +37,35 @@ public class DBHelper extends SQLiteOpenHelper {
             + DatabaseContract.MissingPersons.COL_USER_ID + " INTEGER, "
             + " FOREIGN KEY ("+DatabaseContract.MissingPersons.COL_USER_ID+") REFERENCES "+DatabaseContract.Users.TABLE_NAME+"("+DatabaseContract.Users._ID+"));";
 
+    // admin table creation query
     private static final String CREATE_TABLE_ADMINS="CREATE TABLE "
             + DatabaseContract.Admins.TABLE_NAME + " ("
             + DatabaseContract.Admins._ID +" INTEGER PRIMARY KEY AUTOINCREMENT, "
             + DatabaseContract.Admins.COL_USERNAME + " TEXT, "
             + DatabaseContract.Admins.COL_PASSWORD + " TEXT)";
 
+
+    // admin table insertion query
     private static final String INSERT_INTO_ADMINS = "INSERT INTO "
             + DatabaseContract.Admins.TABLE_NAME+" ( "
             + DatabaseContract.Admins.COL_USERNAME+" ,"
             + DatabaseContract.Admins.COL_PASSWORD+" )"
             + "VALUES ( 'admin', '12345'),"
             + "('admin2', '678910')";
+
+
+    // complaints table creation query
+    private static final String CREATE_TABLE_COMPLAINTS =
+            "CREATE TABLE " + DatabaseContract.Complaints.TABLE_NAME + " (" +
+                    DatabaseContract.Complaints._ID + " INTEGER PRIMARY KEY, " +
+                    DatabaseContract.Complaints.COLUMN_ADDRESS + " TEXT, " +
+                    DatabaseContract.Complaints.COLUMN_CITY + " TEXT, " +
+                    DatabaseContract.Complaints.COLUMN_PINCODE + " TEXT, " +
+                    DatabaseContract.Complaints.COLUMN_SUBJECT + " TEXT, " +
+                    DatabaseContract.Complaints.COLUMN_COMPLAINT + " TEXT," +
+                    DatabaseContract.Complaints.COL_USER_ID + " INTEGER," +
+                    " FOREIGN KEY ("+DatabaseContract.Complaints.COL_USER_ID+") REFERENCES "+DatabaseContract.Users.TABLE_NAME+"("+DatabaseContract.Users._ID+"));";
+
     public DBHelper(@Nullable Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory, int version) {
         super(context, name, factory, version);
     }
@@ -68,6 +87,8 @@ public class DBHelper extends SQLiteOpenHelper {
         // and insert admin users in admins table
         sqLiteDatabase.execSQL(INSERT_INTO_ADMINS);
 
+        // create complaints table when db is created for first time
+        sqLiteDatabase.execSQL(CREATE_TABLE_COMPLAINTS);
     }
 
     @Override
