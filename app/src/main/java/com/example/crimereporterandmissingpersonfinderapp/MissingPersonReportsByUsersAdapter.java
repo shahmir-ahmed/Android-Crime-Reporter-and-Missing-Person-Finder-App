@@ -12,11 +12,13 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -71,7 +73,7 @@ public class MissingPersonReportsByUsersAdapter extends RecyclerView.Adapter<Mis
             public void onClick(View v) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
                 builder.setTitle("Missing Person Details");
-                builder.setMessage("Name: " + missingPersonDataList.getMissingPersonName() + "\nAge: " + missingPersonDataList.getMissingPersonAge()+ "\nGender: " +missingPersonDataList.getMissingPersonGender()+ "\nLast Seen: " + missingPersonDataList.getMissingPersonLastSeenLocation()+ "\nZip Code: " +missingPersonDataList.getMissingPersonZipCode()+ "\nDetails: " +missingPersonDataList.getMissingPersonReportDetails()+ "\nStatus: " +missingPersonDataList.getMissingPersonReportStatus());
+                builder.setMessage("Name: " + missingPersonDataList.getMissingPersonName() + "\nAge: " + missingPersonDataList.getMissingPersonAge()+ "\nGender: " +missingPersonDataList.getMissingPersonGender()+ "\nLast Seen: " + missingPersonDataList.getMissingPersonLastSeenLocation()+ "\nZip Code: " +missingPersonDataList.getMissingPersonZipCode()+ "\nDetails: " +missingPersonDataList.getMissingPersonReportDetails()+ "\nStatus: " +missingPersonDataList.getMissingPersonReportStatus()+ "\n\n\nReported By:\n"+"\nName: "+missingPersonDataList.getUserName()+"\nGender: "+missingPersonDataList.getUserGender()+"\nCNIC: "+missingPersonDataList.getUserCNIC()+"\nContact: "+missingPersonDataList.getUserContact());
                 // Add more details to the message as needed
 
                 builder.setPositiveButton("OK", null);
@@ -85,12 +87,24 @@ public class MissingPersonReportsByUsersAdapter extends RecyclerView.Adapter<Mis
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                builder.setTitle("Missing Person Details");
 
-                builder.setMessage("Name: " + missingPersonDataList.getMissingPersonName() + "\nAge: " + missingPersonDataList.getMissingPersonAge() + "\nGender: " + missingPersonDataList.getMissingPersonGender() + "\nLast Seen: " + missingPersonDataList.getMissingPersonLastSeenLocation() + "\nZip Code: " + missingPersonDataList.getMissingPersonZipCode() + "\nDetails: " + missingPersonDataList.getMissingPersonReportDetails() + "\nStatus: ");
-                // Add more details to the message as needed
+                LayoutInflater inflater = LayoutInflater.from(context);
+                View dialogView = inflater.inflate(R.layout.update_missing_person_report_status, null);
+                builder.setView(dialogView);
 
-                // spinner
+                Spinner spinnerStatus = dialogView.findViewById(R.id.spinner_status);
+                ArrayAdapter<String> statusAdapter = new ArrayAdapter<>(context, android.R.layout.simple_spinner_item, statusOptions);
+                statusAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                spinnerStatus.setAdapter(statusAdapter);
+
+                // Spinner status with current status set on top sending with the report data to display in the update popup dialog
+                // Retrieve the array from the XML file
+                String[] statusArray = context.getResources().getStringArray(R.array.status_array);
+
+                // Create ArrayAdapter and set it as the adapter for the Spinner
+                ArrayAdapter<String> adapter = new ArrayAdapter<>(context, android.R.layout.simple_spinner_item, statusArray);
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
+                spinnerStatus.setAdapter(adapter);
 
                 builder.setNegativeButton("Cancel", null);
                 AlertDialog dialog = builder.create();

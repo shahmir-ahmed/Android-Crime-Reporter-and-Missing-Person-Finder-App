@@ -15,8 +15,11 @@ public class MissingPersonData {
         private Bitmap missingPersonImage;
 
         private String userName;
-
         private String userContact;
+
+        private String userGender;
+
+        private String userCNIC;
 
     public MissingPersonData(String missingPersonName, String missingPersonAge, String missingPersonGender, String missingPersonZipCode, String missingPersonLastSeenLocation, String missingPersonReportStatus, String missingPersonReportDetails, Bitmap missingPersonImage) {
         this.missingPersonName = missingPersonName;
@@ -60,6 +63,24 @@ public class MissingPersonData {
         this.missingPersonImage = missingPersonImage;
     }
 
+    // constructor for admin dashboard data for missing persons and user details
+    public MissingPersonData(String userName, String userGender, String userCNIC, String userContact, String missingPersonName, String missingPersonAge, String missingPersonGender, String missingPersonZipCode, String missingPersonLastSeenLocation, String missingPersonReportStatus, String missingPersonReportDetails, Bitmap missingPersonImage) {
+//        System.out.println("here"+userName+userContact);
+
+//        System.out.println("here"+missingPersonName);
+        this.userName = userName;
+        this.userGender = userGender;
+        this.userCNIC = userCNIC;
+        this.userContact = userContact;
+        this.missingPersonName = missingPersonName;
+        this.missingPersonAge = missingPersonAge;
+        this.missingPersonGender = missingPersonGender;
+        this.missingPersonZipCode = missingPersonZipCode;
+        this.missingPersonLastSeenLocation = missingPersonLastSeenLocation;
+        this.missingPersonReportStatus = missingPersonReportStatus;
+        this.missingPersonReportDetails = missingPersonReportDetails;
+        this.missingPersonImage = missingPersonImage;
+    }
 
     public String getMissingPersonId() {
         return missingPersonId;
@@ -146,5 +167,21 @@ public class MissingPersonData {
 
     public void setUserContact(String userContact) {
         this.userContact = userContact;
+    }
+
+    public String getUserGender() {
+        return userGender;
+    }
+
+    public void setUserGender(String userGender) {
+        this.userGender = userGender;
+    }
+
+    public String getUserCNIC() {
+        return userCNIC;
+    }
+
+    public void setUserCNIC(String userCNIC) {
+        this.userCNIC = userCNIC;
     }
 }

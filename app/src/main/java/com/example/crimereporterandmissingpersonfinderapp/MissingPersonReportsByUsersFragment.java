@@ -17,7 +17,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 /**
@@ -41,6 +43,8 @@ public class MissingPersonReportsByUsersFragment extends Fragment {
     MissingPersonReportsByUsersAdapter missingPersonReportsByUsersAdapter;
 
     RecyclerView recyclerView; // recycler view for cards
+
+    Spinner spinnerStatus;
 
     public MissingPersonReportsByUsersFragment() {
         // Required empty public constructor
@@ -92,14 +96,17 @@ public class MissingPersonReportsByUsersFragment extends Fragment {
 
         SQLiteDatabase db = dbHelper.getReadableDatabase();
 
-        String columns[] = {DatabaseContract.MissingPersons._ID, DatabaseContract.MissingPersons.COL_NAME, DatabaseContract.MissingPersons.COL_AGE, DatabaseContract.MissingPersons.COL_GENDER, DatabaseContract.MissingPersons.COL_LAST_SEEN, DatabaseContract.MissingPersons.COL_ZIPCODE, DatabaseContract.MissingPersons.COL_REPORT_DETAILS, DatabaseContract.MissingPersons.COL_PERSON_IMAGE, DatabaseContract.MissingPersons.COL_REPORT_STATUS};
+        String table = DatabaseContract.Users.TABLE_NAME+" u"+","+ DatabaseContract.MissingPersons.TABLE_NAME+" m";
 
-        Cursor result = db.query(DatabaseContract.MissingPersons.TABLE_NAME, columns, null, null, null, null, null);
+        String columns[] = {"m."+DatabaseContract.MissingPersons.COL_NAME+" AS missing_person_name", "m."+DatabaseContract.MissingPersons.COL_AGE, "m."+DatabaseContract.MissingPersons.COL_GENDER, "m."+DatabaseContract.MissingPersons.COL_LAST_SEEN, "m."+DatabaseContract.MissingPersons.COL_ZIPCODE, "m."+DatabaseContract.MissingPersons.COL_REPORT_DETAILS, "m."+DatabaseContract.MissingPersons.COL_PERSON_IMAGE, "m."+DatabaseContract.MissingPersons.COL_REPORT_STATUS, "u."+DatabaseContract.Users.COL_NAME+" AS user_name", "u."+DatabaseContract.Users.COL_GENDER, "u."+DatabaseContract.Users.COL_CNIC, "u."+DatabaseContract.Users.COL_CONTACT};
 
+        String whereClause = "m."+DatabaseContract.MissingPersons.COL_USER_ID+"="+"u."+DatabaseContract.Users._ID;
+
+        Cursor result = db.query(table, columns, whereClause, null, null, null, null);
 
         // if there are reports
-        if(result.moveToFirst()){
-            // reset to initial position
+        if(result.moveToFirst()) {
+            // reset to intial position
             result.moveToPosition(-1);
 
             // get the number of rows
@@ -109,11 +116,10 @@ public class MissingPersonReportsByUsersFragment extends Fragment {
             int i = 0;
 
             // while there are next cursor positions to move
-            while(result.moveToNext()){
+            while (result.moveToNext()) {
 
                 // getting all the data
-                String id = result.getString(result.getColumnIndexOrThrow(DatabaseContract.MissingPersons._ID));
-                String name = result.getString(result.getColumnIndexOrThrow(DatabaseContract.MissingPersons.COL_NAME));
+                String name = result.getString(result.getColumnIndexOrThrow("missing_person_name"));
                 String age = result.getString(result.getColumnIndexOrThrow(DatabaseContract.MissingPersons.COL_AGE));
                 String gender = result.getString(result.getColumnIndexOrThrow(DatabaseContract.MissingPersons.COL_GENDER));
                 String zipCode = result.getString(result.getColumnIndexOrThrow(DatabaseContract.MissingPersons.COL_ZIPCODE));
@@ -122,10 +128,20 @@ public class MissingPersonReportsByUsersFragment extends Fragment {
                 String reportStatus = result.getString(result.getColumnIndexOrThrow(DatabaseContract.MissingPersons.COL_REPORT_STATUS));
                 byte[] image = result.getBlob(result.getColumnIndexOrThrow(DatabaseContract.MissingPersons.COL_PERSON_IMAGE));
 
+                // user data
+                String userName = result.getString(result.getColumnIndexOrThrow("user_name"));
+
+                String userGender = result.getString(result.getColumnIndexOrThrow(DatabaseContract.Users.COL_CONTACT));
+
+                String userCNIC= result.getString(result.getColumnIndexOrThrow(DatabaseContract.Users.COL_CNIC));
+
+                String userContact = result.getString(result.getColumnIndexOrThrow(DatabaseContract.Users.COL_CONTACT));
+
+//                System.out.println(userName+userContact);
                 // Convert byte array to Bitmap
                 Bitmap bitmap = BitmapFactory.decodeByteArray(image, 0, image.length);
 
-                missingPersonData[i] = new MissingPersonData(id, name, age, gender, zipCode, lastSeen, reportStatus, reportDetails, bitmap);
+                missingPersonData[i] = new MissingPersonData(userName, userGender, userCNIC, userContact, name, age, gender, zipCode, lastSeen, reportStatus, reportDetails, bitmap);
 
                 i++;
             }
