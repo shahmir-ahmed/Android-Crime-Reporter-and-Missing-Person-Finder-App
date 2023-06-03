@@ -26,6 +26,8 @@ public final class DatabaseContract {
         public static final String COLUMN_PINCODE = "pincode";
         public static final String COLUMN_SUBJECT = "subject";
         public static final String COLUMN_COMPLAINT = "complaint";
+
+        public static final String COLUMN_STATUS = "status";
         public static final String COL_USER_ID="user_id";
     }
 

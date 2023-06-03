@@ -123,6 +123,7 @@ public class LodgeComplaintFragment extends Fragment {
         String pincode = editTextPincode.getText().toString().trim();
         String subject = editTextSubject.getText().toString().trim();
         String complaint = editTextComplaint.getText().toString().trim();
+        String status = "Submitted"; // status set to submitted
 
         if (TextUtils.isEmpty(address)) {
             editTextAddress.setError("Please enter address");
@@ -160,10 +161,11 @@ public class LodgeComplaintFragment extends Fragment {
                     DatabaseContract.Complaints.COLUMN_CITY + ", " +
                     DatabaseContract.Complaints.COLUMN_PINCODE + ", " +
                     DatabaseContract.Complaints.COLUMN_SUBJECT + ", " +
-                    DatabaseContract.Complaints.COLUMN_COMPLAINT + ") " +
-                    "VALUES (?, ?, ?, ?, ?)";
+                    DatabaseContract.Complaints.COLUMN_COMPLAINT + ", " +
+                    DatabaseContract.Complaints.COLUMN_STATUS + ") " +
+                    "VALUES (?, ?, ?, ?, ?, ?)";
 
-            database.execSQL(insertQuery, new String[]{address, city, pincode, subject, complaint});
+            database.execSQL(insertQuery, new String[]{address, city, pincode, subject, complaint, status});
 
             // Display success message
             Toast.makeText(getActivity(), "Complaint registered successfully!", Toast.LENGTH_SHORT).show();

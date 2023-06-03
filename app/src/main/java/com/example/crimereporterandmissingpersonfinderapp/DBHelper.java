@@ -1,10 +1,16 @@
 package com.example.crimereporterandmissingpersonfinderapp;
 
+import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import androidx.annotation.Nullable;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class DBHelper extends SQLiteOpenHelper {
 
@@ -63,6 +69,7 @@ public class DBHelper extends SQLiteOpenHelper {
                     DatabaseContract.Complaints.COLUMN_PINCODE + " TEXT, " +
                     DatabaseContract.Complaints.COLUMN_SUBJECT + " TEXT, " +
                     DatabaseContract.Complaints.COLUMN_COMPLAINT + " TEXT," +
+                    DatabaseContract.Complaints.COLUMN_STATUS + " TEXT," +
                     DatabaseContract.Complaints.COL_USER_ID + " INTEGER," +
                     " FOREIGN KEY ("+DatabaseContract.Complaints.COL_USER_ID+") REFERENCES "+DatabaseContract.Users.TABLE_NAME+"("+DatabaseContract.Users._ID+"));";
 
@@ -114,5 +121,87 @@ public class DBHelper extends SQLiteOpenHelper {
 
 
     // self-created methods to manage (create, read, update, delete) all the tables in DB
+
+    // Methods for Complaints table
+    // view operation
+    public List<Complaint> getAllComplaints() {
+        List<Complaint> complaintsList = new ArrayList<>();
+
+        SQLiteDatabase db = getReadableDatabase();
+
+        String[] projection = {
+                DatabaseContract.Complaints._ID,
+                DatabaseContract.Complaints.COLUMN_CITY,
+                DatabaseContract.Complaints.COLUMN_PINCODE,
+                DatabaseContract.Complaints.COLUMN_SUBJECT,
+                DatabaseContract.Complaints.COLUMN_COMPLAINT,
+                DatabaseContract.Complaints.COLUMN_STATUS,
+        };
+
+        Cursor cursor = db.query(
+                DatabaseContract.Complaints.TABLE_NAME,
+                projection,
+                null,
+                null,
+                null,
+                null,
+                null
+        );
+
+        while (cursor.moveToNext()) {
+            Complaint complaint = new Complaint();
+            complaint.setId(cursor.getInt(cursor.getColumnIndexOrThrow(DatabaseContract.Complaints._ID)));
+            complaint.setSubject(cursor.getString(cursor.getColumnIndexOrThrow(DatabaseContract.Complaints.COLUMN_SUBJECT)));
+//            complaint.setPersonName(cursor.getString(cursor.getColumnIndexOrThrow(DatabaseContract.Complaints.COLUMN_PERSON_NAME)));
+            complaint.setComplaintDetails(cursor.getString(cursor.getColumnIndexOrThrow(DatabaseContract.Complaints.COLUMN_COMPLAINT)));
+            complaint.setStatus(cursor.getString(cursor.getColumnIndexOrThrow(DatabaseContract.Complaints.COLUMN_STATUS)));
+            complaint.setCity(cursor.getString(cursor.getColumnIndexOrThrow(DatabaseContract.Complaints.COLUMN_CITY)));
+
+            complaintsList.add(complaint);
+        }
+
+        cursor.close();
+        db.close();
+
+        return complaintsList;
+    }
+
+    // update operation
+    public void updateComplaint(Complaint complaint) {
+        SQLiteDatabase db = getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(DatabaseContract.Complaints.COLUMN_SUBJECT, complaint.getSubject());
+//        values.put(DatabaseContract.Complaints.COLUMN_PERSON_NAME, complaint.getPersonName());
+        values.put(DatabaseContract.Complaints.COLUMN_COMPLAINT, complaint.getComplaintDetails());
+        values.put(DatabaseContract.Complaints.COLUMN_STATUS, complaint.getStatus());
+        values.put(DatabaseContract.Complaints.COLUMN_CITY, complaint.getCity());
+
+        String selection = DatabaseContract.Complaints._ID + " = ?";
+        String[] selectionArgs = {String.valueOf(complaint.getId())};
+
+        db.update(DatabaseContract.Complaints.TABLE_NAME, values, selection, selectionArgs);
+
+        db.close();
+    }
+
+    // delete operation
+    public void deleteComplaint(int complaintId) {
+        SQLiteDatabase db = getWritableDatabase();
+
+        String selection = DatabaseContract.Complaints._ID + " = ?";
+
+        String[] selectionArgs = { String.valueOf(complaintId) };
+
+        int deletedRows = db.delete(DatabaseContract.Complaints.TABLE_NAME, selection, selectionArgs);
+
+        db.close();
+
+        if (deletedRows > 0) {
+            Log.d("DatabaseHelper", "Complaint deleted successfully");
+        } else {
+            Log.d("DatabaseHelper", "Failed to delete complaint");
+        }
+    }
 
 }
