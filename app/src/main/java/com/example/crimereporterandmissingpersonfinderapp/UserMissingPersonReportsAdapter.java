@@ -13,6 +13,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
+import android.os.Handler;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -40,6 +41,9 @@ import java.util.Arrays;
 
 public class UserMissingPersonReportsAdapter extends RecyclerView.Adapter<UserMissingPersonReportsAdapter.ViewHolder> {
 
+//    private AlertDialog alertDialog;
+//    private View toastView;
+//    private TextView textViewMessage;
     MissingPersonData[] missingPersonData; // the missing person data array (array of objects) based on which the adapter binds the individual v=cards views with the data in the object at each position of array
     Context context; // the activity context in which the adapter is
 
@@ -120,6 +124,9 @@ public class UserMissingPersonReportsAdapter extends RecyclerView.Adapter<UserMi
                 View dialogView = LayoutInflater.from(context).inflate(R.layout.dialog_update_missing_person_details, null);
                 builder.setView(dialogView);
 
+//                prevent the dialog from dismissing when positive button is clicked and dismiss manually at some time
+//                builder.setCancelable(false);
+
                 // Get references to the views in the custom layout
                 // Creating bridge
                 EditText etPersonName = (EditText) dialogView.findViewById(R.id.etPersonName);
@@ -191,11 +198,93 @@ public class UserMissingPersonReportsAdapter extends RecyclerView.Adapter<UserMi
                         // validation
                         // if name is not entered
                         if (name.trim().isEmpty()) {
-                            // Show a Toast over the Dialog
-                            // Display a Toast message
-                            Toast toast = Toast.makeText(context, "Please enter name!", Toast.LENGTH_SHORT);
-                            toast.setGravity(Gravity.CENTER, 0, 0);
-                            toast.show();
+                            Toast.makeText(dialogView.getContext(), "Please enter name!", Toast.LENGTH_LONG).show();
+
+//                            // Show a Toast over the Dialog
+//                            // Display a Toast message
+//                            Toast toast = Toast.makeText(context, "Please enter name!", Toast.LENGTH_SHORT);
+//                            toast.setGravity(Gravity.CENTER, 0, 0);
+//                            toast.show();
+
+                            // Inflate the custom Toast layout
+//                            LayoutInflater inflater = ((Activity)context).getLayoutInflater();
+//                            View layout = inflater.inflate(R.layout.custom_toast_layout, ((Activity)context).findViewById(R.id.custom_toast_layout));
+//
+//                            // Find the TextView in the custom layout
+//                            TextView textViewMessage = layout.findViewById(R.id.textView_message);
+//
+//                            // Set the desired message
+//                            String message = "Please enter name.";
+//                            textViewMessage.setText(message);
+//
+//                            // Create a Toast object and set the custom view
+//                            Toast toast = new Toast(context);
+//                            toast.setDuration(Toast.LENGTH_SHORT);
+//                            toast.setView(layout);
+//
+//                            // Show the Toast
+//                            toast.show();
+
+                            // Create a Handler object
+//                            Handler handler = new Handler();
+//
+//                            // Define a Runnable to show the Toast
+//                            Runnable toastRunnable = new Runnable() {
+//                                @Override
+//                                public void run() {
+//                                    Toast.makeText(context, "This is a Toast message", Toast.LENGTH_SHORT).show();
+//                                }
+//                            };
+//
+//                            // Show the Toast after a delay
+//                            handler.postDelayed(toastRunnable, 1000); // Delay of 1000 milliseconds (1 second)
+
+                            // Create a LayoutInflater object using the adapter's context
+//                            LayoutInflater inflater = LayoutInflater.from(context);
+//
+//// Inflate the custom layout for the Toast message
+//                            View toastLayout = inflater.inflate(R.layout.custom_toast_layout, null);
+//
+//// Set the text for the Toast message
+//                            TextView toastText = toastLayout.findViewById(R.id.textView_message);
+//                            toastText.setText("This is a Toast message");
+//
+//// Create a Toast object using the adapter's context
+//                            Toast toast = new Toast(context);
+//                            toast.setGravity(Gravity.CENTER, 0, 0);
+//                            toast.setDuration(Toast.LENGTH_SHORT);
+//                            toast.setView(toastLayout);
+//
+//// Show the Toast message
+//                            toast.show();
+
+//                            // Create a custom Toast layout and set the message
+//                            LayoutInflater inflater = LayoutInflater.from(context);
+//                            View toastView = inflater.inflate(R.layout.custom_toast_layout, null);
+//                            TextView textViewMessage = toastView.findViewById(R.id.textView_message);
+//                            textViewMessage.setText("This is a Toast message");
+//
+//// Create the custom Toast object
+//                            Toast toast = new Toast(context);
+//                            toast.setGravity(Gravity.CENTER, 0, 0);
+//                            toast.setDuration(Toast.LENGTH_SHORT);
+//                            toast.setView(toastView);
+//
+//// Show the custom Toast
+//                            toast.show();
+
+//                            // Create the custom Toast view and set the message
+//                            LayoutInflater inflater = LayoutInflater.from(context);
+//                            toastView = inflater.inflate(R.layout.custom_toast_layout, null);
+//                            textViewMessage = toastView.findViewById(R.id.textView_message);
+//                            textViewMessage.setText("This is a Toast message");
+//
+//// Show the custom Toast by adding the view to the dialog's window
+//                            if (((AlertDialog)dialog).getWindow() != null) {
+//                                ((AlertDialog)dialog).getWindow().addContentView(toastView, new ViewGroup.LayoutParams(
+//                                        ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+//                            }
+
                         }
                         // if age is not entered
                         else if (age.trim().isEmpty()) {
@@ -281,7 +370,10 @@ public class UserMissingPersonReportsAdapter extends RecyclerView.Adapter<UserMi
                                 if (updatedRows != 1) {
                                     Toast.makeText(context, "Report not updated!", Toast.LENGTH_LONG).show();
                                 } else {
-                                    Toast.makeText(context, "Report updated successfully!", Toast.LENGTH_LONG).show();
+//                                    Toast.makeText(context, "Report updated successfully!", Toast.LENGTH_LONG).show();
+
+                                    // dismiss the dialog manually
+//                                    dialog.dismiss();
 
                                     // reflect changes in the view
                                     // Assuming you have the position and updated record
@@ -298,7 +390,7 @@ public class UserMissingPersonReportsAdapter extends RecyclerView.Adapter<UserMi
                                     notifyItemChanged(updatedPosition);
                                 }
                             }catch(Exception e){
-                                Toast.makeText(context, "Error occured!", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context, "Error occurred!", Toast.LENGTH_SHORT).show();
                             }
                         }
                     }
