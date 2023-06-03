@@ -48,7 +48,7 @@ public class UserMissingPersonReportsAdapter extends RecyclerView.Adapter<UserMi
     // update dialog box image
     ImageView imageViewPersonImage;
 
-    public UserMissingPersonReportsAdapter(MissingPersonData[] missingPersonData,UserDashboardActivity activity) {
+    public UserMissingPersonReportsAdapter(MissingPersonData[] missingPersonData, UserDashboardActivity activity) {
         this.missingPersonData = missingPersonData;
         this.context = activity;
     }
@@ -238,50 +238,67 @@ public class UserMissingPersonReportsAdapter extends RecyclerView.Adapter<UserMi
                                 gender = "Female";
                             }
 
-                            // save form data in database
-                            DBHelper dbHelper = new DBHelper(context);
+                            try {
+                                // save form data in database
+                                DBHelper dbHelper = new DBHelper(context);
 
-                            SQLiteDatabase db = dbHelper.getWritableDatabase();
+                                SQLiteDatabase db = dbHelper.getWritableDatabase();
 
-                            // data preparing to send
-                            ContentValues values = new ContentValues();
+                                // data preparing to send
+                                ContentValues values = new ContentValues();
 
-                            // putting key value pairs in object
-                            values.put(DatabaseContract.MissingPersons.COL_NAME, name);
-                            values.put(DatabaseContract.MissingPersons.COL_AGE, age);
-                            values.put(DatabaseContract.MissingPersons.COL_GENDER, gender);
-                            values.put(DatabaseContract.MissingPersons.COL_LAST_SEEN, lastSeen);
-                            values.put(DatabaseContract.MissingPersons.COL_ZIPCODE, zipCode);
-                            values.put(DatabaseContract.MissingPersons.COL_REPORT_DETAILS, reportDetails);
+                                // putting key value pairs in object
+                                values.put(DatabaseContract.MissingPersons.COL_NAME, name);
+                                values.put(DatabaseContract.MissingPersons.COL_AGE, age);
+                                values.put(DatabaseContract.MissingPersons.COL_GENDER, gender);
+                                values.put(DatabaseContract.MissingPersons.COL_LAST_SEEN, lastSeen);
+                                values.put(DatabaseContract.MissingPersons.COL_ZIPCODE, zipCode);
+                                values.put(DatabaseContract.MissingPersons.COL_REPORT_DETAILS, reportDetails);
 
-                            // getting the report id from list to update the report
-                            String reportId = missingPersonDataList.getMissingPersonId();
+                                // getting the report id from list to update the report
+                                String reportId = missingPersonDataList.getMissingPersonId();
 
-                            // missing person image
-                            // Get the Bitmap from the ImageView
-                            Bitmap bitmap = ((BitmapDrawable) imageViewPersonImage.getDrawable()).getBitmap();
+                                // missing person image
+                                // Get the Bitmap from the ImageView
+                                Bitmap bitmap = ((BitmapDrawable) imageViewPersonImage.getDrawable()).getBitmap();
 
-                            // Convert the Bitmap to a byte array
-                            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                            bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
-                            byte[] personImage = baos.toByteArray();
+                                // Convert the Bitmap to a byte array
+                                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                                bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
+                                byte[] personImage = baos.toByteArray();
 
-                            // content value --> missing person image
-                            values.put(DatabaseContract.MissingPersons.COL_PERSON_IMAGE, personImage);
+                                // content value --> missing person image
+                                values.put(DatabaseContract.MissingPersons.COL_PERSON_IMAGE, personImage);
 
-                            String whereClause = DatabaseContract.MissingPersons._ID + "=?";
+                                String whereClause = DatabaseContract.MissingPersons._ID + "=?";
 
-                            String whereArgs[] = {String.valueOf(reportId)};
+                                String whereArgs[] = {String.valueOf(reportId)};
 
-                            // saving form data in DB
-                            long updatedRows = db.update(DatabaseContract.MissingPersons.TABLE_NAME, values, whereClause, whereArgs);
+                                // saving form data in DB
+                                long updatedRows = db.update(DatabaseContract.MissingPersons.TABLE_NAME, values, whereClause, whereArgs);
 
-                            // check the returned updated rows
-                            if (updatedRows != 1) {
-                                Toast.makeText(context, "Report not updated!", Toast.LENGTH_LONG).show();
-                            } else {
-                                Toast.makeText(context, "Report updated successfully!", Toast.LENGTH_LONG).show();
+                                // check the returned updated rows
+                                if (updatedRows != 1) {
+                                    Toast.makeText(context, "Report not updated!", Toast.LENGTH_LONG).show();
+                                } else {
+                                    Toast.makeText(context, "Report updated successfully!", Toast.LENGTH_LONG).show();
 
+                                    // reflect changes in the view
+                                    // Assuming you have the position and updated record
+                                    int updatedPosition = position; // position
+                                    // updating object
+                                    missingPersonData[position].setMissingPersonName(name);
+                                    missingPersonData[position].setMissingPersonAge(age);
+                                    missingPersonData[position].setMissingPersonGender(gender);
+                                    missingPersonData[position].setMissingPersonLastSeenLocation(lastSeen);
+                                    missingPersonData[position].setMissingPersonZipCode(zipCode);
+                                    missingPersonData[position].setMissingPersonReportDetails(reportDetails);
+
+                                    // Step 2: Notify the adapter
+                                    notifyItemChanged(updatedPosition);
+                                }
+                            }catch(Exception e){
+                                Toast.makeText(context, "Error occured!", Toast.LENGTH_SHORT).show();
                             }
                         }
                     }
