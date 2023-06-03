@@ -7,27 +7,28 @@
     tools:context=".MainActivity"
     android:background="#240e71">
 
-    <EditText
-        android:id="@+id/etDob"
-        android:layout_width="350dp"
-        android:layout_height="48dp"
-        android:hint="Date of Birth"
-        android:inputType="phone"
-        android:textColorHint="#607D8B"
-        app:fontFamily="@font/poppins_light"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.491"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.702"
-        tools:ignore="Autofill,HardcodedText,MissingConstraints" />
+<!--    <EditText-->
+<!--        android:id="@+id/etDob"-->
+<!--        android:layout_width="350dp"-->
+<!--        android:layout_height="48dp"-->
+<!--        android:hint="Date of Birth"-->
+<!--        android:inputType="phone"-->
+<!--        android:textColorHint="#607D8B"-->
+<!--        app:fontFamily="@font/poppins_light"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="0.491"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:layout_constraintVertical_bias="0.702"-->
+<!--        tools:ignore="Autofill,HardcodedText,MissingConstraints" />-->
 
     <Button
         android:id="@+id/btnSubmit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="SUBMIT"
+        android:text="Register"
+        android:fontFamily="@font/poppins"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
@@ -49,8 +50,8 @@
         app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.491"
-        tools:ignore="Autofill,HardcodedText,MissingConstraints,TextFields" />
+        app:layout_constraintVertical_bias="0.501"
+        tools:ignore="HardcodedText,MissingConstraints,TextFields" />
 
     <EditText
         android:id="@+id/etEmail"
@@ -65,8 +66,8 @@
         app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.562"
-        tools:ignore="Autofill,HardcodedText,MissingConstraints" />
+        app:layout_constraintVertical_bias="0.582"
+        tools:ignore="HardcodedText,MissingConstraints" />
 
     <TextView
         android:id="@+id/textView"
@@ -82,7 +83,7 @@
         app:layout_constraintHorizontal_bias="0.516"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.769"
+        app:layout_constraintVertical_bias="0.730"
         tools:ignore="Autofill,HardcodedText,MissingConstraints" />
 
     <EditText
@@ -98,19 +99,19 @@
         app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.632"
-        tools:ignore="Autofill,HardcodedText,MissingConstraints" />
+        app:layout_constraintVertical_bias="0.662"
+        tools:ignore="HardcodedText,MissingConstraints" />
 
     <ImageView
         android:id="@+id/imageView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="140dp"
+        android:layout_height="140dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.099"
+        app:layout_constraintVertical_bias="0.080"
         app:srcCompat="@drawable/person"
         tools:ignore="ContentDescription" />
 
@@ -146,7 +147,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.421"
-        tools:ignore="Autofill,HardcodedText,MissingConstraints" />
+        tools:ignore="HardcodedText,MissingConstraints" />
 
     <RadioGroup
         android:id="@+id/radioGroup"
@@ -157,7 +158,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.827"
+        app:layout_constraintVertical_bias="0.787"
         tools:ignore="MissingConstraints">
 
         <RadioButton

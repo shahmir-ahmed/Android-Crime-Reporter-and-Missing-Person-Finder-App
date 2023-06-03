@@ -25,38 +25,38 @@ public class RegistrationActivity extends AppCompatActivity {
         EditText etName = findViewById(R.id.etName);
         EditText etEmail = findViewById(R.id.etEmail);
         EditText etPassword = findViewById(R.id.etPassword);
-        EditText etDob = findViewById(R.id.etDob);
+//        EditText etDob = findViewById(R.id.etDob);
         EditText etPhone = findViewById(R.id.etPhoneNumber);
         RadioGroup radioGroup = findViewById(R.id.radioGroup);
 
         // Set OnClickListener for etDob EditText
-        etDob.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Get current date
-                Calendar calendar = Calendar.getInstance();
-                int year = calendar.get(Calendar.YEAR);
-                int month = calendar.get(Calendar.MONTH);
-                int day = calendar.get(Calendar.DAY_OF_MONTH);
-
-                // Create DatePickerDialog and show it
-                DatePickerDialog datePickerDialog = new DatePickerDialog(
-                        RegistrationActivity.this,
-                        new DatePickerDialog.OnDateSetListener() {
-                            @SuppressLint("SetTextI18n")
-                            @Override
-                            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                                // Set selected date in etDob EditText
-                                etDob.setText(dayOfMonth + "/" + (month + 1) + "/" + year);
-                            }
-                        },
-                        year,
-                        month,
-                        day
-                );
-                datePickerDialog.show();
-            }
-        });
+//        etDob.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                // Get current date
+//                Calendar calendar = Calendar.getInstance();
+//                int year = calendar.get(Calendar.YEAR);
+//                int month = calendar.get(Calendar.MONTH);
+//                int day = calendar.get(Calendar.DAY_OF_MONTH);
+//
+//                // Create DatePickerDialog and show it
+//                DatePickerDialog datePickerDialog = new DatePickerDialog(
+//                        RegistrationActivity.this,
+//                        new DatePickerDialog.OnDateSetListener() {
+//                            @SuppressLint("SetTextI18n")
+//                            @Override
+//                            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+//                                // Set selected date in etDob EditText
+//                                etDob.setText(dayOfMonth + "/" + (month + 1) + "/" + year);
+//                            }
+//                        },
+//                        year,
+//                        month,
+//                        day
+//                );
+//                datePickerDialog.show();
+//            }
+//        });
 
         // Set OnClickListener for submit button
         Button btnSubmit = findViewById(R.id.btnSubmit);
@@ -67,7 +67,7 @@ public class RegistrationActivity extends AppCompatActivity {
                 String name = etName.getText().toString();
                 String email = etEmail.getText().toString();
                 String password = etPassword.getText().toString();
-                String dob = etDob.getText().toString();
+//                String dob = etDob.getText().toString();
                 String phone = etPhone.getText().toString();
 
                 // Validate input fields
@@ -90,10 +90,11 @@ public class RegistrationActivity extends AppCompatActivity {
                     etPassword.setError("Password must be at least 8 characters long and contain a combination of [a-z],[A-Z],[0-9],[@#_$%^&+=]");
                     etPassword.requestFocus();
                     return;
-                }else if (dob.isEmpty()) {
-                    etDob.setError("Please select your date of birth");
-                    etDob.requestFocus();
-                    return;
+//                }
+//                else if (dob.isEmpty()) {
+//                    etDob.setError("Please select your date of birth");
+//                    etDob.requestFocus();
+//                    return;
                 }else if (phone.isEmpty()) {
                     etPhone.setError("Please enter your phone number");
                     etPhone.requestFocus();
@@ -114,7 +115,11 @@ public class RegistrationActivity extends AppCompatActivity {
                 }else if(!isGenderSelected(radioGroup)){
                     Toast.makeText(getApplicationContext(), "Please select your gender", Toast.LENGTH_SHORT).show();
                 }
-                Toast.makeText(getApplicationContext(), "Registration successful!", Toast.LENGTH_SHORT).show();
+                else {
+                    //
+                    
+                    Toast.makeText(getApplicationContext(), "Registration successful!", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
