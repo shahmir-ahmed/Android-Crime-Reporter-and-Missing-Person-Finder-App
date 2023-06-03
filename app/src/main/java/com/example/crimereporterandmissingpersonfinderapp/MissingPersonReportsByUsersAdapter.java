@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
+import android.text.SpannableString;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +17,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
@@ -86,66 +88,191 @@ public class MissingPersonReportsByUsersAdapter extends RecyclerView.Adapter<Mis
         holder.updateBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+//                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+//                builder.setTitle("Update Report Status");
+//
+//                // Get the report and user details from your data source
+//                String name = missingPersonDataList.getMissingPersonName();
+//                String age = missingPersonDataList.getMissingPersonAge();
+//                String gender = missingPersonDataList.getMissingPersonGender();
+//                String lastSeen = missingPersonDataList.getMissingPersonLastSeenLocation();
+//                String details = missingPersonDataList.getMissingPersonReportDetails();
+//                String status = missingPersonDataList.getMissingPersonReportStatus();
+//                String userName = missingPersonDataList.getUserName();
+//                String userGender = missingPersonDataList.getUserGender();
+//                String userCNIC = missingPersonDataList.getUserCNIC();
+//                String userContact = missingPersonDataList.getUserContact();
+//
+//                // Create an array of status options for the spinner
+//                String[] statusOptions = {"Submitted", "Seen", "Processing", "Completed", "Rejected"};
+//
+//                // Create a SpannableString for the message with formatted gender text
+//                SpannableString message = new SpannableString("Person's name: " + name + "\nAge: " + age + "\nGender: "+gender+"\nLast Seen: "+lastSeen+"\nDetails: "+details+"Status: "+"\n\nSubmitted By: "+"\nName: "+userName+"\nGender: "+userGender+"\nCNIC: "+userCNIC+"\nContact: "+userContact);
+//
+//                // Create a spinner and set its adapter
+//                Spinner spinnerStatus = new Spinner(context);
+//                ArrayAdapter<String> statusAdapter = new ArrayAdapter<>(context, android.R.layout.simple_spinner_item, statusOptions);
+//                statusAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//                spinnerStatus.setAdapter(statusAdapter);
+//
+//                // Set the current status of the report as the selected item in the spinner
+//                int selectedStatusIndex = Arrays.asList(statusOptions).indexOf(status);
+//                spinnerStatus.setSelection(selectedStatusIndex);
+//
+//                // Create a LinearLayout to hold the text and spinner
+//                LinearLayout layout = new LinearLayout(context);
+//                layout.setOrientation(LinearLayout.HORIZONTAL);
+//                layout.setGravity(Gravity.CENTER_VERTICAL);
+//
+//                // Create a TextView for the gender text
+//                TextView textViewGender = new TextView(context);
+//                textViewGender.setText(message);
+//                layout.addView(textViewGender);
+//
+//                // Add some spacing between the gender text and spinner
+//                int spacing = (int) (context.getResources().getDisplayMetrics().density * 8); // adjust spacing as needed
+//                layout.addView(spinnerStatus, new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, Gravity.CENTER_VERTICAL));
+//                layout.setPadding(spacing, 0, 0, 0);
+//
+//
+//                // Set the custom view as the message of the dialog box
+//                builder.setView(layout);
+
+
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                builder.setTitle("Update Report Status");
 
-                LayoutInflater inflater = LayoutInflater.from(context);
-                View dialogView = inflater.inflate(R.layout.update_missing_person_report_status, null);
-                builder.setView(dialogView);
+// Get the report and user details from your data source
+                String name = missingPersonDataList.getMissingPersonName();
+                String age = missingPersonDataList.getMissingPersonAge();
+                String gender = missingPersonDataList.getMissingPersonGender();
+                String lastSeen = missingPersonDataList.getMissingPersonLastSeenLocation();
+                String details = missingPersonDataList.getMissingPersonReportDetails();
+                String status = missingPersonDataList.getMissingPersonReportStatus();
+                String userName = missingPersonDataList.getUserName();
+                String userGender = missingPersonDataList.getUserGender();
+                String userCNIC = missingPersonDataList.getUserCNIC();
+                String userContact = missingPersonDataList.getUserContact();
 
-                Spinner spinnerStatus = dialogView.findViewById(R.id.spinner_status);
+                // Create an array of status options for the spinner
+                String[] statusOptions = {"Submitted", "Seen", "Processing", "Completed", "Rejected"};
+
+                // Create a SpannableString for the message with formatted gender text
+                SpannableString message = new SpannableString("Person's name: " + name + "\nAge: " + age + "\nGender: " + gender + "\nLast Seen: " + lastSeen + "\nDetails: " + details + "\nStatus: " + status + "\n\nSubmitted By:\nName: " + userName + "\nGender: " + userGender + "\nCNIC: " + userCNIC + "\nContact: " + userContact);
+
+                // Create a spinner and set its adapter
+                Spinner spinnerStatus = new Spinner(context);
                 ArrayAdapter<String> statusAdapter = new ArrayAdapter<>(context, android.R.layout.simple_spinner_item, statusOptions);
                 statusAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 spinnerStatus.setAdapter(statusAdapter);
 
-                // Spinner status with current status set on top sending with the report data to display in the update popup dialog
-                // Retrieve the array from the XML file
-                String[] statusArray = context.getResources().getStringArray(R.array.status_array);
+                // Set the current status of the report as the selected item in the spinner
+                int selectedStatusIndex = Arrays.asList(statusOptions).indexOf(status);
+                spinnerStatus.setSelection(selectedStatusIndex);
 
-                // Create ArrayAdapter and set it as the adapter for the Spinner
-                ArrayAdapter<String> adapter = new ArrayAdapter<>(context, android.R.layout.simple_spinner_item, statusArray);
-                adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
-                spinnerStatus.setAdapter(adapter);
+                // Create a LinearLayout to hold the text and spinner
+                LinearLayout layout = new LinearLayout(context);
+                layout.setOrientation(LinearLayout.VERTICAL);
+                layout.setPadding(48, 0, 48, 0);
 
-                builder.setNegativeButton("Cancel", null);
-                AlertDialog dialog = builder.create();
-                dialog.show();
+                // Create a TextView for the message
+                TextView textViewMessage = new TextView(context);
+                textViewMessage.setText(message);
+                textViewMessage.setPadding(0, 0, 0, 16); // Add bottom padding
+                layout.addView(textViewMessage);
+
+                // Create a LinearLayout to hold the "Status" text and spinner
+                LinearLayout statusLayout = new LinearLayout(context);
+                statusLayout.setOrientation(LinearLayout.HORIZONTAL);
+                statusLayout.setGravity(Gravity.CENTER_VERTICAL);
+
+                // Create a TextView for the "Status" text
+                TextView textViewStatus = new TextView(context);
+                textViewStatus.setText("Status: ");
+                textViewStatus.setPadding(0, 0, 8, 0); // Add right padding
+                statusLayout.addView(textViewStatus);
+
+                // Add the spinner to the status layout
+                statusLayout.addView(spinnerStatus);
+
+                // Add the status layout to the main layout
+                layout.addView(statusLayout);
+
+                // Set the custom view as the message of the dialog box
+                builder.setView(layout);
+
+
+//                LayoutInflater inflater = LayoutInflater.from(context);
+//                View dialogView = inflater.inflate(R.layout.update_missing_person_report_status, null);
+//                builder.setView(dialogView);
+//
+//                Spinner spinnerStatus = dialogView.findViewById(R.id.spinner_status);
+//                ArrayAdapter<String> statusAdapter = new ArrayAdapter<>(context, android.R.layout.simple_spinner_item, statusOptions);
+//                statusAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//                spinnerStatus.setAdapter(statusAdapter);
+//
+//                // Spinner status with current status set on top sending with the report data to display in the update popup dialog
+//                // Retrieve the array from the XML file
+//                String[] statusArray = context.getResources().getStringArray(R.array.status_array);
+//
+//                // Create ArrayAdapter and set it as the adapter for the Spinner
+//                ArrayAdapter<String> adapter = new ArrayAdapter<>(context, android.R.layout.simple_spinner_item, statusArray);
+//                adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
+//                spinnerStatus.setAdapter(adapter);
+
+
                 builder.setPositiveButton("Update", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
                         // getting status from spinner
-                        String status=null;
+                        String status = spinnerStatus.getSelectedItem().toString();
 
-                        // save form data in database
-                        DBHelper dbHelper = new DBHelper(context);
+                        try {
+                            // save form data in database
+                            DBHelper dbHelper = new DBHelper(context);
 
-                        SQLiteDatabase db = dbHelper.getWritableDatabase();
+                            SQLiteDatabase db = dbHelper.getWritableDatabase();
 
-                        // data preparing to send
-                        ContentValues values = new ContentValues();
+                            // data preparing to send
+                            ContentValues values = new ContentValues();
 
-                        // putting key value pairs in object
-                        values.put(DatabaseContract.MissingPersons.COL_REPORT_STATUS, status);
+                            // putting key value pairs in object
+                            values.put(DatabaseContract.MissingPersons.COL_REPORT_STATUS, status);
 
-                        // getting the report id from list to update the report
-                        String reportId = missingPersonDataList.getMissingPersonId();
+                            // getting the report id from list to update the report
+                            String reportId = missingPersonDataList.getMissingPersonId();
 
-                        String whereClause = DatabaseContract.MissingPersons._ID + "=?";
+                            String whereClause = DatabaseContract.MissingPersons._ID + "=?";
 
-                        String whereArgs[] = {String.valueOf(reportId)};
+                            String whereArgs[] = {String.valueOf(reportId)};
 
-                        // saving form data in DB
-                        long updatedRows = db.update(DatabaseContract.MissingPersons.TABLE_NAME, values, whereClause, whereArgs);
+                            // saving form data in DB
+                            long updatedRows = db.update(DatabaseContract.MissingPersons.TABLE_NAME, values, whereClause, whereArgs);
 
-                        // check the returned updated rows
-                        if (updatedRows != 1) {
-                            Toast.makeText(context, "Report status not updated!", Toast.LENGTH_LONG).show();
-                        } else {
-                            Toast.makeText(context, "Report status updated successfully!", Toast.LENGTH_LONG).show();
+                            // check the returned updated rows
+                            if (updatedRows != 1) {
+                                Toast.makeText(context, "Report status not updated!", Toast.LENGTH_LONG).show();
+                            } else {
+                                Toast.makeText(context, "Report status updated successfully!", Toast.LENGTH_LONG).show();
 
+                                // reflect changes in the view
+                                // Assuming you have the position and updated record
+                                int updatedPosition = position; // position
+                                missingPersonData[position].setMissingPersonReportStatus(status);// updating status record
+
+                                // Step 2: Notify the adapter
+                                notifyItemChanged(updatedPosition);
+                            }
+                        }catch(Exception e){
+                            Toast.makeText(context, "Error occurred!", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
+
+                builder.setNegativeButton("Cancel", null);
+                AlertDialog dialog = builder.create();
+                dialog.show();
             }
         });
 

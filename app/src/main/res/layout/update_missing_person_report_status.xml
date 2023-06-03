@@ -16,130 +16,129 @@
         tools:layout_editor_absoluteY="-14dp">
 
         <TextView
-            android:id="@+id/tvUserName6"
+            android:id="@+id/tvUserContact"
             android:layout_width="240dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="36dp"
             android:ems="10"
             android:fontFamily="@font/poppins_light"
-            android:hint="Name"
+            android:hint="contact"
             android:imeOptions="actionNext"
             android:inputType="textPersonName"
-            android:marginTop="50dp"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.631"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvUserName5" />
+            app:layout_constraintTop_toBottomOf="@+id/tvUserCNIC" />
 
         <TextView
             android:id="@+id/textView41"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="18dp"
+            android:layout_marginTop="36dp"
             android:fontFamily="@font/poppins_light"
             android:text="Contact:"
             android:textColor="#FFFF"
             android:textSize="16sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toStartOf="@+id/tvUserName6"
-            app:layout_constraintHorizontal_bias="0.205"
+            app:layout_constraintEnd_toStartOf="@+id/tvUserContact"
+            app:layout_constraintHorizontal_bias="0.478"
             app:layout_constraintStart_toStartOf="parent"
-            tools:layout_editor_absoluteY="1042dp" />
+            app:layout_constraintTop_toBottomOf="@+id/textView40" />
 
         <TextView
-            android:id="@+id/tvUserName5"
+            android:id="@+id/tvUserCNIC"
             android:layout_width="240dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="36dp"
             android:ems="10"
             android:fontFamily="@font/poppins_light"
-            android:hint="Name"
+            android:hint="cnic"
             android:imeOptions="actionNext"
             android:inputType="textPersonName"
-            android:marginTop="50dp"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.631"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvUserName4" />
+            app:layout_constraintTop_toBottomOf="@+id/tvUserGender" />
 
         <TextView
             android:id="@+id/textView40"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="18dp"
+            android:layout_marginTop="32dp"
             android:fontFamily="@font/poppins_light"
             android:text="CNIC:"
             android:textColor="#FFFF"
             android:textSize="16sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toStartOf="@+id/tvUserName5"
-            app:layout_constraintHorizontal_bias="0.307"
+            app:layout_constraintEnd_toStartOf="@+id/tvUserCNIC"
+            app:layout_constraintHorizontal_bias="0.229"
             app:layout_constraintStart_toStartOf="parent"
-            tools:layout_editor_absoluteY="986dp" />
+            app:layout_constraintTop_toBottomOf="@+id/textView39" />
 
         <TextView
-            android:id="@+id/tvUserName3"
+            android:id="@+id/tvUserName"
             android:layout_width="240dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="45dp"
             android:ems="10"
             android:fontFamily="@font/poppins_light"
-            android:hint="Name"
+            android:hint="name"
             android:imeOptions="actionNext"
             android:inputType="textPersonName"
-            android:marginTop="50dp"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.631"
+            app:layout_constraintHorizontal_bias="0.701"
             app:layout_constraintStart_toStartOf="parent"
-            tools:layout_editor_absoluteY="860dp" />
+            app:layout_constraintTop_toBottomOf="@+id/textView37" />
 
         <TextView
-            android:id="@+id/tvUserName4"
+            android:id="@+id/tvUserGender"
             android:layout_width="240dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="36dp"
             android:ems="10"
             android:fontFamily="@font/poppins_light"
-            android:hint="Name"
+            android:hint="gender"
             android:imeOptions="actionNext"
             android:inputType="textPersonName"
-            android:marginTop="50dp"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.608"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvUserName3" />
+            app:layout_constraintTop_toBottomOf="@+id/tvUserName" />
 
         <TextView
             android:id="@+id/textView39"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="18dp"
+            android:layout_marginTop="36dp"
             android:fontFamily="@font/poppins_light"
             android:text="Gender:"
             android:textColor="#FFFF"
             android:textSize="16sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toStartOf="@+id/tvUserName4"
-            app:layout_constraintHorizontal_bias="0.307"
+            app:layout_constraintEnd_toStartOf="@+id/tvUserGender"
+            app:layout_constraintHorizontal_bias="0.375"
             app:layout_constraintStart_toStartOf="parent"
-            tools:layout_editor_absoluteY="922dp"
-            app:layout_constraintTop_toBottomOf="@+id/textView39"/>
+            app:layout_constraintTop_toBottomOf="@+id/textView38" />
 
         <TextView
             android:id="@+id/textView38"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="18dp"
-            android:layout_marginTop="68dp"
+            android:layout_marginTop="48dp"
             android:fontFamily="@font/poppins_light"
             android:text="Name:"
             android:textColor="#FFFF"
             android:textSize="16sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toStartOf="@+id/tvUserName3"
+            app:layout_constraintEnd_toStartOf="@+id/tvUserName"
             app:layout_constraintHorizontal_bias="0.282"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView37" />
@@ -149,6 +148,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="18dp"
+            android:layout_marginTop="50dp"
             android:fontFamily="@font/poppins_light"
             android:text="Submitted by:"
             android:textColor="#FFFF"
@@ -157,13 +157,14 @@
             app:layout_constraintEnd_toStartOf="@+id/tvUserName"
             app:layout_constraintHorizontal_bias="0.307"
             app:layout_constraintStart_toStartOf="parent"
-            tools:layout_editor_absoluteY="766dp" />
+            app:layout_constraintTop_toBottomOf="@+id/imageViewPersonImage" />
 
         <TextView
             android:id="@+id/textView36"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="18dp"
+            android:layout_marginStart="28dp"
+            android:layout_marginTop="32dp"
             android:fontFamily="@font/poppins_light"
             android:text="Status:"
             android:textColor="#FFFF"
@@ -172,23 +173,23 @@
             app:layout_constraintEnd_toStartOf="@+id/tvUserName"
             app:layout_constraintHorizontal_bias="0.297"
             app:layout_constraintStart_toStartOf="parent"
-            tools:layout_editor_absoluteY="1374dp" />
+            app:layout_constraintTop_toBottomOf="@+id/textView41" />
 
         <Spinner
-            android:id="@+id/tvUserName"
+            android:id="@+id/spinnerStatus"
             android:layout_width="240dp"
             android:layout_height="wrap_content"
             android:ems="10"
+            android:layout_marginTop="30dp"
             android:fontFamily="@font/poppins_light"
             android:hint="Name"
             android:imeOptions="actionNext"
             android:inputType="textPersonName"
-            android:marginTop="50dp"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.631"
             app:layout_constraintStart_toStartOf="parent"
-            tools:layout_editor_absoluteY="1372dp" />
+            app:layout_constraintTop_toBottomOf="@+id/tvUserContact" />
 
         <TextView
                     android:id="@+id/textView8"
@@ -231,7 +232,6 @@
             android:hint="Name"
             android:imeOptions="actionNext"
             android:inputType="textPersonName"
-            android:marginTop="50dp"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.678"
@@ -368,10 +368,11 @@
             android:id="@+id/imageViewPersonImage"
             android:layout_width="229dp"
             android:layout_height="167dp"
+            android:layout_marginTop="40dp"
             android:background="#FFFF"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            tools:layout_editor_absoluteY="486dp"
+            app:layout_constraintTop_toBottomOf="@+id/etDetails"
             tools:src="@tools:sample/avatars" />
 
         <TextView

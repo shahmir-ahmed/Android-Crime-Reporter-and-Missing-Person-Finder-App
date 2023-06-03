@@ -21,6 +21,7 @@ public class MissingPersonData {
 
         private String userCNIC;
 
+        // old contrsructor int=itail class
     public MissingPersonData(String missingPersonName, String missingPersonAge, String missingPersonGender, String missingPersonZipCode, String missingPersonLastSeenLocation, String missingPersonReportStatus, String missingPersonReportDetails, Bitmap missingPersonImage) {
         this.missingPersonName = missingPersonName;
         this.missingPersonAge = missingPersonAge;
@@ -32,7 +33,7 @@ public class MissingPersonData {
         this.missingPersonImage = missingPersonImage;
     }
 
-    // constructor with missing person id for user dashboard to delete and update the missing person report against this id
+    // constructor with missing person id for USER dashboard to delete and update the missing person report against this id
     public MissingPersonData(String missingPersonId, String missingPersonName, String missingPersonAge, String missingPersonGender, String missingPersonZipCode, String missingPersonLastSeenLocation, String missingPersonReportStatus, String missingPersonReportDetails, Bitmap missingPersonImage) {
         this.missingPersonId = missingPersonId;
         this.missingPersonName = missingPersonName;
@@ -45,8 +46,7 @@ public class MissingPersonData {
         this.missingPersonImage = missingPersonImage;
     }
 
-    // constructor with user and missing person report details
-
+    // constructor with user and missing person report details for search missing person activity adapter
     public MissingPersonData(String userName, String userContact, String missingPersonName, String missingPersonAge, String missingPersonGender, String missingPersonZipCode, String missingPersonLastSeenLocation, String missingPersonReportStatus, String missingPersonReportDetails, Bitmap missingPersonImage) {
 //        System.out.println("here"+userName+userContact);
 
@@ -63,11 +63,9 @@ public class MissingPersonData {
         this.missingPersonImage = missingPersonImage;
     }
 
-    // constructor for admin dashboard data for missing persons and user details
-    public MissingPersonData(String userName, String userGender, String userCNIC, String userContact, String missingPersonName, String missingPersonAge, String missingPersonGender, String missingPersonZipCode, String missingPersonLastSeenLocation, String missingPersonReportStatus, String missingPersonReportDetails, Bitmap missingPersonImage) {
-//        System.out.println("here"+userName+userContact);
-
-//        System.out.println("here"+missingPersonName);
+    // constructor for ADMIN dashboard data for missing persons and user details
+    public MissingPersonData(String missingPersonId, String userName, String userGender, String userCNIC, String userContact, String missingPersonName, String missingPersonAge, String missingPersonGender, String missingPersonZipCode, String missingPersonLastSeenLocation, String missingPersonReportStatus, String missingPersonReportDetails, Bitmap missingPersonImage) {
+        this.missingPersonId = missingPersonId;
         this.userName = userName;
         this.userGender = userGender;
         this.userCNIC = userCNIC;

@@ -99,11 +99,11 @@
     </string-array>
 
 <!--    Report status array-->
-    <string-array name="status_array">
-        <item>Submitted</item>
-        <item>Seen</item>
-        <item>Processing</item>
-        <item>Completed</item>
-        <item>Rejected</item>
-    </string-array>
+<!--    <string-array name="status_array">-->
+<!--        <item>Submitted</item>-->
+<!--        <item>Seen</item>-->
+<!--        <item>Processing</item>-->
+<!--        <item>Completed</item>-->
+<!--        <item>Rejected</item>-->
+<!--    </string-array>-->
 </resources>
