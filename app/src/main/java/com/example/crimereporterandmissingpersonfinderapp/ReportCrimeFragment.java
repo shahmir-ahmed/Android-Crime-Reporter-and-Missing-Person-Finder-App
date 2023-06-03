@@ -97,7 +97,7 @@ import java.io.InputStream;
 public class ReportCrimeFragment extends Fragment {
     private static final int PICK_IMAGE_REQUEST = 1; // store the request code for image selection
     private EditText editTextStreetNumber;
-    private Spinner spinnerCity;
+    private Spinner spinnerCity, spinnerCrime;
     private EditText editTextZipCode;
     private EditText editTextCrimeDescription;
     private ImageView imageCrime;
@@ -150,6 +150,7 @@ public class ReportCrimeFragment extends Fragment {
         editTextStreetNumber = view.findViewById(R.id.editTextStreetNumber);
         editTextZipCode = view.findViewById(R.id.editTextZipCode);
         editTextCrimeDescription = view.findViewById(R.id.editTextCrimeDescription);
+        spinnerCrime = view.findViewById(R.id.spinnerCrime);
         spinnerCity = view.findViewById(R.id.spinnerCity);
         imageCrime = view.findViewById(R.id.imageCrime);
         Button buttonBrowse = view.findViewById(R.id.buttonBrowse);
@@ -162,6 +163,14 @@ public class ReportCrimeFragment extends Fragment {
         ArrayAdapter<String> adapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_spinner_item, cityArray);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
         spinnerCity.setAdapter(adapter);
+
+        // Retrieve the array from the XML file
+        String[] crimeArray = getResources().getStringArray(R.array.crime_array);
+
+        // Create ArrayAdapter and set it as the adapter for the Spinner
+        ArrayAdapter<String> adapter1 = new ArrayAdapter<>(requireContext(), android.R.layout.simple_spinner_item, crimeArray);
+        adapter1.setDropDownViewResource(android.R.layout.simple_spinner_item);
+        spinnerCrime.setAdapter(adapter1);
 
         // Set up browse button click listener
         buttonBrowse.setOnClickListener(new View.OnClickListener() {
@@ -227,6 +236,13 @@ public class ReportCrimeFragment extends Fragment {
         String streetNumber = editTextStreetNumber.getText().toString().trim();
         String zipCode = editTextZipCode.getText().toString().trim();
         String crimeDescription = editTextCrimeDescription.getText().toString().trim();
+
+        String selectedCrime = spinnerCrime.getSelectedItem().toString();
+//        System.out.println(selectedCrime);
+        if (selectedCrime.equals("Select crime")) {
+            Toast.makeText(getContext(), "Please select a city", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
         if (streetNumber.isEmpty()) {
             editTextStreetNumber.setError("Street details are required");

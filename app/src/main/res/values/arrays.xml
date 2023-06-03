@@ -73,4 +73,28 @@
         <item>Wah Cantonment</item>
         <item>Wazirabad</item>
     </string-array>
+
+<!--    Crime types-->
+    <string-array name="crime_array">
+        <item>Select crime</item>
+        <item>Theft</item>
+        <item>Robbery</item>
+        <item>Assault</item>
+        <item>Burglary</item>
+        <item>Fraud</item>
+        <item>Kidnapping</item>
+        <item>Homicide</item>
+        <item>Drug Offenses</item>
+        <item>Cybercrime</item>
+        <item>Corruption</item>
+        <item>Domestic Violence</item>
+        <item>Harassment</item>
+        <item>Honor Killing</item>
+        <item>Acid Attacks</item>
+        <item>Blasphemy</item>
+        <item>Child Abuse</item>
+        <item>Extortion</item>
+        <item>Human Trafficking</item>
+        <item>Honor Crimes</item>
+    </string-array>
 </resources>

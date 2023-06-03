@@ -14,19 +14,52 @@
     tools:layout_editor_absoluteX="0dp"
     tools:layout_editor_absoluteY="35dp">
 
+<!--    <TextView-->
+<!--        android:id="@+id/textView17"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="30dp"-->
+<!--        android:fontFamily="@font/poppins_light"-->
+<!--        android:text="Report Crime"-->
+<!--        android:textColor="#FFFFFF"-->
+<!--        android:textSize="24sp"-->
+<!--        android:textStyle="bold"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent" />-->
+
+
     <TextView
         android:id="@+id/textView17"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
         android:fontFamily="@font/poppins_light"
-        android:text="Report Crime"
-        android:textColor="#FFFFFF"
-        android:textSize="24sp"
+        android:text="Type:"
+        android:textColor="#FFFF"
+        android:textSize="15.5sp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.107"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.068"
+        tools:ignore="HardcodedText" />
+
+    <Spinner
+        android:id="@+id/spinnerCrime"
+        android:layout_width="263dp"
+        android:layout_height="48dp"
+        android:fontFamily="@font/poppins_light"
+        android:textColor="#FFFF"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.831"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.055"
+        tools:ignore="SpeakableTextPresentCheck" />
 
     <TextView
         android:id="@+id/textView16"
@@ -42,7 +75,7 @@
         app:layout_constraintHorizontal_bias="0.115"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.290"
+        app:layout_constraintVertical_bias="0.292"
         tools:ignore="HardcodedText" />
 
     <TextView
@@ -74,8 +107,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.11"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.136"
+        app:layout_constraintTop_toBottomOf="@+id/textView17"
+        app:layout_constraintVertical_bias="0.050"
         tools:ignore="HardcodedText" />
 
     <Button
@@ -167,7 +200,7 @@
         app:layout_constraintHorizontal_bias="0.864"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextStreetNumber"
-        app:layout_constraintVertical_bias="0.025"
+        app:layout_constraintVertical_bias="0.027"
         tools:ignore="SpeakableTextPresentCheck" />
 
     <EditText
@@ -183,7 +216,7 @@
         app:layout_constraintHorizontal_bias="0.78"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spinnerCity"
-        app:layout_constraintVertical_bias="0.036"
+        app:layout_constraintVertical_bias="0.034"
         tools:ignore="Autofill,HardcodedText,LabelFor,SpeakableTextPresentCheck" />
 
     <ImageView
