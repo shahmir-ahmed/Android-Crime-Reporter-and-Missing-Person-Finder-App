@@ -1,5 +1,7 @@
 package com.example.crimereporterandmissingpersonfinderapp;
 
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -40,6 +42,8 @@ public class LodgeComplaintFragment extends Fragment {
     private EditText editTextComplaint;
     private Button buttonRegisterComplaint;
 
+
+    private SQLiteDatabase database;
 
     public LodgeComplaintFragment() {
         // Required empty public constructor
@@ -106,6 +110,10 @@ public class LodgeComplaintFragment extends Fragment {
                 registerComplaint();
             }
         });
+
+        DBHelper dbHelper = new DBHelper(getActivity());
+        database = dbHelper.getWritableDatabase();
+
     }
 
     //
@@ -145,9 +153,43 @@ public class LodgeComplaintFragment extends Fragment {
             return;
         }
 
+        try {
+            // Insert the complaint into the database
+            String insertQuery = "INSERT INTO " + DatabaseContract.Complaints.TABLE_NAME + " (" +
+                    DatabaseContract.Complaints.COLUMN_ADDRESS + ", " +
+                    DatabaseContract.Complaints.COLUMN_CITY + ", " +
+                    DatabaseContract.Complaints.COLUMN_PINCODE + ", " +
+                    DatabaseContract.Complaints.COLUMN_SUBJECT + ", " +
+                    DatabaseContract.Complaints.COLUMN_COMPLAINT + ") " +
+                    "VALUES (?, ?, ?, ?, ?)";
+
+            database.execSQL(insertQuery, new String[]{address, city, pincode, subject, complaint});
+
+            // Display success message
+            Toast.makeText(getActivity(), "Complaint registered successfully!", Toast.LENGTH_SHORT).show();
+
+            // clear all the fields
+            editTextAddress.setText("");
+            editTextPincode.setText("");
+            editTextSubject.setText("");
+            editTextComplaint.setText("");
+        }
+        catch (SQLiteException e) {
+            // Display error message
+            Toast.makeText(getActivity(), "Failed to register complaint.", Toast.LENGTH_SHORT).show();
+            e.printStackTrace();
+        }
+
+    // Display success message
+//    Toast.makeText(getActivity(), "Complaint registered successfully!", Toast.LENGTH_SHORT).show();
+
+    // Close the database connection when the fragment is destroyed
+    if (database != null) {
+        database.close();
+    }
 
 
-        // Display success message
-        Toast.makeText(getActivity(), "Complaint registered successfully!", Toast.LENGTH_SHORT).show();
+    // Display success message
+//        Toast.makeText(getActivity(), "Complaint registered successfully!", Toast.LENGTH_SHORT).show();
     }
 }
