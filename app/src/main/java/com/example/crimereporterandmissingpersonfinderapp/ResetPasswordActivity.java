@@ -46,7 +46,7 @@ public class ResetPasswordActivity extends AppCompatActivity {
                 confirmPasswordEditText.requestFocus();
             }
             else {
-                //
+                // Update user password in the database using email
 
                 Toast.makeText(this, "Password reset successfully.", Toast.LENGTH_SHORT).show();
             }

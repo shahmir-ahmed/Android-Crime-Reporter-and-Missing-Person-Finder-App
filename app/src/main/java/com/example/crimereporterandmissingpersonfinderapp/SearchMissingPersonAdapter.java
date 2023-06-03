@@ -1,6 +1,7 @@
 package com.example.crimereporterandmissingpersonfinderapp;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,6 +43,36 @@ import androidx.recyclerview.widget.RecyclerView;
             holder.textViewLastSeenLocation.setText(missingPersonDataList.getMissingPersonLastSeenLocation());
             holder.textViewReportDetails.setText(missingPersonDataList.getMissingPersonReportDetails());
             holder.textViewReportStatus.setText(missingPersonDataList.getMissingPersonReportStatus());
+
+            // based on the status of report change the colour of status
+            TextView statusTextView = holder.textViewReportStatus;
+
+            String reportStatus = missingPersonDataList.getMissingPersonReportStatus();
+
+            int color;
+            switch (reportStatus) {
+                case "Submitted":
+                    color = Color.BLUE;
+                    break;
+                case "Seen":
+                    color = Color.GREEN;
+                    break;
+                case "Processing":
+                    color = Color.YELLOW;
+                    break;
+                case "Completed":
+                    color = Color.RED;
+                    break;
+                case "Rejected":
+                    color = Color.GRAY;
+                    break;
+                default:
+                    color = Color.BLACK;
+                    break;
+            }
+
+            statusTextView.setTextColor(color);
+
             holder.missingPersonImage.setImageBitmap(missingPersonDataList.getMissingPersonImage());
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

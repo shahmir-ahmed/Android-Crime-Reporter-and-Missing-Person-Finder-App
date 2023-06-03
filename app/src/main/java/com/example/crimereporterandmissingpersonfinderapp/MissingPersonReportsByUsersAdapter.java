@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.text.SpannableString;
 import android.view.Gravity;
@@ -67,6 +68,36 @@ public class MissingPersonReportsByUsersAdapter extends RecyclerView.Adapter<Mis
 
         holder.textViewPersonName.setText(missingPersonDataList.getMissingPersonName());
         holder.textViewReportStatus.setText(missingPersonDataList.getMissingPersonReportStatus());
+
+        // based on the status of report change the colour of status
+        TextView statusTextView = holder.textViewReportStatus;
+
+        String reportStatus = missingPersonDataList.getMissingPersonReportStatus();
+
+        int color;
+        switch (reportStatus) {
+            case "Submitted":
+                color = Color.BLUE;
+                break;
+            case "Seen":
+                color = Color.GREEN;
+                break;
+            case "Processing":
+                color = Color.YELLOW;
+                break;
+            case "Completed":
+                color = Color.RED;
+                break;
+            case "Rejected":
+                color = Color.GRAY;
+                break;
+            default:
+                color = Color.BLACK;
+                break;
+        }
+
+        statusTextView.setTextColor(color);
+
         holder.missingPersonImage.setImageBitmap(missingPersonDataList.getMissingPersonImage());
 
         // view button
@@ -142,7 +173,7 @@ public class MissingPersonReportsByUsersAdapter extends RecyclerView.Adapter<Mis
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
                 builder.setTitle("Update Report Status");
 
-// Get the report and user details from your data source
+                // Get the report and user details from your data source
                 String name = missingPersonDataList.getMissingPersonName();
                 String age = missingPersonDataList.getMissingPersonAge();
                 String gender = missingPersonDataList.getMissingPersonGender();

@@ -11,6 +11,7 @@ import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Handler;
@@ -79,6 +80,36 @@ public class UserMissingPersonReportsAdapter extends RecyclerView.Adapter<UserMi
         holder.textViewLastSeenLocation.setText(missingPersonDataList.getMissingPersonLastSeenLocation());
         holder.textViewReportDetails.setText(missingPersonDataList.getMissingPersonReportDetails());
         holder.textViewReportStatus.setText(missingPersonDataList.getMissingPersonReportStatus());
+
+        // based on the status of report change the colour of status
+        TextView statusTextView = holder.textViewReportStatus;
+
+        String reportStatus = missingPersonDataList.getMissingPersonReportStatus();
+
+        int color;
+        switch (reportStatus) {
+            case "Submitted":
+                color = Color.BLUE;
+                break;
+            case "Seen":
+                color = Color.GREEN;
+                break;
+            case "Processing":
+                color = Color.YELLOW;
+                break;
+            case "Completed":
+                color = Color.RED;
+                break;
+            case "Rejected":
+                color = Color.GRAY;
+                break;
+            default:
+                color = Color.BLACK;
+                break;
+        }
+
+        statusTextView.setTextColor(color);
+
         holder.missingPersonImage.setImageBitmap(missingPersonDataList.getMissingPersonImage());
 
         // Getting the status because based on the status displaying view, update, delete button or more details button
@@ -97,6 +128,21 @@ public class UserMissingPersonReportsAdapter extends RecyclerView.Adapter<UserMi
             holder.updateBtn.setVisibility(View.GONE);
             holder.deleteBtn.setVisibility(View.GONE);
         }
+
+        // more details button (same details as shown in view button clicking appearing dialog)
+        holder.moreDetailsBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                builder.setTitle("Missing Person Details");
+                builder.setMessage("Name: " + missingPersonDataList.getMissingPersonName() + "\nAge: " + missingPersonDataList.getMissingPersonAge()+ "\nGender: " +missingPersonDataList.getMissingPersonGender()+ "\nLast Seen: " + missingPersonDataList.getMissingPersonLastSeenLocation()+ "\nZip Code: " +missingPersonDataList.getMissingPersonZipCode()+ "\nDetails: " +missingPersonDataList.getMissingPersonReportDetails()+ "\nStatus: " +missingPersonDataList.getMissingPersonReportStatus());
+                // Add more details to the message as needed
+
+                builder.setPositiveButton("OK", null);
+                AlertDialog dialog = builder.create();
+                dialog.show();
+            }
+        });
 
         // view button
         holder.viewBtn.setOnClickListener(new View.OnClickListener() {
@@ -163,18 +209,18 @@ public class UserMissingPersonReportsAdapter extends RecyclerView.Adapter<UserMi
                 imageViewPersonImage.setImageBitmap(missingPersonDataList.getMissingPersonImage());
 
 
-                Button browseBtn = (Button) dialogView.findViewById(R.id.browseBtn);
+//                Button browseBtn = (Button) dialogView.findViewById(R.id.browseBtn);
 
 
                 // on click listener on browse image button
-                browseBtn.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-
-                        getImageFromGallery();
-
-                    }
-                });
+//                browseBtn.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//
+//                        getImageFromGallery();
+//
+//                    }
+//                });
 
                 builder.setPositiveButton("Update", new DialogInterface.OnClickListener() {
                     @Override
@@ -347,6 +393,7 @@ public class UserMissingPersonReportsAdapter extends RecyclerView.Adapter<UserMi
                                 // getting the report id from list to update the report
                                 String reportId = missingPersonDataList.getMissingPersonId();
 
+                                /*
                                 // missing person image
                                 // Get the Bitmap from the ImageView
                                 Bitmap bitmap = ((BitmapDrawable) imageViewPersonImage.getDrawable()).getBitmap();
@@ -358,6 +405,7 @@ public class UserMissingPersonReportsAdapter extends RecyclerView.Adapter<UserMi
 
                                 // content value --> missing person image
                                 values.put(DatabaseContract.MissingPersons.COL_PERSON_IMAGE, personImage);
+                                */
 
                                 String whereClause = DatabaseContract.MissingPersons._ID + "=?";
 
@@ -479,17 +527,17 @@ public class UserMissingPersonReportsAdapter extends RecyclerView.Adapter<UserMi
 
 
     // Used to start gallery activity
-    public void getImageFromGallery(){
-        Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
-        photoPickerIntent.setType("image/*");
-        ((Activity) context).startActivityForResult(photoPickerIntent, RESULT_LOAD_IMG);
-    }
+//    public void getImageFromGallery(){
+//        Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
+//        photoPickerIntent.setType("image/*");
+//        ((Activity) context).startActivityForResult(photoPickerIntent, RESULT_LOAD_IMG);
+//    }
 
     // handles the gallery result from activity
-    public void handleGalleryResult(Bitmap image) {
-        Toast.makeText(context, "here", Toast.LENGTH_SHORT).show();
-        imageViewPersonImage.setImageBitmap(image);
-    }
+//    public void handleGalleryResult(Bitmap image) {
+//        Toast.makeText(context, "here", Toast.LENGTH_SHORT).show();
+//        imageViewPersonImage.setImageBitmap(image);
+//    }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
         TextView textViewPersonName;

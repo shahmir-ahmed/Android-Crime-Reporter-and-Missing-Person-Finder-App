@@ -116,7 +116,7 @@ public class RegistrationActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Please select your gender", Toast.LENGTH_SHORT).show();
                 }
                 else {
-                    //
+                    // Insert new user in the database
 
                     Toast.makeText(getApplicationContext(), "Registration successful!", Toast.LENGTH_SHORT).show();
                 }
