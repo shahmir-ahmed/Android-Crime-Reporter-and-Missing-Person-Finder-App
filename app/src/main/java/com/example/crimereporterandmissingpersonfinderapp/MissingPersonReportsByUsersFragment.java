@@ -89,71 +89,75 @@ public class MissingPersonReportsByUsersFragment extends Fragment {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity().getApplicationContext()));
 
-        // retrieve all the missing person reports from DB reported by the user
-        DBHelper dbHelper = new DBHelper(getActivity().getApplicationContext());
+        try {
+            // retrieve all the missing person reports from DB reported by the user
+            DBHelper dbHelper = new DBHelper(getActivity().getApplicationContext());
 
-        SQLiteDatabase db = dbHelper.getReadableDatabase();
+            SQLiteDatabase db = dbHelper.getReadableDatabase();
 
-        String table = DatabaseContract.Users.TABLE_NAME+" u"+","+ DatabaseContract.MissingPersons.TABLE_NAME+" m";
+            String table = DatabaseContract.Users.TABLE_NAME + " u" + "," + DatabaseContract.MissingPersons.TABLE_NAME + " m";
 
-        String columns[] = {"m."+DatabaseContract.MissingPersons._ID, " m."+DatabaseContract.MissingPersons.COL_NAME+" AS missing_person_name", "m."+DatabaseContract.MissingPersons.COL_AGE, "m."+DatabaseContract.MissingPersons.COL_GENDER, "m."+DatabaseContract.MissingPersons.COL_LAST_SEEN, "m."+DatabaseContract.MissingPersons.COL_ZIPCODE, "m."+DatabaseContract.MissingPersons.COL_REPORT_DETAILS, "m."+DatabaseContract.MissingPersons.COL_PERSON_IMAGE, "m."+DatabaseContract.MissingPersons.COL_REPORT_STATUS, "u."+DatabaseContract.Users.COL_NAME+" AS user_name", "u."+DatabaseContract.Users.COL_GENDER, "u."+DatabaseContract.Users.COL_CNIC, "u."+DatabaseContract.Users.COL_CONTACT};
+            String columns[] = {"m." + DatabaseContract.MissingPersons._ID, " m." + DatabaseContract.MissingPersons.COL_NAME + " AS missing_person_name", "m." + DatabaseContract.MissingPersons.COL_AGE, "m." + DatabaseContract.MissingPersons.COL_GENDER, "m." + DatabaseContract.MissingPersons.COL_LAST_SEEN, "m." + DatabaseContract.MissingPersons.COL_ZIPCODE, "m." + DatabaseContract.MissingPersons.COL_REPORT_DETAILS, "m." + DatabaseContract.MissingPersons.COL_PERSON_IMAGE, "m." + DatabaseContract.MissingPersons.COL_REPORT_STATUS, "u." + DatabaseContract.Users.COL_NAME + " AS user_name", "u." + DatabaseContract.Users.COL_GENDER, "u." + DatabaseContract.Users.COL_CNIC, "u." + DatabaseContract.Users.COL_CONTACT};
 
-        String whereClause = "m."+DatabaseContract.MissingPersons.COL_USER_ID+"="+"u."+DatabaseContract.Users._ID;
+            String whereClause = "m." + DatabaseContract.MissingPersons.COL_USER_ID + "=" + "u." + DatabaseContract.Users._ID;
 
-        Cursor result = db.query(table, columns, whereClause, null, null, null, null);
+            Cursor result = db.query(table, columns, whereClause, null, null, null, null);
 
-        // if there are reports
-        if(result.moveToFirst()) {
-            // reset to intial position
-            result.moveToPosition(-1);
+            // if there are reports
+            if (result.moveToFirst()) {
+                // reset to intial position
+                result.moveToPosition(-1);
 
-            // get the number of rows
-            int count = result.getCount();
-            missingPersonData = new MissingPersonData[count]; // Initialize the array with the appropriate size
+                // get the number of rows
+                int count = result.getCount();
+                missingPersonData = new MissingPersonData[count]; // Initialize the array with the appropriate size
 
-            int i = 0;
+                int i = 0;
 
-            // while there are next cursor positions to move
-            while (result.moveToNext()) {
+                // while there are next cursor positions to move
+                while (result.moveToNext()) {
 
-                // getting all the data
-                String reportId = String.valueOf(result.getInt(result.getColumnIndexOrThrow(DatabaseContract.MissingPersons._ID)));
-                String name = result.getString(result.getColumnIndexOrThrow("missing_person_name"));
-                String age = result.getString(result.getColumnIndexOrThrow(DatabaseContract.MissingPersons.COL_AGE));
-                String gender = result.getString(result.getColumnIndexOrThrow(DatabaseContract.MissingPersons.COL_GENDER));
-                String zipCode = result.getString(result.getColumnIndexOrThrow(DatabaseContract.MissingPersons.COL_ZIPCODE));
-                String lastSeen = result.getString(result.getColumnIndexOrThrow(DatabaseContract.MissingPersons.COL_LAST_SEEN));
-                String reportDetails = result.getString(result.getColumnIndexOrThrow(DatabaseContract.MissingPersons.COL_REPORT_DETAILS));
-                String reportStatus = result.getString(result.getColumnIndexOrThrow(DatabaseContract.MissingPersons.COL_REPORT_STATUS));
-                byte[] image = result.getBlob(result.getColumnIndexOrThrow(DatabaseContract.MissingPersons.COL_PERSON_IMAGE));
+                    // getting all the data
+                    String reportId = String.valueOf(result.getInt(result.getColumnIndexOrThrow(DatabaseContract.MissingPersons._ID)));
+                    String name = result.getString(result.getColumnIndexOrThrow("missing_person_name"));
+                    String age = result.getString(result.getColumnIndexOrThrow(DatabaseContract.MissingPersons.COL_AGE));
+                    String gender = result.getString(result.getColumnIndexOrThrow(DatabaseContract.MissingPersons.COL_GENDER));
+                    String zipCode = result.getString(result.getColumnIndexOrThrow(DatabaseContract.MissingPersons.COL_ZIPCODE));
+                    String lastSeen = result.getString(result.getColumnIndexOrThrow(DatabaseContract.MissingPersons.COL_LAST_SEEN));
+                    String reportDetails = result.getString(result.getColumnIndexOrThrow(DatabaseContract.MissingPersons.COL_REPORT_DETAILS));
+                    String reportStatus = result.getString(result.getColumnIndexOrThrow(DatabaseContract.MissingPersons.COL_REPORT_STATUS));
+                    byte[] image = result.getBlob(result.getColumnIndexOrThrow(DatabaseContract.MissingPersons.COL_PERSON_IMAGE));
 
-                // user data
-                String userName = result.getString(result.getColumnIndexOrThrow("user_name"));
+                    // user data
+                    String userName = result.getString(result.getColumnIndexOrThrow("user_name"));
 
-                String userGender = result.getString(result.getColumnIndexOrThrow(DatabaseContract.Users.COL_GENDER));
+                    String userGender = result.getString(result.getColumnIndexOrThrow(DatabaseContract.Users.COL_GENDER));
 
-                String userCNIC= result.getString(result.getColumnIndexOrThrow(DatabaseContract.Users.COL_CNIC));
+                    String userCNIC = result.getString(result.getColumnIndexOrThrow(DatabaseContract.Users.COL_CNIC));
 
-                String userContact = result.getString(result.getColumnIndexOrThrow(DatabaseContract.Users.COL_CONTACT));
+                    String userContact = result.getString(result.getColumnIndexOrThrow(DatabaseContract.Users.COL_CONTACT));
 
 //                System.out.println(userName+userContact);
-                // Convert byte array to Bitmap
-                Bitmap bitmap = BitmapFactory.decodeByteArray(image, 0, image.length);
+                    // Convert byte array to Bitmap
+                    Bitmap bitmap = BitmapFactory.decodeByteArray(image, 0, image.length);
 
-                missingPersonData[i] = new MissingPersonData(reportId, userName, userGender, userCNIC, userContact, name, age, gender, zipCode, lastSeen, reportStatus, reportDetails, bitmap);
+                    missingPersonData[i] = new MissingPersonData(reportId, userName, userGender, userCNIC, userContact, name, age, gender, zipCode, lastSeen, reportStatus, reportDetails, bitmap);
 
-                i++;
+                    i++;
+                }
+
             }
 
-        }
-
-        // if there are reports made by user the attach adapter with view
-        if(result.getCount()>0) {
-            missingPersonReportsByUsersAdapter = new MissingPersonReportsByUsersAdapter(missingPersonData, (AdminDashboardActivity) getActivity());
-            recyclerView.setAdapter(missingPersonReportsByUsersAdapter);
-        }
-        else{
-            Toast.makeText(getActivity().getApplicationContext(), "No missing person reports found!", Toast.LENGTH_SHORT).show();
+            // if there are reports made by user the attach adapter with view
+            if (result.getCount() > 0) {
+                missingPersonReportsByUsersAdapter = new MissingPersonReportsByUsersAdapter(missingPersonData, (AdminDashboardActivity) getActivity());
+                recyclerView.setAdapter(missingPersonReportsByUsersAdapter);
+            } else {
+                Toast.makeText(getActivity().getApplicationContext(), "No missing person reports found!", Toast.LENGTH_SHORT).show();
+            }
+        }catch(Exception e){
+            Toast.makeText(getActivity().getApplicationContext(), "Error occured!", Toast.LENGTH_SHORT).show();
+            e.printStackTrace();
         }
     }
 }

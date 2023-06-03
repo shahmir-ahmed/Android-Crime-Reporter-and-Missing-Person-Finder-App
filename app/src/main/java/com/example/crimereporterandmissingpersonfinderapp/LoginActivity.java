@@ -157,14 +157,44 @@ public class LoginActivity extends AppCompatActivity {
                     // Check if the user trying to login is admin
                     else{
                         // Here when we know that the user trying to login is not registered user
-                        Toast.makeText(LoginActivity.this, "You are not registered user!", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(LoginActivity.this, "You are not registered user!", Toast.LENGTH_SHORT).show();
 
                         // check user credentials are present as admin or not from database
+                        // columns for which data needs to be retrieved
+                        String columns1[] = {DatabaseContract.Admins.COL_USERNAME, DatabaseContract.Admins.COL_PASSWORD};
 
-                        // send intent to admin dashboard activity
-                        Intent intent = new Intent(LoginActivity.this, AdminDashboardActivity.class);
-//
-                        startActivity(intent);
+                        // where clause
+                        String whereClause1 = DatabaseContract.Admins.COL_USERNAME+"=? AND "+DatabaseContract.Admins.COL_PASSWORD+"=?";
+
+                        // where clause args
+                        String whereArgs1[] = {username, password};
+
+                        // query to check user trying to login exists
+                        Cursor result1 = db.query(DatabaseContract.Admins.TABLE_NAME, columns1, whereClause1, whereArgs1, null, null, null);
+
+                        // if user exists
+
+                        // query() method returns an Empty Cursor if there is not record found
+                        // You can use getCount() to confirm if the Cursor is empty or check if moveToFirst() returns false (i.e., it could not move to the first row).
+                        if(result1.moveToFirst()){
+
+                            Toast.makeText(LoginActivity.this, "Logged in successfully, Welcome "+username, Toast.LENGTH_SHORT).show();
+
+                            // send intent to user dashboard activity
+                            Intent intent = new Intent(LoginActivity.this, AdminDashboardActivity.class);
+
+                            startActivity(intent);
+                            result1.close(); // close the cursor
+                        }
+                        else{
+                            Toast.makeText(LoginActivity.this, "Incorrect username or password!", Toast.LENGTH_SHORT).show();
+                        }
+
+
+//                        // send intent to admin dashboard activity
+//                        Intent intent = new Intent(LoginActivity.this, AdminDashboardActivity.class);
+////
+//                        startActivity(intent);
                     }
 
                     db.close(); // close the sqlite database object

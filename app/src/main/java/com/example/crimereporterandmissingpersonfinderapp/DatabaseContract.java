@@ -25,6 +25,12 @@ public final class DatabaseContract {
 
 
     // Admins table
+    public static abstract class Admins implements BaseColumns{
+        public static final String TABLE_NAME="admins";
+        public static final String COL_USERNAME ="username";
+        public static final String COL_PASSWORD ="password";
+    }
+
 
 
     // Missing persons table

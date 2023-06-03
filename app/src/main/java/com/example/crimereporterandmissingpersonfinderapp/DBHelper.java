@@ -35,6 +35,18 @@ public class DBHelper extends SQLiteOpenHelper {
             + DatabaseContract.MissingPersons.COL_USER_ID + " INTEGER, "
             + " FOREIGN KEY ("+DatabaseContract.MissingPersons.COL_USER_ID+") REFERENCES "+DatabaseContract.Users.TABLE_NAME+"("+DatabaseContract.Users._ID+"));";
 
+    private static final String CREATE_TABLE_ADMINS="CREATE TABLE "
+            + DatabaseContract.Admins.TABLE_NAME + " ("
+            + DatabaseContract.Admins._ID +" INTEGER PRIMARY KEY AUTOINCREMENT, "
+            + DatabaseContract.Admins.COL_USERNAME + " TEXT, "
+            + DatabaseContract.Admins.COL_PASSWORD + " TEXT)";
+
+    private static final String INSERT_INTO_ADMINS = "INSERT INTO "
+            + DatabaseContract.Admins.TABLE_NAME+" ( "
+            + DatabaseContract.Admins.COL_USERNAME+" ,"
+            + DatabaseContract.Admins.COL_PASSWORD+" )"
+            + "VALUES ( 'admin', '12345'),"
+            + "('admin2', '678910')";
     public DBHelper(@Nullable Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory, int version) {
         super(context, name, factory, version);
     }
@@ -47,8 +59,15 @@ public class DBHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         // create users table when db is created for first time
         sqLiteDatabase.execSQL(CREATE_TABLE_USERS);
+
         // create missing persons table when db is created for first time
         sqLiteDatabase.execSQL(CREATE_TABLE_MISSING_PERSONS);
+
+        // create admins table when db is created for first time
+        sqLiteDatabase.execSQL(CREATE_TABLE_ADMINS);
+        // and insert admin users in admins table
+        sqLiteDatabase.execSQL(INSERT_INTO_ADMINS);
+
     }
 
     @Override
