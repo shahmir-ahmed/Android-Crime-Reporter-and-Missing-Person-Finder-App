@@ -90,7 +90,7 @@ public class MissingPersonReportsByUsersFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity().getApplicationContext()));
 
         try {
-            // retrieve all the missing person reports from DB reported by the user
+            // retrieve all the missing person reports from DB reported by the users
             DBHelper dbHelper = new DBHelper(getActivity().getApplicationContext());
 
             SQLiteDatabase db = dbHelper.getReadableDatabase();

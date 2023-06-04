@@ -1,0 +1,60 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/textViewTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Update Status"
+        android:textAppearance="@android:style/TextAppearance.Material.Subhead"
+        android:textColor="@android:color/black"
+        android:textStyle="bold" />
+
+    <RadioGroup
+        android:id="@+id/radioGroupStatus"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <RadioButton
+            android:id="@+id/radioButtonSubmitted"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Submitted" />
+
+        <RadioButton
+            android:id="@+id/radioButtonSeen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Seen" />
+
+        <RadioButton
+            android:id="@+id/radioButtonProcessing"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Processing" />
+
+        <RadioButton
+            android:id="@+id/radioButtonCompleted"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Completed" />
+
+        <RadioButton
+            android:id="@+id/radioButtonRejected"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Rejected" />
+
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/updateBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Update" />
+
+</LinearLayout>

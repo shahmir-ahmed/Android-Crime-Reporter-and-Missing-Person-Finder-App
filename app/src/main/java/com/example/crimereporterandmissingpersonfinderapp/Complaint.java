@@ -4,7 +4,7 @@ package com.example.crimereporterandmissingpersonfinderapp;
 public class Complaint {
 
     private int id;
-    private String personName;
+//    private String personName;
     private String status;
     private String address;
     private String city;
@@ -12,7 +12,13 @@ public class Complaint {
     private String subject;
     private String complaintDetails;
 
-    private String userId;
+    private String userName;
+
+    private String userGender;
+
+    private String userCNIC;
+
+    private String userContact;
 
     public int getId() {
         return id;
@@ -30,13 +36,13 @@ public class Complaint {
         this.subject = subject;
     }
 
-    public String getPersonName() {
-        return personName;
-    }
-
-    public void setPersonName(String personName) {
-        this.personName = personName;
-    }
+//    public String getPersonName() {
+//        return personName;
+//    }
+//
+//    public void setPersonName(String personName) {
+//        this.personName = personName;
+//    }
 
     public String getComplaintDetails() {
         return complaintDetails;
@@ -78,12 +84,36 @@ public class Complaint {
         this.zipCode = zipCode;
     }
 
-    public String getUserId() {
-        return userId;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getUserGender() {
+        return userGender;
+    }
+
+    public void setUserGender(String userGender) {
+        this.userGender = userGender;
+    }
+
+    public String getUserCNIC() {
+        return userCNIC;
+    }
+
+    public void setUserCNIC(String userCNIC) {
+        this.userCNIC = userCNIC;
+    }
+
+    public String getUserContact() {
+        return userContact;
+    }
+
+    public void setUserContact(String userContact) {
+        this.userContact = userContact;
     }
 }
 

@@ -10,6 +10,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
@@ -141,37 +142,39 @@ public class DBHelper extends SQLiteOpenHelper {
 
         SQLiteDatabase db = getReadableDatabase();
 
-        // using join to query user data along with complaint details
+        // using join to query complaint details along with user details
 
-        String[] projection = {
-                DatabaseContract.Complaints._ID,
-                DatabaseContract.Complaints.COLUMN_CITY,
-                DatabaseContract.Complaints.COLUMN_PINCODE,
-                DatabaseContract.Complaints.COLUMN_SUBJECT,
-                DatabaseContract.Complaints.COLUMN_COMPLAINT,
-                DatabaseContract.Complaints.COLUMN_STATUS,
-        };
+        String table = DatabaseContract.Users.TABLE_NAME + " u" + "," + DatabaseContract.Complaints.TABLE_NAME + " c";
 
-        Cursor cursor = db.query(
-                DatabaseContract.Complaints.TABLE_NAME,
-                projection,
-                null,
-                null,
-                null,
-                null,
-                null
-        );
+        String columns[] = {"c." + DatabaseContract.Complaints._ID, " c." + DatabaseContract.Complaints.COLUMN_ADDRESS, "c." + DatabaseContract.Complaints.COLUMN_CITY, "c." + DatabaseContract.Complaints.COLUMN_PINCODE, "c." + DatabaseContract.Complaints.COLUMN_SUBJECT, "c." + DatabaseContract.Complaints.COLUMN_COMPLAINT, "c." + DatabaseContract.Complaints.COLUMN_STATUS, "u." + DatabaseContract.Users.COL_NAME, "u." + DatabaseContract.Users.COL_CNIC, "u." + DatabaseContract.Users.COL_CONTACT};
 
-        while (cursor.moveToNext()) {
-            Complaint complaint = new Complaint();
-            complaint.setId(cursor.getInt(cursor.getColumnIndexOrThrow(DatabaseContract.Complaints._ID)));
-            complaint.setSubject(cursor.getString(cursor.getColumnIndexOrThrow(DatabaseContract.Complaints.COLUMN_SUBJECT)));
-//            complaint.setPersonName(cursor.getString(cursor.getColumnIndexOrThrow(DatabaseContract.Complaints.COLUMN_PERSON_NAME)));
-            complaint.setComplaintDetails(cursor.getString(cursor.getColumnIndexOrThrow(DatabaseContract.Complaints.COLUMN_COMPLAINT)));
-            complaint.setStatus(cursor.getString(cursor.getColumnIndexOrThrow(DatabaseContract.Complaints.COLUMN_STATUS)));
-            complaint.setCity(cursor.getString(cursor.getColumnIndexOrThrow(DatabaseContract.Complaints.COLUMN_CITY)));
+        String whereClause = "c." + DatabaseContract.Complaints.COL_USER_ID + "=" + "u." + DatabaseContract.Users._ID;
 
-            complaintsList.add(complaint);
+        Cursor cursor = db.query(table, columns, whereClause, null, null, null, null);
+
+        if(cursor.moveToFirst()) {
+            cursor.moveToPosition(-1);
+
+            while (cursor.moveToNext()) {
+                Complaint complaint = new Complaint();
+                complaint.setId(cursor.getInt(cursor.getColumnIndexOrThrow(DatabaseContract.Complaints._ID)));
+                complaint.setCity(cursor.getString(cursor.getColumnIndexOrThrow(DatabaseContract.Complaints.COLUMN_CITY)));
+                complaint.setSubject(cursor.getString(cursor.getColumnIndexOrThrow(DatabaseContract.Complaints.COLUMN_SUBJECT)));
+                complaint.setComplaintDetails(cursor.getString(cursor.getColumnIndexOrThrow(DatabaseContract.Complaints.COLUMN_COMPLAINT)));
+                complaint.setStatus(cursor.getString(cursor.getColumnIndexOrThrow(DatabaseContract.Complaints.COLUMN_STATUS)));
+
+                complaint.setAddress(cursor.getString(cursor.getColumnIndexOrThrow(DatabaseContract.Complaints.COLUMN_ADDRESS)));
+                complaint.setZipCode(cursor.getString(cursor.getColumnIndexOrThrow(DatabaseContract.Complaints.COLUMN_PINCODE)));
+
+                complaint.setUserName(cursor.getString(cursor.getColumnIndexOrThrow(DatabaseContract.Users.COL_NAME)));
+                complaint.setUserContact(cursor.getString(cursor.getColumnIndexOrThrow(DatabaseContract.Users.COL_CONTACT)));
+                complaint.setUserCNIC(cursor.getString(cursor.getColumnIndexOrThrow(DatabaseContract.Users.COL_CNIC)));
+
+                complaintsList.add(complaint);
+            }
+        }
+        else{
+            Toast.makeText(context, "No complaints found!", Toast.LENGTH_SHORT).show();
         }
 
         cursor.close();
@@ -257,6 +260,24 @@ public class DBHelper extends SQLiteOpenHelper {
 
         String selection = DatabaseContract.Complaints._ID + " = ?";
         String[] selectionArgs = {String.valueOf(complaint.getId())};
+
+        int updatedRows = db.update(DatabaseContract.Complaints.TABLE_NAME, values, selection, selectionArgs);
+
+        db.close();
+
+        return updatedRows;
+    }
+
+    public int updateComplaintStatus(int complaintId, String newStatus) {
+        SQLiteDatabase db = getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+
+        // putting key value pairs in object
+        values.put(DatabaseContract.Complaints.COLUMN_STATUS, newStatus);
+
+        String selection = DatabaseContract.Complaints._ID + " = ?";
+        String[] selectionArgs = {String.valueOf(complaintId)};
 
         int updatedRows = db.update(DatabaseContract.Complaints.TABLE_NAME, values, selection, selectionArgs);
 

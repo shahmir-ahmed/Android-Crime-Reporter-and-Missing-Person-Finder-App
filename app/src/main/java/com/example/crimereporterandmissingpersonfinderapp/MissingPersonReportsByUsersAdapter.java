@@ -80,16 +80,16 @@ public class MissingPersonReportsByUsersAdapter extends RecyclerView.Adapter<Mis
                 color = Color.BLUE;
                 break;
             case "Seen":
-                color = Color.GREEN;
+                color = Color.MAGENTA;
                 break;
             case "Processing":
-                color = Color.YELLOW;
+                color = Color.GRAY;
                 break;
             case "Completed":
-                color = Color.RED;
+                color = Color.GREEN;
                 break;
             case "Rejected":
-                color = Color.GRAY;
+                color = Color.RED;
                 break;
             default:
                 color = Color.BLACK;
