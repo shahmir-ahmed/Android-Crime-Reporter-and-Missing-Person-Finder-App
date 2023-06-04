@@ -9,8 +9,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Update Status"
+        android:textSize="18dp"
+        android:fontFamily="@font/poppins"
+        android:textColor="@color/white"
         android:textAppearance="@android:style/TextAppearance.Material.Subhead"
-        android:textColor="@android:color/black"
         android:textStyle="bold" />
 
     <RadioGroup
@@ -23,38 +25,43 @@
             android:id="@+id/radioButtonSubmitted"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins"
             android:text="Submitted" />
 
         <RadioButton
             android:id="@+id/radioButtonSeen"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins"
             android:text="Seen" />
 
         <RadioButton
             android:id="@+id/radioButtonProcessing"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins"
             android:text="Processing" />
 
         <RadioButton
             android:id="@+id/radioButtonCompleted"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins"
             android:text="Completed" />
 
         <RadioButton
             android:id="@+id/radioButtonRejected"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins"
             android:text="Rejected" />
 
     </RadioGroup>
 
-    <Button
-        android:id="@+id/updateBtn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Update" />
+<!--    <Button-->
+<!--        android:id="@+id/updateBtn"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="Update" />-->
 
 </LinearLayout>

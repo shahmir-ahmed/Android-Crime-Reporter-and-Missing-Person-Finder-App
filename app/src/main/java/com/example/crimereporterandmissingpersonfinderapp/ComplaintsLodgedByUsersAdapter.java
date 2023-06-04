@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -41,7 +42,7 @@ public class ComplaintsLodgedByUsersAdapter  extends RecyclerView.Adapter<Compla
         // Bind the complaint data to the views in the item layout
         holder.nameTextView.setText(complaint.getUserName());
 
-        holder.cityTextView.setText(complaint.getSubject());
+        holder.cityTextView.setText(complaint.getCity());
 
         holder.subjectTextView.setText(complaint.getSubject());
 
@@ -84,7 +85,7 @@ public class ComplaintsLodgedByUsersAdapter  extends RecyclerView.Adapter<Compla
         holder.viewButton.setOnClickListener(v -> {
             androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(context);
             builder.setTitle("Complaint Details");
-            builder.setMessage("Name: " + complaint.getUserName() + "\nSubject: " + complaint.getSubject()+ "\nComplaint: " +complaint.getComplaintDetails()+ "\nAddress: " + complaint.getAddress()+ "\nCity: " +complaint.getCity()+ "\nPin code: " +complaint.getZipCode()   + "\nPhone: " +complaint.getUserContact()+ "\nEmail: "+complaint.getUserCNIC());
+            builder.setMessage("Name: " + complaint.getUserName() + "\nSubject: " + complaint.getSubject()+ "\nComplaint: " +complaint.getComplaintDetails()+ "\nAddress: " + complaint.getAddress()+ "\nCity: " +complaint.getCity()+ "\nPin code: " +complaint.getZipCode()   + "\nPhone: " +complaint.getUserContact()+ "\nCNIC: "+complaint.getUserCNIC());
             // Add more details to the message as needed
 
             builder.setPositiveButton("OK", null);
@@ -102,10 +103,37 @@ public class ComplaintsLodgedByUsersAdapter  extends RecyclerView.Adapter<Compla
 
                 RadioGroup radioGroupStatus = dialogView.findViewById(R.id.radioGroupStatus);
 
+                // getting individual radio buttons
+                RadioButton rbSubmitted = (RadioButton) dialogView.findViewById(R.id.radioButtonSubmitted);
+                RadioButton rbSeen = (RadioButton) dialogView.findViewById(R.id.radioButtonSeen);
+                RadioButton rbProcessing = (RadioButton) dialogView.findViewById(R.id.radioButtonProcessing);
+                RadioButton rbCompleted = (RadioButton) dialogView.findViewById(R.id.radioButtonCompleted);
+                RadioButton rbRejected = (RadioButton) dialogView.findViewById(R.id.radioButtonRejected);
+
+                // based on status checking radio buttons
+                switch (reportStatus) {
+                    case "Submitted":
+                        rbSubmitted.setChecked(true);
+                        break;
+                    case "Seen":
+                        rbSeen.setChecked(true);
+                        break;
+                    case "Processing":
+                        rbProcessing.setChecked(true);
+                        break;
+                    case "Completed":
+                        rbCompleted.setChecked(true);
+                        break;
+                    case "Rejected":
+                        rbRejected.setChecked(true);
+                        break;
+                    }
+
                 builder.setPositiveButton("Update", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         int selectedRadioButtonId = radioGroupStatus.getCheckedRadioButtonId();
+
                         String newStatus = "";
 
                         switch (selectedRadioButtonId) {
@@ -124,14 +152,16 @@ public class ComplaintsLodgedByUsersAdapter  extends RecyclerView.Adapter<Compla
                             case R.id.radioButtonRejected:
                                 newStatus = "Rejected";
                                 break;
-                        }
+                            }
 
                         // Update the status in the local database
                         DBHelper databaseHelper = new DBHelper(context);
 
                         int updatedRows = databaseHelper.updateComplaintStatus(complaint.getId(), newStatus);
 
-                        Toast.makeText(context, "Complaint status updated successfully! ", Toast.LENGTH_SHORT).show();
+                        if(updatedRows==1){
+                            Toast.makeText(context, "Complaint status updated successfully! ", Toast.LENGTH_SHORT).show();
+                        }
 
                         // reflect changes in the view
                         complaint.setStatus(newStatus); // updating status of record
