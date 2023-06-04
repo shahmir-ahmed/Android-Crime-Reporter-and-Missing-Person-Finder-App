@@ -78,7 +78,7 @@
         android:layout_width="320dp"
         android:layout_height="48dp"
         android:hint="Phone number"
-        android:inputType="textEmailAddress"
+        android:inputType="phone"
         android:textColorHint="#607D8B"
         app:fontFamily="@font/poppins_light"
         app:layout_constraintBottom_toBottomOf="parent"

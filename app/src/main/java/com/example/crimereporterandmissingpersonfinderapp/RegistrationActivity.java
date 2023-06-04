@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.content.ContentValues;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
@@ -124,19 +125,45 @@ public class RegistrationActivity extends AppCompatActivity {
                 }
                 else {
                     // valid form
-                    // get the gender
-                    if (selectedGenderId == R.id.rbMale) {
-                        gender = "Male";
+                    // check if email already exists or not
+                    // creating database helper class object
+                    DBHelper dbHelper = new DBHelper(getApplicationContext());
+
+                    // creating sqlite database object and getting the readable repository of database in the object
+                    SQLiteDatabase db = dbHelper.getReadableDatabase();
+
+                    // columns for which data needs to be retrieved
+                    String columns[] = {DatabaseContract.Users.COL_USERNAME};
+
+                    // where clause
+                    String whereClause = DatabaseContract.Users.COL_USERNAME+"=?";
+
+                    // where clause args
+                    String whereArgs[] = {email};
+
+                    // query to check email exists
+                    Cursor result = db.query(DatabaseContract.Users.TABLE_NAME, columns, whereClause, whereArgs, null, null, null);
+
+                    // if email is taken
+                    // query() method returns an Empty Cursor if there is not record found
+                    // You can use getCount() to confirm if the Cursor is empty or check if moveToFirst() returns false (i.e., it could not move to the first row).
+                    if(result.moveToFirst()){
+                        etEmail.setError("Email is already taken");
+                        etEmail.requestFocus();
+                        return;
                     }
-                    else if (selectedGenderId == R.id.rbFemale) {
-                        gender = "Female";
-                    }
+                    // email is not taken
+                    else {
+                        // get the gender
+                        if (selectedGenderId == R.id.rbMale) {
+                            gender = "Male";
+                        } else if (selectedGenderId == R.id.rbFemale) {
+                            gender = "Female";
+                        }
                         // Insert new user in the database
-                        // creating database helper class object
-                        DBHelper dbHelper = new DBHelper(getApplicationContext());
 
                         // creating sqlite database object and getting the readable repository of database in the object
-                        SQLiteDatabase db = dbHelper.getWritableDatabase();
+                        SQLiteDatabase db1 = dbHelper.getWritableDatabase();
 
                         ContentValues values = new ContentValues();
 
@@ -147,7 +174,7 @@ public class RegistrationActivity extends AppCompatActivity {
                         values.put(DatabaseContract.Users.COL_USERNAME, email);
                         values.put(DatabaseContract.Users.COL_PASSWORD, password);
 
-                        long id = db.insert(DatabaseContract.Users.TABLE_NAME, null, values);
+                        long id = db1.insert(DatabaseContract.Users.TABLE_NAME, null, values);
 
                         if (id > 0) {
                             Toast.makeText(getApplicationContext(), "Registered successfully!", Toast.LENGTH_SHORT).show();
@@ -157,6 +184,7 @@ public class RegistrationActivity extends AppCompatActivity {
                         } else {
                             Toast.makeText(RegistrationActivity.this, "Err 1", Toast.LENGTH_SHORT).show();
                         }
+                    }
             }
         });
     }

@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.viewpager.widget.ViewPager;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -14,6 +16,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.Window;
+import android.widget.Toast;
 
 import com.google.android.material.tabs.TabLayout;
 
@@ -82,7 +85,7 @@ public class AdminDashboardActivity extends AppCompatActivity {
 
         MenuInflater inflater = getMenuInflater();
 
-        inflater.inflate(R.menu.dashboard_menu, menu);
+        inflater.inflate(R.menu.dashboard_menu_admin, menu);
 
         int positionOfMenuItem = 0; // or whatever...
         MenuItem item = menu.getItem(positionOfMenuItem);
@@ -98,7 +101,7 @@ public class AdminDashboardActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
         switch (item.getItemId()) {
-            case R.id.dashboard_menu:
+            case R.id.logout:
                 Intent intent = new Intent(this, LoginActivity.class);
 
                 // destroys all the activities in the stack except the first main activity
@@ -112,6 +115,40 @@ public class AdminDashboardActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(AdminDashboardActivity.this);
+
+//        final boolean[] logout = {false};
+
+        builder.setTitle("Logout?");
+        builder.setMessage("Are you sure you want to logout?");
+
+        builder.setPositiveButton("Yes", (dialog, which) -> {
+//                logout[0] = true;
+//            AdminDashboardActivity.super.onBackPressed();
+            Intent intent = new Intent(this, LoginActivity.class);
+
+            // destroys all the activities in the stack except the first main activity
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
+            // starting the login activity over the main activity
+            startActivity(intent);
+
+            Toast.makeText(this, "Logged out successfully!", Toast.LENGTH_SHORT).show();
+        });
+        builder.setNegativeButton("No", null);
+
+//        // if confirmed
+//        if(logout[0]==true) {
+//            super.onBackPressed();
+//            Toast.makeText(getApplicationContext(), "Logged out successfully!", Toast.LENGTH_SHORT).show();
+//        }
+
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
     }
 }
 
