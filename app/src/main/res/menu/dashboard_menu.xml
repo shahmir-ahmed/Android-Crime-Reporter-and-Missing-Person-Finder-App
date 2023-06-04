@@ -3,6 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
+        android:id="@+id/user"
+        app:showAsAction="never"
+        android:textColor="@color/white"
+        android:title="TODO" />
+    <item
         android:id="@+id/dashboard_menu"
         android:title="Logout"
         app:showAsAction="never"

@@ -8,6 +8,7 @@ import androidx.viewpager.widget.ViewPager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.SpannableString;
@@ -24,6 +25,8 @@ import com.google.android.material.tabs.TabLayout;
 public class UserDashboardActivity extends AppCompatActivity {
 
     int backPressedCount = 0;
+
+    String userName = " ";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -92,11 +95,23 @@ public class UserDashboardActivity extends AppCompatActivity {
 
         inflater.inflate(R.menu.dashboard_menu, menu);
 
+        Intent intent = getIntent();
+
+        userName = intent.getStringExtra("username");
+
+        // user name
         int positionOfMenuItem = 0; // or whatever...
         MenuItem item = menu.getItem(positionOfMenuItem);
-        SpannableString s = new SpannableString("Logout");
+        SpannableString s = new SpannableString(userName);
         s.setSpan(new ForegroundColorSpan(Color.WHITE), 0, s.length(), 0);
         item.setTitle(s);
+
+        // Logout text changing color
+        int positionOfMenuItem1 = 1; // or whatever...
+        MenuItem item1 = menu.getItem(positionOfMenuItem1);
+        SpannableString s1 = new SpannableString("Logout");
+        s1.setSpan(new ForegroundColorSpan(Color.WHITE), 0, s1.length(), 0);
+        item1.setTitle(s1);
 
 //        return super.onCreateOptionsMenu(menu);
 

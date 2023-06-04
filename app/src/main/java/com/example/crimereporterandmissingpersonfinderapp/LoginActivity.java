@@ -128,7 +128,7 @@ public class LoginActivity extends AppCompatActivity {
                     // You can use getCount() to confirm if the Cursor is empty or check if moveToFirst() returns false (i.e., it could not move to the first row).
                     if(result.moveToFirst()){
 
-                        Toast.makeText(LoginActivity.this, "Logged in successfully, Welcome"+username, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LoginActivity.this, "Logged in successfully, Welcome "+username, Toast.LENGTH_SHORT).show();
 
                         // send intent to user dashboard activity
 //                        Intent intent = new Intent(LoginActivity.this, UserDashboardActivity.class);
@@ -143,6 +143,9 @@ public class LoginActivity extends AppCompatActivity {
 
 
                         Intent intent = new Intent(LoginActivity.this, UserDashboardActivity.class);
+
+                        // send username of user with the intent
+                        intent.putExtra("username", username);
 
                         startActivity(intent); // starting activity using intent
 
