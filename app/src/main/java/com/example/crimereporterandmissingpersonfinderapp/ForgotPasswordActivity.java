@@ -3,6 +3,8 @@ package com.example.crimereporterandmissingpersonfinderapp;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
@@ -41,12 +43,42 @@ public class ForgotPasswordActivity extends AppCompatActivity {
                 emailEditText.requestFocus();
             }
             else {
-                Intent intent = new Intent(this, ResetPasswordActivity.class);
-                intent.putExtra("email", email);
-                startActivity(intent);
-                }
-            });
 
+                // verify user email from users table
+                // creating database helper class object
+                DBHelper dbHelper = new DBHelper(getApplicationContext());
+
+                // creating sqlite database object and getting the readable repository of database in the object
+                SQLiteDatabase db = dbHelper.getReadableDatabase();
+
+                // columns for which data needs to be retrieved
+                String columns[] = {DatabaseContract.Users.COL_USERNAME};
+
+                // where clause
+                String whereClause = DatabaseContract.Users.COL_USERNAME + "=?";
+
+                // where clause args
+                String whereArgs[] = {email};
+
+                // query to check user trying to login exists
+                Cursor result = db.query(DatabaseContract.Users.TABLE_NAME, columns, whereClause, whereArgs, null, null, null);
+
+                // if user exists
+
+                // query() method returns an Empty Cursor if there is not record found
+                // You can use getCount() to confirm if the Cursor is empty or check if moveToFirst() returns false (i.e., it could not move to the first row).
+                if (result.moveToFirst()) {
+                    Intent intent = new Intent(this, ResetPasswordActivity.class);
+                    intent.putExtra("email", email);
+                    startActivity(intent);
+                    Toast.makeText(this, "Email verified!", Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    emailEditText.setError("Email does not exists");
+                    emailEditText.requestFocus();
+                }
+            }
+        });
     }
 
     private boolean isValidEmail(String email)

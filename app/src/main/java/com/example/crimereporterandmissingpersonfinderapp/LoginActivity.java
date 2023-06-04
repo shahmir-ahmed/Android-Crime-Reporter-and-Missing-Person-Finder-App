@@ -100,7 +100,12 @@ public class LoginActivity extends AppCompatActivity {
                 password = password.trim();
 
                 if (username.isEmpty() || password.isEmpty()) {
-                    Toast.makeText(LoginActivity.this, "Please enter username and password", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(LoginActivity.this, "Please enter username and password", Toast.LENGTH_SHORT).show();
+                    etUsername.setError("Please enter username");
+                    etPassword.setError("Please enter password");
+                    etUsername.requestFocus();
+                    etPassword.requestFocus();
+                    return;
                 } else {
                     // Perform actual login logic here, such as authentication against a server
 

@@ -2,7 +2,10 @@ package com.example.crimereporterandmissingpersonfinderapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.ContentValues;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
@@ -17,6 +20,7 @@ public class ResetPasswordActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reset_password);
 
+        // getting the user email passe dfrom forgot password activity
         Intent intent = getIntent();
         userEmail = intent.getStringExtra("email");
 
@@ -47,8 +51,48 @@ public class ResetPasswordActivity extends AppCompatActivity {
             }
             else {
                 // Update user password in the database using email
+                // Perform actual login logic here, such as authentication against a server
 
-                Toast.makeText(this, "Password reset successfully.", Toast.LENGTH_SHORT).show();
+                try {
+                    // creating database helper class object
+                    DBHelper dbHelper = new DBHelper(getApplicationContext());
+
+                    // creating sqlite database object and getting the readable repository of database in the object
+                    SQLiteDatabase db = dbHelper.getWritableDatabase();
+
+                    ContentValues values = new ContentValues();
+
+                    values.put(DatabaseContract.Users.COL_PASSWORD, password);
+
+                    // where clause
+                    String whereClause = DatabaseContract.Users.COL_USERNAME + "=?";
+
+                    // where clause args
+                    String whereArgs[] = {userEmail};
+
+                    // query to check user trying to login exists
+                    long updatedRow = db.update(DatabaseContract.Users.TABLE_NAME, values, whereClause, whereArgs);
+
+                    // if password updated
+                    if (updatedRow ==1) {
+
+                        // redirect to login screen
+                        Intent intent1 = new Intent(this, LoginActivity.class);
+
+                        // destroys all the activities in the stack except the first main activity
+                        intent1.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
+                        // starting the login activity over the main activity
+                        startActivity(intent1);
+
+                        Toast.makeText(this, "Password reset successfully!", Toast.LENGTH_SHORT).show();
+
+                    } else {
+                        Toast.makeText(this, "Err", Toast.LENGTH_SHORT).show();
+                    }
+                }catch(Exception e){
+                    Toast.makeText(this, "Something went wrong\n Please try again later!", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
