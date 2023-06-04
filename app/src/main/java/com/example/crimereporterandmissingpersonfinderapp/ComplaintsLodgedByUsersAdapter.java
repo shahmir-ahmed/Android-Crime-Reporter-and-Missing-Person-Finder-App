@@ -98,7 +98,7 @@ public class ComplaintsLodgedByUsersAdapter  extends RecyclerView.Adapter<Compla
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                View dialogView = LayoutInflater.from(context).inflate(R.layout.dialog_update_complaint_status, null);
+                View dialogView = LayoutInflater.from(context).inflate(R.layout.dialog_update_status, null);
                 builder.setView(dialogView);
 
                 RadioGroup radioGroupStatus = dialogView.findViewById(R.id.radioGroupStatus);
