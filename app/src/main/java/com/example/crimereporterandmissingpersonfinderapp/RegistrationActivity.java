@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
+import android.content.ContentValues;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -26,6 +28,7 @@ public class RegistrationActivity extends AppCompatActivity {
         EditText etEmail = findViewById(R.id.etEmail);
         EditText etPassword = findViewById(R.id.etPassword);
 //        EditText etDob = findViewById(R.id.etDob);
+        EditText etCNIC = findViewById(R.id.etCNIC);
         EditText etPhone = findViewById(R.id.etPhoneNumber);
         RadioGroup radioGroup = findViewById(R.id.radioGroup);
 
@@ -60,66 +63,100 @@ public class RegistrationActivity extends AppCompatActivity {
 
         // Set OnClickListener for submit button
         Button btnSubmit = findViewById(R.id.btnSubmit);
-        btnSubmit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Get values from EditText fields
-                String name = etName.getText().toString();
-                String email = etEmail.getText().toString();
-                String password = etPassword.getText().toString();
+        btnSubmit.setOnClickListener(v -> {
+            // Get values from EditText fields
+            String name = etName.getText().toString();
+            String email = etEmail.getText().toString();
+            String password = etPassword.getText().toString();
 //                String dob = etDob.getText().toString();
-                String phone = etPhone.getText().toString();
+            String CNIC = etCNIC.getText().toString();
+            String phone = etPhone.getText().toString();
 
-                // Validate input fields
-                if (name.isEmpty()) {
-                    etName.setError("Please enter your name");
-                    etName.requestFocus();
-                    return;
-                }else if (email.isEmpty()) { etEmail.setError("Please enter your email");
-                    etEmail.requestFocus();
-                    return;
-                }else if (!isValidEmail(email)) {
-                    etEmail.setError("Please enter a valid email");
-                    etEmail.requestFocus();
-                    return;
-                }else if (password.isEmpty()) {
-                    etPassword.setError("Please enter a password");
-                    etPassword.requestFocus();
-                    return;
-                }else if (!isValidPassword(password)) {
-                    etPassword.setError("Password must be at least 8 characters long and contain a combination of [a-z],[A-Z],[0-9],[@#_$%^&+=]");
-                    etPassword.requestFocus();
-                    return;
+            // Get selected gender from RadioGroup
+            int selectedGenderId = radioGroup.getCheckedRadioButtonId();
+            String gender = "";
+
+            // Validate input fields
+            if (name.isEmpty()) {
+                etName.setError("Please enter your name");
+                etName.requestFocus();
+                return;
+            }else if (CNIC.isEmpty()) {
+                etCNIC.setError("Please enter your CNIC");
+                etEmail.requestFocus();
+                return;
+            }
+            else if (!isValidCNIC(CNIC)) {
+                etCNIC.setError("Please enter a valid CNIC. Fomrat: (xxxxx-xxxxxxx-x)");
+                etEmail.requestFocus();
+                return;
+            }else if (phone.isEmpty()) {
+                etPhone.setError("Please enter your phone number");
+                etPhone.requestFocus();
+                return;
+            }else if (!isValidPhone(phone)) {
+                etPhone.setError("Phone number must be 11 digits starting with 03 or 12 digits starting with 923");
+                etPhone.requestFocus();
+                return;
+            }else if (email.isEmpty()) { etEmail.setError("Please enter your email");
+                etEmail.requestFocus();
+                return;
+            }else if (!isValidEmail(email)) {
+                etEmail.setError("Please enter a valid email");
+                etEmail.requestFocus();
+                return;
+            }else if (password.isEmpty()) {
+                etPassword.setError("Please enter password");
+                etPassword.requestFocus();
+                return;
+            }else if (!isValidPassword(password)) {
+                etPassword.setError("Password must be at least 8 characters long and contain a combination of [a-z],[A-Z],[0-9],[@#_$%^&+=]");
+                etPassword.requestFocus();
+                return;
 //                }
 //                else if (dob.isEmpty()) {
 //                    etDob.setError("Please select your date of birth");
 //                    etDob.requestFocus();
 //                    return;
-                }else if (phone.isEmpty()) {
-                    etPhone.setError("Please enter your phone number");
-                    etPhone.requestFocus();
-                    return;
-                }else if (!isValidPhone(phone)) {
-                    etPhone.setError("Phone number must be 11 digits starting with 03 or 12 digits starting with 923");
-                    etPhone.requestFocus();
-                    return;
-                }
-
-                // Get selected gender from RadioGroup
-                int selectedGenderId = radioGroup.getCheckedRadioButtonId();
-                String gender = "";
-                if (selectedGenderId == R.id.rbMale) {
-                    gender = "Male";
-                } else if (selectedGenderId == R.id.rbFemale) {
-                    gender ="Female";
-                }else if(!isGenderSelected(radioGroup)){
+            }
+            else if (!isGenderSelected(radioGroup)) {
                     Toast.makeText(getApplicationContext(), "Please select your gender", Toast.LENGTH_SHORT).show();
                 }
                 else {
-                    // Insert new user in the database
+                    // valid form
+                    // get the gender
+                    if (selectedGenderId == R.id.rbMale) {
+                        gender = "Male";
+                    }
+                    else if (selectedGenderId == R.id.rbFemale) {
+                        gender = "Female";
+                    }
+                        // Insert new user in the database
+                        // creating database helper class object
+                        DBHelper dbHelper = new DBHelper(getApplicationContext());
 
-                    Toast.makeText(getApplicationContext(), "Registration successful!", Toast.LENGTH_SHORT).show();
-                }
+                        // creating sqlite database object and getting the readable repository of database in the object
+                        SQLiteDatabase db = dbHelper.getWritableDatabase();
+
+                        ContentValues values = new ContentValues();
+
+                        values.put(DatabaseContract.Users.COL_NAME, name);
+                        values.put(DatabaseContract.Users.COL_CNIC, CNIC);
+                        values.put(DatabaseContract.Users.COL_CONTACT, phone);
+                        values.put(DatabaseContract.Users.COL_GENDER, gender);
+                        values.put(DatabaseContract.Users.COL_USERNAME, email);
+                        values.put(DatabaseContract.Users.COL_PASSWORD, password);
+
+                        long id = db.insert(DatabaseContract.Users.TABLE_NAME, null, values);
+
+                        if (id > 0) {
+                            Toast.makeText(getApplicationContext(), "Registered successfully!", Toast.LENGTH_SHORT).show();
+
+                            // Back to login
+                            finish();
+                        } else {
+                            Toast.makeText(RegistrationActivity.this, "Err 1", Toast.LENGTH_SHORT).show();
+                        }
             }
         });
     }
@@ -160,4 +197,13 @@ public class RegistrationActivity extends AppCompatActivity {
         //[a-z]+: Matches one or more characters that are letters (lowercase).
         return email.matches(pattern);
     }
+
+    // method to validate CNIC
+    private boolean isValidCNIC(String cnic) {
+        // CNIC format: XXXXX-XXXXXXX-X
+        String pattern = "^[0-9]{5}-[0-9]{7}-[0-9]{1}$";
+
+        return cnic.matches(pattern);
+    }
+
 }

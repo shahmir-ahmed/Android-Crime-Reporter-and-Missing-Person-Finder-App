@@ -23,25 +23,46 @@
 <!--        app:layout_constraintVertical_bias="0.702"-->
 <!--        tools:ignore="Autofill,HardcodedText,MissingConstraints" />-->
 
+    <TextView
+        android:id="@+id/textView19"
+        android:layout_width="290dp"
+        android:layout_height="wrap_content"
+        android:text="Sign up to your account, so you can continue using our experience."
+        android:textAlignment="center"
+        android:textColor="#607D8B"
+        android:textSize="14dp"
+        android:textStyle="bold"
+        app:autoSizeTextType="uniform"
+        app:drawableTint="#000000"
+        app:fontFamily="@font/poppins"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.270"
+        tools:ignore="HardcodedText,MissingConstraints" />
+
     <Button
         android:id="@+id/btnSubmit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Register"
+        android:textStyle="bold"
         android:fontFamily="@font/poppins"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.935"
+        app:layout_constraintVertical_bias="0.970"
         tools:ignore="HardcodedText,MissingConstraints" />
 
     <EditText
-        android:id="@+id/etPhoneNumber"
-        android:layout_width="350dp"
+        android:id="@+id/etCNIC"
+        android:layout_width="320dp"
         android:layout_height="48dp"
-        android:hint="Phone Number"
+        android:hint="CNIC"
         android:inputType="phone"
         android:textColorHint="#607D8B"
         app:fontFamily="@font/poppins_light"
@@ -50,12 +71,43 @@
         app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.501"
-        tools:ignore="HardcodedText,MissingConstraints,TextFields" />
+        app:layout_constraintVertical_bias="0.470" />
+
+    <EditText
+        android:id="@+id/etPhoneNumber"
+        android:layout_width="320dp"
+        android:layout_height="48dp"
+        android:hint="Phone number"
+        android:inputType="textEmailAddress"
+        android:textColorHint="#607D8B"
+        app:fontFamily="@font/poppins_light"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.560" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="310dp"
+        android:layout_height="wrap_content"
+        android:text="Gender"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:textColor="#607D8B"
+        android:textStyle="bold"
+        app:fontFamily="@font/poppins"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.536"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.820"
+        tools:ignore="Autofill,HardcodedText,MissingConstraints" />
 
     <EditText
         android:id="@+id/etEmail"
-        android:layout_width="350dp"
+        android:layout_width="320dp"
         android:layout_height="48dp"
         android:hint="Email"
         android:inputType="textEmailAddress"
@@ -66,29 +118,11 @@
         app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.582"
-        tools:ignore="HardcodedText,MissingConstraints" />
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="351dp"
-        android:layout_height="wrap_content"
-        android:text="Gender"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-        android:textColor="#607D8B"
-        android:textStyle="bold"
-        app:fontFamily="@font/poppins"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.516"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.730"
-        tools:ignore="Autofill,HardcodedText,MissingConstraints" />
+        app:layout_constraintVertical_bias="0.650"/>
 
     <EditText
         android:id="@+id/etPassword"
-        android:layout_width="350dp"
+        android:layout_width="320dp"
         android:layout_height="48dp"
         android:hint="Password"
         android:inputType="textPassword"
@@ -99,19 +133,18 @@
         app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.662"
-        tools:ignore="HardcodedText,MissingConstraints" />
+        app:layout_constraintVertical_bias="0.740"/>
 
     <ImageView
         android:id="@+id/imageView3"
-        android:layout_width="140dp"
-        android:layout_height="140dp"
+        android:layout_width="110dp"
+        android:layout_height="110dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.080"
+        app:layout_constraintVertical_bias="0.040"
         app:srcCompat="@drawable/person"
         tools:ignore="ContentDescription" />
 
@@ -119,23 +152,25 @@
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="CREATE AN ACCOUNT"
+        android:text="Let's get Started"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textColor="#795548"
         android:textStyle="bold"
+        android:textSize="24dp"
         app:autoSizeTextType="uniform"
         app:drawableTint="#000000"
         app:fontFamily="@font/poppins"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.308"
+        app:layout_constraintVertical_bias="0.209"
         tools:ignore="HardcodedText,MissingConstraints" />
 
     <EditText
         android:id="@+id/etName"
-        android:layout_width="350dp"
+        android:layout_width="320dp"
         android:layout_height="48dp"
         android:hint="Name"
         android:inputType="text"
@@ -146,19 +181,18 @@
         app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.421"
-        tools:ignore="HardcodedText,MissingConstraints" />
+        app:layout_constraintVertical_bias="0.380" />
 
     <RadioGroup
         android:id="@+id/radioGroup"
-        android:layout_width="349dp"
+        android:layout_width="300dp"
         android:layout_height="46dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.787"
+        app:layout_constraintVertical_bias="0.880"
         tools:ignore="MissingConstraints">
 
         <RadioButton
