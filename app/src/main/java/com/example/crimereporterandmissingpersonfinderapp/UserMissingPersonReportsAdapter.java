@@ -418,7 +418,7 @@ public class UserMissingPersonReportsAdapter extends RecyclerView.Adapter<UserMi
                                 if (updatedRows != 1) {
                                     Toast.makeText(context, "Report not updated!", Toast.LENGTH_LONG).show();
                                 } else {
-//                                    Toast.makeText(context, "Report updated successfully!", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(context, "Report updated successfully!", Toast.LENGTH_LONG).show();
 
                                     // dismiss the dialog manually
 //                                    dialog.dismiss();

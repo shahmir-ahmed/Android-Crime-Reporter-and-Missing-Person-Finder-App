@@ -47,7 +47,7 @@ public class ComplaintsFragment extends Fragment {
 
         dbHelper = new DBHelper(requireContext());
 
-        complaintList = dbHelper.getAllComplaints();
+        complaintList = dbHelper.getUserComplaints();
 
         complaintsAdapter = new ComplaintsAdapter(complaintList, requireContext());
     }

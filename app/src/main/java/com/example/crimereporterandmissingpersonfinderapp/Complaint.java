@@ -12,6 +12,8 @@ public class Complaint {
     private String subject;
     private String complaintDetails;
 
+    private String userId;
+
     public int getId() {
         return id;
     }
@@ -74,6 +76,14 @@ public class Complaint {
 
     public void setZipCode(String zipCode) {
         this.zipCode = zipCode;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 }
 

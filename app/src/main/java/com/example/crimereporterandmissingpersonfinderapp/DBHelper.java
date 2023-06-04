@@ -1,10 +1,14 @@
 package com.example.crimereporterandmissingpersonfinderapp;
 
+import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.util.Log;
 
 import androidx.annotation.Nullable;
@@ -16,6 +20,13 @@ public class DBHelper extends SQLiteOpenHelper {
 
     public static final int DATABASE_VERSION = 1;
     public static final String DATABASE_NAME = "crmpfa.db";
+
+    // shared preferences for user session
+    public static final String MyPREFERENCES = "MyPrefs" ;
+    public static final String userIdKey = "idKey";
+    SharedPreferences sharedpreferences;
+
+    private Context context;
 
     // users table creation query
     private static final String CREATE_TABLE_USERS="CREATE TABLE "
@@ -92,6 +103,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     public DBHelper(Context context){
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
+        this.context = context;
     }
 
     @Override
@@ -120,14 +132,16 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
 
-    // self-created methods to manage (create, read, update, delete) all the tables in DB
+    // self-created methods to manage (create, read, update, delete) of the tables in DB
 
     // Methods for Complaints table
-    // view operation
+    // view operation for all users complaints
     public List<Complaint> getAllComplaints() {
         List<Complaint> complaintsList = new ArrayList<>();
 
         SQLiteDatabase db = getReadableDatabase();
+
+        // using join to query user data along with complaint details
 
         String[] projection = {
                 DatabaseContract.Complaints._ID,
@@ -166,23 +180,89 @@ public class DBHelper extends SQLiteOpenHelper {
         return complaintsList;
     }
 
+
+    // view operation
+    public List<Complaint> getUserComplaints() {
+
+        List<Complaint> complaintsList = new ArrayList<>();
+
+        // initializing shared preferences
+        sharedpreferences = ((Activity) context).getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+
+        int userId = Integer.parseInt(sharedpreferences.getString(userIdKey, ""));
+
+        // retrieve all the missing person reports from DB reported by the user
+
+        SQLiteDatabase db = getReadableDatabase();
+
+        String columns[] = {DatabaseContract.Complaints._ID, DatabaseContract.Complaints.COLUMN_ADDRESS, DatabaseContract.Complaints.COLUMN_CITY, DatabaseContract.Complaints.COLUMN_PINCODE, DatabaseContract.Complaints.COLUMN_SUBJECT, DatabaseContract.Complaints.COLUMN_COMPLAINT, DatabaseContract.Complaints.COLUMN_STATUS};
+
+        String whereClause = DatabaseContract.Complaints.COL_USER_ID+"=?"; // fetching only the login user complaints
+
+        String whereArgs[] = {String.valueOf(userId)};
+
+
+        Cursor result = db.query(DatabaseContract.Complaints.TABLE_NAME, columns, whereClause, whereArgs, null, null, null);
+
+
+        // if there are reports
+        if(result.moveToFirst()){
+            // reset to initial position
+            result.moveToPosition(-1);
+
+            int i = 0;
+
+            // while there are next cursor positions to move
+            while(result.moveToNext()){
+
+                // Creating compliant object
+                Complaint complaint = new Complaint();
+
+                // getting all the data
+                complaint.setId(result.getInt(result.getColumnIndexOrThrow(DatabaseContract.Complaints._ID)));
+                complaint.setAddress(result.getString(result.getColumnIndexOrThrow(DatabaseContract.Complaints.COLUMN_ADDRESS)));
+                complaint.setCity(result.getString(result.getColumnIndexOrThrow(DatabaseContract.Complaints.COLUMN_CITY)));
+                complaint.setZipCode(result.getString(result.getColumnIndexOrThrow(DatabaseContract.Complaints.COLUMN_PINCODE)));
+                complaint.setSubject(result.getString(result.getColumnIndexOrThrow(DatabaseContract.Complaints.COLUMN_SUBJECT)));
+                complaint.setComplaintDetails(result.getString(result.getColumnIndexOrThrow(DatabaseContract.Complaints.COLUMN_COMPLAINT)));
+                complaint.setStatus(result.getString(result.getColumnIndexOrThrow(DatabaseContract.Complaints.COLUMN_STATUS)));
+
+                complaintsList.add(complaint);
+            }
+
+        }
+
+        return complaintsList;
+    }
+
+
     // update operation
-    public void updateComplaint(Complaint complaint) {
+    public int updateComplaint(Complaint complaint) {
         SQLiteDatabase db = getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put(DatabaseContract.Complaints.COLUMN_SUBJECT, complaint.getSubject());
-//        values.put(DatabaseContract.Complaints.COLUMN_PERSON_NAME, complaint.getPersonName());
-        values.put(DatabaseContract.Complaints.COLUMN_COMPLAINT, complaint.getComplaintDetails());
-        values.put(DatabaseContract.Complaints.COLUMN_STATUS, complaint.getStatus());
+
+//        values.put(DatabaseContract.Complaints.COLUMN_SUBJECT, complaint.getSubject());
+//////        values.put(DatabaseContract.Complaints.COLUMN_PERSON_NAME, complaint.getPersonName());
+////        values.put(DatabaseContract.Complaints.COLUMN_COMPLAINT, complaint.getComplaintDetails());
+////        values.put(DatabaseContract.Complaints.COLUMN_STATUS, complaint.getStatus());
+////        values.put(DatabaseContract.Complaints.COLUMN_CITY, complaint.getCity());
+
+        // putting key value pairs in object
+        values.put(DatabaseContract.Complaints.COLUMN_ADDRESS, complaint.getAddress());
         values.put(DatabaseContract.Complaints.COLUMN_CITY, complaint.getCity());
+        values.put(DatabaseContract.Complaints.COLUMN_PINCODE, complaint.getZipCode());
+        values.put(DatabaseContract.Complaints.COLUMN_SUBJECT, complaint.getSubject());
+        values.put(DatabaseContract.Complaints.COLUMN_COMPLAINT, complaint.getComplaintDetails());
 
         String selection = DatabaseContract.Complaints._ID + " = ?";
         String[] selectionArgs = {String.valueOf(complaint.getId())};
 
-        db.update(DatabaseContract.Complaints.TABLE_NAME, values, selection, selectionArgs);
+        int updatedRows = db.update(DatabaseContract.Complaints.TABLE_NAME, values, selection, selectionArgs);
 
         db.close();
+
+        return updatedRows;
     }
 
     // delete operation

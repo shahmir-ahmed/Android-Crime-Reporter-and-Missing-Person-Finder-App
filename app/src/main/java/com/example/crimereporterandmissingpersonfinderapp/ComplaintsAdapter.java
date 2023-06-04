@@ -1,18 +1,30 @@
 package com.example.crimereporterandmissingpersonfinderapp;
+import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
 import android.graphics.Color;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class ComplaintsAdapter  extends RecyclerView.Adapter<ComplaintsAdapter.ComplaintViewHolder> {
@@ -109,14 +121,156 @@ public class ComplaintsAdapter  extends RecyclerView.Adapter<ComplaintsAdapter.C
 //                holder.complaintDetailsTextView.setVisibility(View.GONE);
 //            }
 
+            androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(context);
+            builder.setTitle("Complaint Details");
+            builder.setMessage("City: " + complaint.getCity() + "\nAddress: " + complaint.getAddress()+ "\nZip code: " +complaint.getZipCode()+ "\nSubject: " + complaint.getSubject()+ "\nComplaint: " +complaint.getComplaintDetails()+"\nStatus: " +complaint.getStatus());
+            // Add more details to the message as needed
+
+            builder.setPositiveButton("OK", null);
+            androidx.appcompat.app.AlertDialog dialog = builder.create();
+            dialog.show();
 
 
+        });
+
+        // more details button (same details as shown in view button clicking appearing dialog)
+        holder.moreDetailsBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(context);
+                builder.setTitle("Complaint Details");
+                builder.setMessage("City: " + complaint.getCity() + "\nAddress: " + complaint.getAddress()+ "\nZip code: " +complaint.getZipCode()+ "\nSubject: " + complaint.getSubject()+ "\nComplaint: " +complaint.getComplaintDetails()+"\nStatus: " +complaint.getStatus());
+                // Add more details to the message as needed
+
+                builder.setPositiveButton("OK", null);
+                androidx.appcompat.app.AlertDialog dialog = builder.create();
+                dialog.show();
+            }
         });
 
         holder.updateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //handle update operations
+                androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(context);
+//                builder.setTitle("Missing Person Details");
+
+                // Create a custom layout for the AlertDialog
+                View dialogView = LayoutInflater.from(context).inflate(R.layout.dialog_update_complaint_details, null);
+                builder.setView(dialogView);
+
+                // Get references to the views in the custom layout
+                // Creating bridge
+                EditText etAddress = (EditText) dialogView.findViewById(R.id.editTextAddress);
+                Spinner spinnerCity = (Spinner) dialogView.findViewById(R.id.spinnerCity);
+
+                // getting cities to set by adapter on spinner
+                String[] cityArray = ((Activity) context).getResources().getStringArray(R.array.city_array);
+
+                ArrayAdapter<String> adapter = new ArrayAdapter<>(((Activity) context).getApplicationContext(), android.R.layout.simple_list_item_1, cityArray);
+
+                spinnerCity = (Spinner) dialogView.findViewById(R.id.spinnerCity);
+                spinnerCity.setAdapter(adapter);
+
+                EditText etZipCode = (EditText) dialogView.findViewById(R.id.editTextPincode);
+                EditText etSubject = (EditText) dialogView.findViewById(R.id.editTextSubject);
+                EditText etComplaint = (EditText) dialogView.findViewById(R.id.editTextComplaint);
+
+                // setting the report data on form
+                etAddress.setText(complaint.getAddress());
+
+                // check the city
+                String city = complaint.getCity();
+
+                // Set the current city as the selected item in the spinner
+                int selectedCityIndex = Arrays.asList(R.array.city_array).indexOf(status);
+                spinnerCity.setSelection(selectedCityIndex);
+
+                etZipCode.setText(complaint.getZipCode());
+
+                etSubject.setText(complaint.getSubject());
+                etZipCode.setText(complaint.getZipCode());
+                etComplaint.setText(complaint.getComplaintDetails());
+
+
+                builder.setPositiveButton("Update", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        // getting form details
+                        String newAddress, newCity, newZipCode, newSubject, newComplaint;
+
+                        newAddress = etAddress.getText().toString();
+
+                        newCity = spinnerCity.getSelectedItem();
+
+                        newZipCode = etZipCode.getText().toString();
+
+                        newSubject = etSubject.getText().toString();
+
+                        newComplaint = etComplaint.getText().toString();
+
+                        if (TextUtils.isEmpty(newAddress)) {
+                            etAddress.setError("Please enter address");
+                            return;
+                        }
+
+                        if (newCity.equals("Select city")) {
+                            Toast.makeText(((Activity) context).getApplicationContext(), "Please select city", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+
+                        if (TextUtils.isEmpty(newZipCode)) {
+                            etZipCode.setError("Please enter zip code");
+                            return;
+                        }
+                        else if (!TextUtils.isDigitsOnly(newZipCode)) {
+                            etZipCode.setError("Invalid Postal Code");
+                            return;
+                        }
+
+                        if (TextUtils.isEmpty(newSubject)) {
+                            etSubject.setError("Please enter your Subject");
+                            return;
+                        }
+
+                        if (TextUtils.isEmpty(newComplaint)) {
+                            etComplaint.setError("Please enter your Complaint");
+                            return;
+                        }
+                        else {
+                                // updating object
+                                complaint.setAddress(newAddress);
+                                complaint.setCity(newCity);
+                                complaint.setZipCode(newZipCode);
+                                complaint.setSubject(newSubject);
+                                complaint.setComplaintDetails(newComplaint);
+
+                                DBHelper dbHelper = new DBHelper(context);
+
+                                // passing the object to update the details in DB
+                                int updatedRows = dbHelper.updateComplaint(complaint);
+
+                                // check the returned updated rows
+                                if (updatedRows != 1) {
+                                    Toast.makeText(context, "Report not updated!", Toast.LENGTH_LONG).show();
+                                } else {
+                                    Toast.makeText(context, "Report updated successfully!", Toast.LENGTH_LONG).show();
+
+                                    // reflect changes in the view
+
+                                    // Step 2: Notify the adapter
+                                    notifyItemChanged(position);
+                                }
+                            }
+                    }
+                });
+
+
+                builder.setNegativeButton("Cancel",  null);
+
+                androidx.appcompat.app.AlertDialog dialog = builder.create();
+                dialog.show();
 
             }
         });

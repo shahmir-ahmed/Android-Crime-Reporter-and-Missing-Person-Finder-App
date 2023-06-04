@@ -2,73 +2,155 @@
 <resources>
     <string-array name="city_array">
         <item>Select city</item>
-        <item>Abbottabad</item>
-        <item>Ahmadpur East</item>
+<!--        <item>Abbottabad</item>-->
+<!--        <item>Ahmadpur East</item>-->
+<!--        <item>Bahawalnagar</item>-->
+<!--        <item>Bahawalpur</item>-->
+<!--        <item>Burewala</item>-->
+<!--        <item>Chakwal</item>-->
+<!--        <item>Charsada</item>-->
+<!--        <item>Chichawatni</item>-->
+<!--        <item>Chiniot</item>-->
+<!--        <item>Chishtian</item>-->
+<!--        <item>Dadu</item>-->
+<!--        <item>Daska</item>-->
+<!--        <item>Dera Ghazi Khan</item>-->
+<!--        <item>Dera Ismail Khan</item>-->
+<!--        <item>Faisalabad</item>-->
+<!--        <item>Farooka</item>-->
+<!--        <item>Gojra</item>-->
+<!--        <item>Gujranwala</item>-->
+<!--        <item>Gujrat</item>-->
+<!--        <item>Hafizabad</item>-->
+<!--        <item>Hyderabad</item>-->
+<!--        <item>Islamabad</item>-->
+<!--        <item>Jacobabad</item>-->
+<!--        <item>Jaranwala</item>-->
+<!--        <item>Jhelum</item>-->
+<!--        <item>Kamalia</item>-->
+<!--        <item>Kamoke</item>-->
+<!--        <item>Kandhkot</item>-->
+<!--        <item>Karachi</item>-->
+<!--        <item>Kasur</item>-->
+<!--        <item>Khairpur</item>-->
+<!--        <item>Khanewal</item>-->
+<!--        <item>Khanpur</item>-->
+<!--        <item>Khushab</item>-->
+<!--        <item>Khuzdar</item>-->
+<!--        <item>Kohat</item>-->
+<!--        <item>Kot Adu</item>-->
+<!--        <item>Lahore</item>-->
+<!--        <item>Larkana</item>-->
+<!--        <item>Mandi Bahauddin</item>-->
+<!--        <item>Mansehra</item>-->
+<!--        <item>Mardan</item>-->
+<!--        <item>Mianwali</item>-->
+<!--        <item>Mingora</item>-->
+<!--        <item>Mirpur Khas</item>-->
+<!--        <item>Multan</item>-->
+<!--        <item>Muridke</item>-->
+<!--        <item>Muzaffargarh</item>-->
+<!--        <item>Narowal</item>-->
+<!--        <item>Nawabshah</item>-->
+<!--        <item>Nowshera</item>-->
+<!--        <item>Okara</item>-->
+<!--        <item>Pakpattan</item>-->
+<!--        <item>Peshawar</item>-->
+<!--        <item>Quetta</item>-->
+<!--        <item>Rahim Yar Khan</item>-->
+<!--        <item>Rawalakot</item>-->
+<!--        <item>Rawalpindi</item>-->
+<!--        <item>Sahiwal</item>-->
+<!--        <item>Sargodha</item>-->
+<!--        <item>Sheikhupura</item>-->
+<!--        <item>Shikarpur</item>-->
+<!--        <item>Sialkot</item>-->
+<!--        <item>Sukkur</item>-->
+<!--        <item>Swabi</item>-->
+<!--        <item>Tando Adam</item>-->
+<!--        <item>Tando Allahyar</item>-->
+<!--        <item>Vehari</item>-->
+<!--        <item>Wah Cantonment</item>-->
+<!--        <item>Wazirabad</item>-->
+        <item>Ahmedpur East</item>
+        <item>Alipur</item>
+        <item>Arifwala</item>
+        <item>Attock</item>
         <item>Bahawalnagar</item>
         <item>Bahawalpur</item>
+        <item>Bhakkar</item>
         <item>Burewala</item>
         <item>Chakwal</item>
-        <item>Charsada</item>
         <item>Chichawatni</item>
         <item>Chiniot</item>
         <item>Chishtian</item>
-        <item>Dadu</item>
         <item>Daska</item>
         <item>Dera Ghazi Khan</item>
-        <item>Dera Ismail Khan</item>
+        <item>Dhaular</item>
         <item>Faisalabad</item>
-        <item>Farooka</item>
+        <item>Fateh Jang</item>
         <item>Gojra</item>
+        <item>Gujar Khan</item>
         <item>Gujranwala</item>
         <item>Gujrat</item>
         <item>Hafizabad</item>
-        <item>Hyderabad</item>
-        <item>Islamabad</item>
-        <item>Jacobabad</item>
+        <item>Haroonabad</item>
+        <item>Hasan Abdal</item>
+        <item>Hasilpur</item>
+        <item>Haveli Lakha</item>
+        <item>Jalalpur Jattan</item>
+        <item>Jampur</item>
         <item>Jaranwala</item>
+        <item>Jhang</item>
         <item>Jhelum</item>
         <item>Kamalia</item>
         <item>Kamoke</item>
-        <item>Kandhkot</item>
-        <item>Karachi</item>
         <item>Kasur</item>
-        <item>Khairpur</item>
+        <item>Kharian</item>
         <item>Khanewal</item>
         <item>Khanpur</item>
         <item>Khushab</item>
-        <item>Khuzdar</item>
-        <item>Kohat</item>
-        <item>Kot Adu</item>
+        <item>Kot Addu</item>
+        <item>Kot Momin</item>
+        <item>Kot Radha Kishan</item>
         <item>Lahore</item>
-        <item>Larkana</item>
+        <item>Lalamusa</item>
+        <item>Layyah</item>
+        <item>Liaquatpur</item>
+        <item>Lodhran</item>
+        <item>Mailsi</item>
         <item>Mandi Bahauddin</item>
-        <item>Mansehra</item>
-        <item>Mardan</item>
+        <item>Mian Channu</item>
         <item>Mianwali</item>
-        <item>Mingora</item>
-        <item>Mirpur Khas</item>
+        <item>Minchinabad</item>
         <item>Multan</item>
         <item>Muridke</item>
         <item>Muzaffargarh</item>
+        <item>Nankana Sahib</item>
         <item>Narowal</item>
-        <item>Nawabshah</item>
-        <item>Nowshera</item>
         <item>Okara</item>
         <item>Pakpattan</item>
-        <item>Peshawar</item>
-        <item>Quetta</item>
+        <item>Patoki</item>
+        <item>Pir Mahal</item>
+        <item>Rabwah</item>
         <item>Rahim Yar Khan</item>
-        <item>Rawalakot</item>
+        <item>Raiwind</item>
+        <item>Rajanpur</item>
+        <item>Rasulnagar</item>
         <item>Rawalpindi</item>
+        <item>Sadiqabad</item>
         <item>Sahiwal</item>
-        <item>Sargodha</item>
+        <item>Sambrial</item>
+        <item>Sangla Hill</item>
+        <item>Shahkot</item>
         <item>Sheikhupura</item>
-        <item>Shikarpur</item>
         <item>Sialkot</item>
-        <item>Sukkur</item>
-        <item>Swabi</item>
-        <item>Tando Adam</item>
-        <item>Tando Allahyar</item>
+        <item>Soianwala</item>
+        <item>Surkhpur</item>
+        <item>Talagang</item>
+        <item>Tandlianwala</item>
+        <item>Taxila</item>
+        <item>Toba Tek Singh</item>
         <item>Vehari</item>
         <item>Wah Cantonment</item>
         <item>Wazirabad</item>

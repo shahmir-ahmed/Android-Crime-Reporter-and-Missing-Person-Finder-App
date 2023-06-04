@@ -1,5 +1,6 @@
 package com.example.crimereporterandmissingpersonfinderapp;
 
+import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.os.Bundle;
@@ -44,6 +45,11 @@ public class LodgeComplaintFragment extends Fragment {
 
 
     private SQLiteDatabase database;
+
+    // shared preferences for user session
+    public static final String MyPREFERENCES = "MyPrefs" ;
+    public static final String userIdKey = "idKey";
+    SharedPreferences sharedpreferences;
 
     public LodgeComplaintFragment() {
         // Required empty public constructor
@@ -114,6 +120,9 @@ public class LodgeComplaintFragment extends Fragment {
         DBHelper dbHelper = new DBHelper(getActivity());
         database = dbHelper.getWritableDatabase();
 
+        // initailzing shared preferences
+        sharedpreferences = getActivity().getSharedPreferences(MyPREFERENCES, getContext().MODE_PRIVATE);
+
     }
 
     //
@@ -124,6 +133,9 @@ public class LodgeComplaintFragment extends Fragment {
         String subject = editTextSubject.getText().toString().trim();
         String complaint = editTextComplaint.getText().toString().trim();
         String status = "Submitted"; // status set to submitted
+
+        // getting the user id from shared preferences
+        int userId = Integer.parseInt(sharedpreferences.getString(userIdKey, ""));
 
         if (TextUtils.isEmpty(address)) {
             editTextAddress.setError("Please enter address");
@@ -162,10 +174,11 @@ public class LodgeComplaintFragment extends Fragment {
                     DatabaseContract.Complaints.COLUMN_PINCODE + ", " +
                     DatabaseContract.Complaints.COLUMN_SUBJECT + ", " +
                     DatabaseContract.Complaints.COLUMN_COMPLAINT + ", " +
-                    DatabaseContract.Complaints.COLUMN_STATUS + ") " +
-                    "VALUES (?, ?, ?, ?, ?, ?)";
+                    DatabaseContract.Complaints.COLUMN_STATUS + ", " +
+                    DatabaseContract.Complaints.COL_USER_ID + ") " +
+                    "VALUES (?, ?, ?, ?, ?, ?, ?)";
 
-            database.execSQL(insertQuery, new String[]{address, city, pincode, subject, complaint, status});
+            database.execSQL(insertQuery, new String[]{address, city, pincode, subject, complaint, status, String.valueOf(userId)});
 
             // Display success message
             Toast.makeText(getActivity(), "Complaint registered successfully!", Toast.LENGTH_SHORT).show();

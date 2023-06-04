@@ -57,7 +57,7 @@ public class MissingPersonReportsFragment extends Fragment {
     public static final String userIdKey = "idKey";
     SharedPreferences sharedpreferences;
 
-    // global variable image view to store the refernce of the image in dialog box
+    // global variable image view to store the reference of the image in dialog box
     public static ImageView imageView;
 
     private static final int RESULT_LOAD_IMG = 0;
