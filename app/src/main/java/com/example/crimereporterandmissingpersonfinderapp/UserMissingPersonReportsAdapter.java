@@ -95,13 +95,13 @@ public class UserMissingPersonReportsAdapter extends RecyclerView.Adapter<UserMi
                 color = Color.GREEN;
                 break;
             case "Processing":
-                color = Color.YELLOW;
+                color = Color.rgb(246,190,0);
                 break;
             case "Completed":
-                color = Color.RED;
+                color = Color.DKGRAY;
                 break;
             case "Rejected":
-                color = Color.GRAY;
+                color = Color.RED;
                 break;
             default:
                 color = Color.BLACK;
