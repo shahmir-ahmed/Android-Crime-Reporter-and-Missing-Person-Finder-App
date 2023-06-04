@@ -162,14 +162,13 @@ public class ComplaintsAdapter  extends RecyclerView.Adapter<ComplaintsAdapter.C
                 // Get references to the views in the custom layout
                 // Creating bridge
                 EditText etAddress = (EditText) dialogView.findViewById(R.id.editTextAddress);
-                Spinner spinnerCity = (Spinner) dialogView.findViewById(R.id.spinnerCity);
+                final Spinner spinnerCity = (Spinner) dialogView.findViewById(R.id.spinnerCity);
 
                 // getting cities to set by adapter on spinner
                 String[] cityArray = ((Activity) context).getResources().getStringArray(R.array.city_array);
 
                 ArrayAdapter<String> adapter = new ArrayAdapter<>(((Activity) context).getApplicationContext(), android.R.layout.simple_list_item_1, cityArray);
 
-                spinnerCity = (Spinner) dialogView.findViewById(R.id.spinnerCity);
                 spinnerCity.setAdapter(adapter);
 
                 EditText etZipCode = (EditText) dialogView.findViewById(R.id.editTextPincode);
@@ -182,8 +181,10 @@ public class ComplaintsAdapter  extends RecyclerView.Adapter<ComplaintsAdapter.C
                 // check the city
                 String city = complaint.getCity();
 
+                String cities[] = ((Activity) context).getResources().getStringArray(R.array.city_array);
+
                 // Set the current city as the selected item in the spinner
-                int selectedCityIndex = Arrays.asList(R.array.city_array).indexOf(status);
+                int selectedCityIndex = Arrays.asList(cities).indexOf(city);
                 spinnerCity.setSelection(selectedCityIndex);
 
                 etZipCode.setText(complaint.getZipCode());
@@ -202,7 +203,7 @@ public class ComplaintsAdapter  extends RecyclerView.Adapter<ComplaintsAdapter.C
 
                         newAddress = etAddress.getText().toString();
 
-                        newCity = spinnerCity.getSelectedItem();
+                        newCity = spinnerCity.getSelectedItem().toString();
 
                         newZipCode = etZipCode.getText().toString();
 
@@ -211,7 +212,8 @@ public class ComplaintsAdapter  extends RecyclerView.Adapter<ComplaintsAdapter.C
                         newComplaint = etComplaint.getText().toString();
 
                         if (TextUtils.isEmpty(newAddress)) {
-                            etAddress.setError("Please enter address");
+//                            etAddress.setError("Please enter address");
+                            Toast.makeText(((Activity) context).getApplicationContext(), "Please enter address", Toast.LENGTH_SHORT).show();
                             return;
                         }
 
@@ -221,21 +223,25 @@ public class ComplaintsAdapter  extends RecyclerView.Adapter<ComplaintsAdapter.C
                         }
 
                         if (TextUtils.isEmpty(newZipCode)) {
-                            etZipCode.setError("Please enter zip code");
+//                            etZipCode.setError("Please enter zip code");
+                            Toast.makeText(((Activity) context).getApplicationContext(), "Please enter zip code", Toast.LENGTH_SHORT).show();
                             return;
                         }
                         else if (!TextUtils.isDigitsOnly(newZipCode)) {
-                            etZipCode.setError("Invalid Postal Code");
+//                            etZipCode.setError("Invalid Postal Code");
+                            Toast.makeText(((Activity) context).getApplicationContext(), "Invalid Postal Code", Toast.LENGTH_SHORT).show();
                             return;
                         }
 
                         if (TextUtils.isEmpty(newSubject)) {
-                            etSubject.setError("Please enter your Subject");
+//                            etSubject.setError("Please enter your Subject");
+                            Toast.makeText(((Activity) context).getApplicationContext(), "Please enter your Subject", Toast.LENGTH_SHORT).show();
                             return;
                         }
 
                         if (TextUtils.isEmpty(newComplaint)) {
-                            etComplaint.setError("Please enter your Complaint");
+//                            etComplaint.setError("Please enter your Complaint");
+                            Toast.makeText(((Activity) context).getApplicationContext(), "Please enter your Complaint", Toast.LENGTH_SHORT).show();
                             return;
                         }
                         else {

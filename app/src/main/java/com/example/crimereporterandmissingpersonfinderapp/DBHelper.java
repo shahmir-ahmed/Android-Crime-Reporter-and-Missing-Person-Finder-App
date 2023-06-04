@@ -191,7 +191,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
         int userId = Integer.parseInt(sharedpreferences.getString(userIdKey, ""));
 
-        // retrieve all the missing person reports from DB reported by the user
+        // retrieve all the complaints reports from DB reported by the user
 
         SQLiteDatabase db = getReadableDatabase();
 
