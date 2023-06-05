@@ -25,6 +25,7 @@ public class LoginActivity extends AppCompatActivity {
     // shared preferences for user session
     public static final String MyPREFERENCES = "MyPrefs" ;
     public static final String userIdKey = "idKey";
+    public static final String userNameKey = "userNameKey";
     SharedPreferences sharedpreferences;
 
     @Override
@@ -144,6 +145,7 @@ public class LoginActivity extends AppCompatActivity {
                         SharedPreferences.Editor editor = sharedpreferences.edit(); // getting editor object ti edit the shared pref.
 
                         editor.putString(userIdKey, userID); // putting the user id in shared preferences
+                        editor.putString(userNameKey, username); // putting the user name in shared preferences
                         editor.commit(); // committing the changes
 
 

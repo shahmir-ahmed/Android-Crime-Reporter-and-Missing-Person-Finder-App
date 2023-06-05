@@ -26,12 +26,22 @@ public class UserDashboardActivity extends AppCompatActivity {
 
     int backPressedCount = 0;
 
-    String userName = " ";
+    // shared preferences for user session
+    public static final String MyPREFERENCES = "MyPrefs" ;
+    public static final String userNameKey = "userNameKey";
+    SharedPreferences sharedpreferences;
+    String userName = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_dashboard);
 
+        // initialize the shared preferences
+        sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+
+//        Intent intent = getIntent();
+//
+//        userName = intent.getStringExtra("username");
 
         // hiding the default action bar
 //        getSupportActionBar().hide();
@@ -95,11 +105,10 @@ public class UserDashboardActivity extends AppCompatActivity {
 
         inflater.inflate(R.menu.dashboard_menu, menu);
 
-        Intent intent = getIntent();
+        // get the username of user through shared preferences
+        userName = sharedpreferences.getString(userNameKey, "");
 
-        userName = intent.getStringExtra("username");
-
-        // user name
+        // user name setting on options menu
         int positionOfMenuItem = 0; // or whatever...
         MenuItem item = menu.getItem(positionOfMenuItem);
         SpannableString s = new SpannableString(userName);

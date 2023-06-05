@@ -13,7 +13,7 @@
     <!--    Admin Dashboard Tab Layout Titles-->
     <string name="tab_label7">Missing Person Reports</string>
     <string name="tab_label8">Crime Reports</string>
-    <string name="tab_label9">Lodged Complaints</string>
+    <string name="tab_label9">Complaints</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
