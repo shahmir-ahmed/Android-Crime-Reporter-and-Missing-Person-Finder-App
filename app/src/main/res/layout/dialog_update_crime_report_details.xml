@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#5A5A5A"
+        tools:context=".ReportCrimeFragment"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="35dp">
+
+            <TextView
+                android:id="@+id/textView177"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:fontFamily="@font/poppins_light"
+                android:text="Update Crime Report"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+        <TextView
+            android:id="@+id/textView17"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_light"
+            android:text="Type:"
+            android:textColor="#FFFF"
+            android:textSize="15.5sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.107"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.13"
+            tools:ignore="HardcodedText" />
+
+        <Spinner
+            android:id="@+id/spinnerCrime"
+            android:layout_width="223dp"
+            android:layout_height="48dp"
+            android:fontFamily="@font/poppins_light"
+            android:textColor="#FFFF"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.831"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.120"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <TextView
+            android:id="@+id/textView16"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_light"
+            android:text="Zip Code:"
+            android:textColor="#FFFF"
+            android:textSize="15.5sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.111"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.402"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_light"
+            android:text="City:"
+            android:textColor="#FFFF"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.105"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView15"
+            app:layout_constraintVertical_bias="0.069"
+            tools:ignore="HardcodedText" />
+
+        <!--        <Button-->
+<!--            android:id="@+id/buttonBrowse"-->
+<!--            android:layout_width="166dp"-->
+<!--            android:layout_height="51dp"-->
+<!--            android:layout_marginTop="60dp"-->
+<!--            android:text="Browse"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/imageCrime"-->
+<!--            tools:ignore="HardcodedText" />-->
+
+        <TextView
+            android:id="@+id/textView15"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_light"
+            android:text="Street:"
+            android:textColor="#FFFF"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.11"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView17"
+            app:layout_constraintVertical_bias="0.071"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_light"
+            android:text="Crime Details:"
+            android:textStyle="bold"
+            android:textColor="#FFFF"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.126"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView16"
+            app:layout_constraintVertical_bias="0.111"
+            tools:ignore="HardcodedText" />
+
+<!--        <TextView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:fontFamily="@font/poppins_light"-->
+<!--            android:text="Upload an Image:"-->
+<!--            android:textStyle="bold"-->
+<!--            android:textColor="#607D8B"-->
+<!--            android:textSize="16sp"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintHorizontal_bias="0.139"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent"-->
+<!--            app:layout_constraintVertical_bias="0.571"-->
+<!--            tools:ignore="HardcodedText" />-->
+
+        <EditText
+            android:id="@+id/editTextCrimeDescription"
+            android:layout_width="300dp"
+            android:layout_height="104dp"
+            android:fontFamily="@font/poppins_light"
+            android:gravity="start|top"
+            android:hint="Max. 200 characters"
+            android:inputType="textMultiLine|textCapSentences|textAutoCorrect"
+            android:textColorHint="#A86B58"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.495"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.625"
+            tools:ignore="Autofill,HardcodedText,LabelFor,SpeakableTextPresentCheck" />
+
+        <EditText
+            android:id="@+id/editTextStreetNumber"
+            android:layout_width="217dp"
+            android:layout_height="48dp"
+            android:inputType="text"
+            android:textColor="#FFFF"
+            android:textSize="16sp"
+            android:fontFamily="@font/poppins_light"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.735"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.220"
+            tools:ignore="Autofill,LabelFor,SpeakableTextPresentCheck" />
+
+        <Spinner
+            android:id="@+id/spinnerCity"
+            android:layout_width="243dp"
+            android:layout_height="48dp"
+            android:textColor="#FFFF"
+            android:textSize="16sp"
+            android:fontFamily="@font/poppins_light"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.864"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editTextStreetNumber"
+            app:layout_constraintVertical_bias="0.027"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <EditText
+            android:id="@+id/editTextZipCode"
+            android:layout_width="188dp"
+            android:layout_height="48dp"
+            android:fontFamily="@font/poppins_light"
+            android:hint="xxxxx"
+            android:inputType="phone"
+            android:textColorHint="#A86B58"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.78"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/spinnerCity"
+            app:layout_constraintVertical_bias="0.034"
+            tools:ignore="Autofill,HardcodedText,LabelFor,SpeakableTextPresentCheck" />
+
+        <ImageView
+            android:id="@+id/imageCrime"
+            android:layout_width="301dp"
+            android:layout_height="167dp"
+            android:background="#FFFF"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="30dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editTextCrimeDescription"
+            app:layout_constraintVertical_bias="0.913"
+            tools:ignore="ContentDescription" />
+
+        <!--        <Button-->
+<!--            android:id="@+id/buttonRegisterCrime"-->
+<!--            android:layout_width="202dp"-->
+<!--            android:layout_height="52dp"-->
+<!--            android:layout_marginTop="40dp"-->
+<!--            android:layout_marginBottom="40dp"-->
+<!--            android:text="Report Crime"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/buttonBrowse"-->
+<!--            tools:ignore="HardcodedText" />-->
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

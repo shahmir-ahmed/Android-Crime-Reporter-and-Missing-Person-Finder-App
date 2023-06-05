@@ -26,9 +26,9 @@
       <list>
         <option value="valueResourceFile" />
         <option value="layoutResourceFile_vertical" />
-        <option value="layoutResourceFile" />
         <option value="resourceFile" />
         <option value="Class" />
+        <option value="layoutResourceFile" />
       </list>
     </option>
   </component>
@@ -46,24 +46,24 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ResourceManagerPrefKey.ResourceType&quot;: &quot;LAYOUT&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;android-custom-viewC:/Users/Shahmir Ahmed/.gradle/caches/modules-2/files-2.1/androidx.viewpager/viewpager/1.0.0/db045f92188b9d247d5f556866f8861ab68528f0/viewpager-1.0.0-sources.jar!/androidx/viewpager/widget/ViewPager.java_SELECTED&quot;: &quot;ViewPager&quot;,
-    &quot;android-custom-viewC:/Users/Shahmir Ahmed/Documents/GitHub/Android-Crime-Reporter-and-Missing-Person-Finder-App/app/src/main/java/com/example/crimereporterandmissingpersonfinderapp/DraggableLayout.java_SELECTED&quot;: &quot;DraggableTabLayout&quot;,
-    &quot;android-custom-viewC:/Users/Shahmir Ahmed/Documents/GitHub/Android-Crime-Reporter-and-Missing-Person-Finder-App/app/src/main/java/com/example/crimereporterandmissingpersonfinderapp/DraggableTabLayout.java_SELECTED&quot;: &quot;DraggableTabLayout&quot;,
-    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;last_directory_selection&quot;: &quot;C:/Users/Shahmir Ahmed/Documents/GitHub/Android-Crime-Reporter-and-Missing-Person-Finder-App/app/src/main/res/drawable&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Shahmir Ahmed/Documents/GitHub/Android-Crime-Reporter-and-Missing-Person-Finder-App/app/src/main/res/drawable&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Dependencies&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.17&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;Errors&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ResourceManagerPrefKey.ResourceType": "LAYOUT",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.cidr.known.project.marker": "true",
+    "android-custom-viewC:/Users/Shahmir Ahmed/.gradle/caches/modules-2/files-2.1/androidx.viewpager/viewpager/1.0.0/db045f92188b9d247d5f556866f8861ab68528f0/viewpager-1.0.0-sources.jar!/androidx/viewpager/widget/ViewPager.java_SELECTED": "ViewPager",
+    "android-custom-viewC:/Users/Shahmir Ahmed/Documents/GitHub/Android-Crime-Reporter-and-Missing-Person-Finder-App/app/src/main/java/com/example/crimereporterandmissingpersonfinderapp/DraggableLayout.java_SELECTED": "DraggableTabLayout",
+    "android-custom-viewC:/Users/Shahmir Ahmed/Documents/GitHub/Android-Crime-Reporter-and-Missing-Person-Finder-App/app/src/main/java/com/example/crimereporterandmissingpersonfinderapp/DraggableTabLayout.java_SELECTED": "DraggableTabLayout",
+    "cidr.known.project.marker": "true",
+    "last_directory_selection": "C:/Users/Shahmir Ahmed/Documents/GitHub/Android-Crime-Reporter-and-Missing-Person-Finder-App/app/src/main/res/drawable",
+    "last_opened_file_path": "C:/Users/Shahmir Ahmed/Documents/GitHub/Android-Crime-Reporter-and-Missing-Person-Finder-App/app/src/main/res/drawable",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.17",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "Errors"
   }
-}</component>
+}]]></component>
   <component name="PsdUISettings">
     <option name="LAST_EDITED_BUILD_TYPE" value="release" />
   </component>

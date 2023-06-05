@@ -305,4 +305,87 @@ public class DBHelper extends SQLiteOpenHelper {
         }
     }
 
+
+
+    // Crimes table operation
+
+    // view operation
+    public List<Crime> getAllCrimes() {
+        List<Crime> crimeList = new ArrayList<>();
+
+        SQLiteDatabase db = getReadableDatabase();
+
+        String[] projection = {
+                DatabaseContract.CrimeDetails.COLUMN_ID,
+                DatabaseContract.CrimeDetails.COLUMN_CRIME_DESCRIPTION,
+                DatabaseContract.CrimeDetails.COLUMN_STATUS
+        };
+
+        Cursor cursor = db.query(
+                DatabaseContract.TABLE_CRIME_DETAILS,
+                projection,
+                null,
+                null,
+                null,
+                null,
+                null
+        );
+
+        while (cursor.moveToNext()) {
+            Crime crime = new Crime();
+            crime.setId(cursor.getInt(cursor.getColumnIndexOrThrow(DatabaseContract.CrimeDetails.COLUMN_ID)));
+            crime.setCrimeDescription(cursor.getString(cursor.getColumnIndexOrThrow(DatabaseContract.CrimeDetails.COLUMN_CRIME_DESCRIPTION)));
+            crime.setStatus(cursor.getString(cursor.getColumnIndexOrThrow(DatabaseContract.CrimeDetails.COLUMN_STATUS)));
+
+            crimeList.add(crime);
+        }
+
+        cursor.close();
+        db.close();
+
+        return crimeList;
+    }
+
+    //update operation
+    public boolean updateCrime(int id, String street, String city, String zipCode, String crimeDetails, Bitmap crimeImage) {
+        SQLiteDatabase db = getWritableDatabase();
+
+        // Convert the Bitmap to a byte array
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        crimeImage.compress(Bitmap.CompressFormat.PNG, 100, stream);
+        byte[] imageBytes = stream.toByteArray();
+
+        ContentValues values = new ContentValues();
+        values.put(DatabaseContract.CrimeEntry.COLUMN_STREET_NUMBER, street);
+        values.put(DatabaseContract.CrimeEntry.COLUMN_CITY, city);
+        values.put(DatabaseContract.CrimeEntry.COLUMN_ZIP_CODE, zipCode);
+        values.put(DatabaseContract.CrimeEntry.COLUMN_CRIME_DETAILS, crimeDetails);
+        values.put(DatabaseContract.CrimeEntry.COLUMN_CRIME_IMAGE, imageBytes);
+
+        String selection = DatabaseContract.CrimeEntry._ID + " = ?";
+        String[] selectionArgs = {String.valueOf(id)};
+
+        int rowsUpdated = db.update(DatabaseContract.TABLE_CRIME_DETAILS, values, selection, selectionArgs);
+
+        return rowsUpdated > 0;
+    }
+
+    //delete operation
+    public void deleteComplaint(int crimeId) {
+        SQLiteDatabase db = getWritableDatabase();
+        String selection = DatabaseContract.CrimeDetails._ID + " = ?";
+        String[] selectionArgs = { String.valueOf(crimeId) };
+        int deletedRows = db.delete(DatabaseContract. TABLE_CRIME_DETAILS, selection, selectionArgs);
+        db.close();
+
+        if (deletedRows > 0) {
+            Log.d("DatabaseHelper", "Crime deleted successfully");
+        } else {
+            Log.d("DatabaseHelper", "Failed to delete crime");
+        }
+    }
+
+}
+
+
 }

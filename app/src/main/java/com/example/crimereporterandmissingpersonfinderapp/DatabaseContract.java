@@ -35,11 +35,13 @@ public final class DatabaseContract {
     public static class Crimes implements BaseColumns {
         public static final String TABLE_NAME = "crimes";
         public static final String COLUMN_TYPE = "crime_type";
-        public static final String COLUMN_STREET_NUMBER = "street_number";
+        public static final String COLUMN_STREET_DETAILS = "street_details";
         public static final String COLUMN_CITY = "city";
         public static final String COLUMN_ZIPCODE = "zipcode";
         public static final String COLUMN_CRIME_DETAILS = "crime_details";
         public static final String COLUMN_IMAGE = "image";
+
+        public static final String COLUMN_USER_ID = "user_id";
     }
 
 

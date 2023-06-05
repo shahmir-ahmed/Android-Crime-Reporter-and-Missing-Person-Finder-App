@@ -241,7 +241,7 @@ public class ReportCrimeFragment extends Fragment {
 
     private void registerForm() {
 
-        String streetNumber = editTextStreetNumber.getText().toString().trim();
+        String streetDetails = editTextStreetNumber.getText().toString().trim();
         String zipCode = editTextZipCode.getText().toString().trim();
         String crimeDescription = editTextCrimeDescription.getText().toString().trim();
 
@@ -252,7 +252,7 @@ public class ReportCrimeFragment extends Fragment {
             return;
         }
 
-        if (streetNumber.isEmpty()) {
+        if (streetDetails.isEmpty()) {
             editTextStreetNumber.setError("Street details are required");
             editTextStreetNumber.requestFocus();
             return;
@@ -296,14 +296,14 @@ public class ReportCrimeFragment extends Fragment {
             // Insert the complaint into the database
             String insertQuery = "INSERT INTO " + DatabaseContract.Crimes.TABLE_NAME + " (" +
                     DatabaseContract.Crimes.COLUMN_TYPE + ", " +
-                    DatabaseContract.Crimes.COLUMN_STREET_NUMBER + ", " +
+                    DatabaseContract.Crimes.COLUMN_STREET_DETAILS + ", " +
                     DatabaseContract.Crimes.COLUMN_CITY + ", " +
                     DatabaseContract.Crimes.COLUMN_ZIPCODE + ", " +
                     DatabaseContract.Crimes.COLUMN_CRIME_DETAILS + ", " +
                     DatabaseContract.Crimes.COLUMN_IMAGE + ") " +
                     "VALUES (?, ?, ?, ?, ?, ?)";
 
-            database.execSQL(insertQuery, new String[]{selectedCrimeType, streetNumber, selectedCity, zipCode, crimeDescription, String.valueOf(selectedImageBitmap)});
+            database.execSQL(insertQuery, new String[]{selectedCrimeType, streetDetails, selectedCity, zipCode, crimeDescription, String.valueOf(selectedImageBitmap)});
 
             // clear all the fields
             editTextStreetNumber.setText("");
