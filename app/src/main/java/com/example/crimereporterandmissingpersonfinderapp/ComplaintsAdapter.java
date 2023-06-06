@@ -221,6 +221,10 @@ public class ComplaintsAdapter  extends RecyclerView.Adapter<ComplaintsAdapter.C
                             Toast.makeText(((Activity) context).getApplicationContext(), "Please select city", Toast.LENGTH_SHORT).show();
                             return;
                         }
+                        else if (!isValidZipCode(newZipCode)) {
+                            Toast.makeText(((Activity) context).getApplicationContext(), "Invalid! Enter 5 digit zip code", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
 
                         if (TextUtils.isEmpty(newZipCode)) {
 //                            etZipCode.setError("Please enter zip code");
@@ -318,6 +322,11 @@ public class ComplaintsAdapter  extends RecyclerView.Adapter<ComplaintsAdapter.C
             }
         });
     }
+
+    private boolean isValidZipCode(String zipCode) {
+        // - The zip code shall be a 5 digit number
+        return zipCode.matches("[0-9]{5}");
+    }
     @Override
     public int getItemCount() {
         return complaintList.size();
@@ -347,6 +356,7 @@ public class ComplaintsAdapter  extends RecyclerView.Adapter<ComplaintsAdapter.C
             moreDetailsBtn = itemView.findViewById(R.id.moreDetailsBtn);
         }
     }
+
 
 }
 

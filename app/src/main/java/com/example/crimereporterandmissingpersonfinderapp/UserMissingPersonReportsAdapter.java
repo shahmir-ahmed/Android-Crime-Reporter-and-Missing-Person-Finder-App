@@ -51,7 +51,7 @@ public class UserMissingPersonReportsAdapter extends RecyclerView.Adapter<UserMi
     private static final int RESULT_LOAD_IMG = 0;
 
     // update dialog box image
-    ImageView imageViewPersonImage;
+//    ImageView imageViewPersonImage;
 
     public UserMissingPersonReportsAdapter(MissingPersonData[] missingPersonData, UserDashboardActivity activity) {
         this.missingPersonData = missingPersonData;
@@ -185,7 +185,7 @@ public class UserMissingPersonReportsAdapter extends RecyclerView.Adapter<UserMi
                 EditText etLastSeen = (EditText) dialogView.findViewById(R.id.etLastSeen);
                 EditText etZipCode = (EditText) dialogView.findViewById(R.id.editTextZipCode);
                 EditText etDetails = (EditText) dialogView.findViewById(R.id.etDetails);
-                imageViewPersonImage = (ImageView) dialogView.findViewById(R.id.imageViewPersonImage);
+//                imageViewPersonImage = (ImageView) dialogView.findViewById(R.id.imageViewPersonImage);
 
                 // setting the report data on form
                 etPersonName.setText(missingPersonDataList.getMissingPersonName());
@@ -206,7 +206,7 @@ public class UserMissingPersonReportsAdapter extends RecyclerView.Adapter<UserMi
                 etZipCode.setText(missingPersonDataList.getMissingPersonZipCode());
                 etDetails.setText(missingPersonDataList.getMissingPersonReportDetails());
 
-                imageViewPersonImage.setImageBitmap(missingPersonDataList.getMissingPersonImage());
+//                imageViewPersonImage.setImageBitmap(missingPersonDataList.getMissingPersonImage());
 
 
 //                Button browseBtn = (Button) dialogView.findViewById(R.id.browseBtn);
@@ -337,7 +337,7 @@ public class UserMissingPersonReportsAdapter extends RecyclerView.Adapter<UserMi
                             Toast.makeText(dialogView.getContext(), "Please enter age!", Toast.LENGTH_LONG).show();
                         }
                         // if age is greater than 2 digits
-                        else if (age.length() > 2) {
+                        else if (age.length() != 2) {
                             Toast.makeText(dialogView.getContext(), "Invalid age!", Toast.LENGTH_LONG).show();
                         }
                         // if no radio button is selected
@@ -359,10 +359,10 @@ public class UserMissingPersonReportsAdapter extends RecyclerView.Adapter<UserMi
                         else if (reportDetails.trim().isEmpty()) {
                             Toast.makeText(dialogView.getContext(), "Please enter report details!", Toast.LENGTH_LONG).show();
                         }
-                        // if image is not selected
-                        else if (imageViewPersonImage.getDrawable() == null) {
-                            Toast.makeText(dialogView.getContext(), "Please choose an image!", Toast.LENGTH_LONG).show();
-                        }
+//                        // if image is not selected
+//                        else if (imageViewPersonImage.getDrawable() == null) {
+//                            Toast.makeText(dialogView.getContext(), "Please choose an image!", Toast.LENGTH_LONG).show();
+//                        }
                         // if form is valid
                         else {
 

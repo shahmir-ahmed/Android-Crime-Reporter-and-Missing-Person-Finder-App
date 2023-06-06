@@ -9,6 +9,21 @@ public class Crime {
 
     private String userName, userContact, userEmail, userCNIC;
 
+    // default constructor
+    public Crime(){
+
+    }
+
+    public Crime(String crimeType, String streetDetails, String city, String zipCode, String crimeDetails, Bitmap bitmap, String reportStatus){
+        type = crimeType;
+        this.streetDetails = streetDetails;
+        this.city = city;
+        this.zipCode = zipCode;
+        this.crimeDetails = crimeDetails;
+        crimeImage = bitmap;
+        status = reportStatus;
+    }
+
     public int getId() {
         return id;
     }

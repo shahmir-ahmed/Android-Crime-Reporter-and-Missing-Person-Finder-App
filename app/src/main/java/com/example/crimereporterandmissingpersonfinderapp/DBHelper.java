@@ -344,7 +344,9 @@ public class DBHelper extends SQLiteOpenHelper {
         );
 
         while (cursor.moveToNext()) {
+
             Crime crime = new Crime();
+
             crime.setId(cursor.getInt(cursor.getColumnIndexOrThrow(DatabaseContract.Crimes._ID)));
             crime.setType(cursor.getString(cursor.getColumnIndexOrThrow(DatabaseContract.Crimes.COLUMN_TYPE)));
             crime.setStreetDetails(cursor.getString(cursor.getColumnIndexOrThrow(DatabaseContract.Crimes.COLUMN_STREET_DETAILS)));

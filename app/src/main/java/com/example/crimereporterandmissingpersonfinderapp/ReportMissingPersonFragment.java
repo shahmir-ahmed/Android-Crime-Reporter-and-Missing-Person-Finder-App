@@ -170,7 +170,7 @@ public class ReportMissingPersonFragment extends Fragment {
                     Toast.makeText(getView().getContext(), "Please enter age!", Toast.LENGTH_LONG).show();
                 }
                 // if age is not entered
-                else if(age.length()>2){
+                else if(age.length()!=2){
                     Toast.makeText(getView().getContext(), "Invalid age!", Toast.LENGTH_LONG).show();
                 }
                 // if no radio button is selected

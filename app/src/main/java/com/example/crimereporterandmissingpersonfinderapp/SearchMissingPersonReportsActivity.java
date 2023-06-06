@@ -22,9 +22,7 @@ import android.widget.Toast;
 public class SearchMissingPersonReportsActivity extends AppCompatActivity {
 
     MissingPersonData[] missingPersonData;
-
     SearchMissingPersonAdapter searchMissingPersonAdapter;
-
     RecyclerView recyclerView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {

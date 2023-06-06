@@ -242,7 +242,7 @@
             <!--            More details button-->
             <Button
                 android:id="@+id/moreDetailsBtn"
-                android:layout_width="300dp"
+                android:layout_width="290dp"
                 android:layout_height="wrap_content"
                 android:text="More Details"
                 android:layout_gravity="center_horizontal|bottom"
