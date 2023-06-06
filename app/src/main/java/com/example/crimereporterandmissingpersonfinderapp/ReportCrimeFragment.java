@@ -66,12 +66,15 @@
 package com.example.crimereporterandmissingpersonfinderapp;
 
 import android.app.Activity;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -88,6 +91,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -112,6 +116,11 @@ public class ReportCrimeFragment extends Fragment {
 
     // sqlite database object
     private SQLiteDatabase database;
+
+    // shared preferences for user session
+    public static final String MyPREFERENCES = "MyPrefs" ;
+    public static final String userIdKey = "idKey";
+    SharedPreferences sharedpreferences;
 
     public ReportCrimeFragment() {
         // Required empty public constructor
@@ -177,6 +186,9 @@ public class ReportCrimeFragment extends Fragment {
 //        adapter1.setDropDownViewResource(android.R.layout.simple_spinner_item);
         spinnerCrime.setAdapter(adapter1);
 
+        // initializing shared preferences
+        sharedpreferences = getActivity().getSharedPreferences(MyPREFERENCES, getContext().MODE_PRIVATE);
+
         // Set up browse button click listener
         buttonBrowse.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -241,11 +253,16 @@ public class ReportCrimeFragment extends Fragment {
 
     private void registerForm() {
 
+        String selectedCrimeType = spinnerCrime.getSelectedItem().toString();
         String streetDetails = editTextStreetNumber.getText().toString().trim();
+        String selectedCity = spinnerCity.getSelectedItem().toString();
         String zipCode = editTextZipCode.getText().toString().trim();
         String crimeDescription = editTextCrimeDescription.getText().toString().trim();
+        // status set to submitted
+        String status = "Submitted";
 
-        String selectedCrimeType = spinnerCrime.getSelectedItem().toString();
+//        System.out.println(userId);
+
 //        System.out.println(selectedCrime);
         if (selectedCrimeType.equals("Select crime")) {
             Toast.makeText(getContext(), "Please select crime type", Toast.LENGTH_SHORT).show();
@@ -263,8 +280,8 @@ public class ReportCrimeFragment extends Fragment {
 //            return;
 //        }
 
-        String selectedCity = spinnerCity.getSelectedItem().toString();
-        System.out.println(selectedCity);
+
+//        System.out.println(selectedCity);
         if (selectedCity.equals("Select city")) {
             Toast.makeText(getContext(), "Please select a city", Toast.LENGTH_SHORT).show();
             return;
@@ -294,25 +311,72 @@ public class ReportCrimeFragment extends Fragment {
         try {
             // Save crime in database
             // Insert the complaint into the database
-            String insertQuery = "INSERT INTO " + DatabaseContract.Crimes.TABLE_NAME + " (" +
-                    DatabaseContract.Crimes.COLUMN_TYPE + ", " +
-                    DatabaseContract.Crimes.COLUMN_STREET_DETAILS + ", " +
-                    DatabaseContract.Crimes.COLUMN_CITY + ", " +
-                    DatabaseContract.Crimes.COLUMN_ZIPCODE + ", " +
-                    DatabaseContract.Crimes.COLUMN_CRIME_DETAILS + ", " +
-                    DatabaseContract.Crimes.COLUMN_IMAGE + ") " +
-                    "VALUES (?, ?, ?, ?, ?, ?)";
+//            String insertQuery = "INSERT INTO " + DatabaseContract.Crimes.TABLE_NAME + " (" +
+//                    DatabaseContract.Crimes.COLUMN_TYPE + ", " +
+//                    DatabaseContract.Crimes.COLUMN_STREET_DETAILS + ", " +
+//                    DatabaseContract.Crimes.COLUMN_CITY + ", " +
+//                    DatabaseContract.Crimes.COLUMN_ZIPCODE + ", " +
+//                    DatabaseContract.Crimes.COLUMN_CRIME_DETAILS + ", " +
+//                    DatabaseContract.Crimes.COLUMN_IMAGE + ", " +
+//                    DatabaseContract.Crimes.COLUMN_STATUS + ", " +
+//                    DatabaseContract.Crimes.COLUMN_USER_ID + ")" +
+//                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+//
+//            database.execSQL(insertQuery, new String[]{selectedCrimeType, streetDetails, selectedCity, zipCode, crimeDescription, String.valueOf(crimeImage), status, String.valueOf(userId)});
 
-            database.execSQL(insertQuery, new String[]{selectedCrimeType, streetDetails, selectedCity, zipCode, crimeDescription, String.valueOf(selectedImageBitmap)});
+            DBHelper dbHelper = new DBHelper(getActivity().getApplicationContext());
 
-            // clear all the fields
-            editTextStreetNumber.setText("");
-            editTextZipCode.setText("");
-            editTextCrimeDescription.setText("");
-            imageCrime.setImageBitmap(null);
+            SQLiteDatabase db = dbHelper.getWritableDatabase();
 
-            // Display success message
-            Toast.makeText(getActivity(), "Crime reported successfully!", Toast.LENGTH_SHORT).show();
+            // data preparing to send
+            ContentValues values = new ContentValues();
+
+            // putting key value pairs in object
+            values.put(DatabaseContract.Crimes.COLUMN_TYPE, selectedCrimeType);
+            values.put(DatabaseContract.Crimes.COLUMN_STREET_DETAILS, streetDetails);
+            values.put(DatabaseContract.Crimes.COLUMN_CITY, selectedCity);
+            values.put(DatabaseContract.Crimes.COLUMN_ZIPCODE, zipCode);
+            values.put(DatabaseContract.Crimes.COLUMN_CRIME_DETAILS, crimeDescription);
+
+
+            // Status initially set to submitted
+            values.put(DatabaseContract.Crimes.COLUMN_STATUS, status);
+
+            // getting the user id from shared preferences
+            int userId = Integer.parseInt(sharedpreferences.getString(userIdKey, ""));
+
+            values.put(DatabaseContract.Crimes.COLUMN_USER_ID, userId);
+
+            // crime image
+            // Get the Bitmap from the ImageView
+            Bitmap bitmap = ((BitmapDrawable) imageCrime.getDrawable()).getBitmap();
+
+            // Convert the Bitmap to a byte array
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
+            byte[] crimeImage = baos.toByteArray();
+
+            // content value --> crime image
+            values.put(DatabaseContract.Crimes.COLUMN_IMAGE, crimeImage);
+
+            // saving form data in DB
+            long rowId = db.insert(DatabaseContract.Crimes.TABLE_NAME, null, values);
+
+            if (rowId == -1) {
+                Toast.makeText(getView().getContext(), "Report not submitted!", Toast.LENGTH_LONG).show();
+            } else {
+
+                // clear all the fields
+                spinnerCrime.setSelection(0);
+                editTextStreetNumber.setText("");
+                spinnerCity.setSelection(0);
+                editTextZipCode.setText("");
+                editTextCrimeDescription.setText("");
+                imageCrime.setImageBitmap(null);
+
+                // Display success message
+                Toast.makeText(getActivity(), "Crime reported successfully!", Toast.LENGTH_SHORT).show();
+            }
         }
         catch (SQLiteException e) {
             // Display error message

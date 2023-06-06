@@ -40,7 +40,7 @@ public final class DatabaseContract {
         public static final String COLUMN_ZIPCODE = "zipcode";
         public static final String COLUMN_CRIME_DETAILS = "crime_details";
         public static final String COLUMN_IMAGE = "image";
-
+        public static final String COLUMN_STATUS = "status";
         public static final String COLUMN_USER_ID = "user_id";
     }
 

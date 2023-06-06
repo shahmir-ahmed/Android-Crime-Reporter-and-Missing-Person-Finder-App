@@ -1,6 +1,7 @@
 package com.example.crimereporterandmissingpersonfinderapp;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -26,7 +27,7 @@ import java.util.List;
 public class CrimeReportsAdapter  extends RecyclerView.Adapter<CrimeReportsAdapter.ViewHolder> {
     private List<Crime> crimeList;
     private Context context;
-    private String newStatus;
+//    private String newStatus;
 
     public CrimeReportsAdapter(List<Crime> crimeList, Context context) {
         this.crimeList = crimeList;
@@ -101,7 +102,7 @@ public class CrimeReportsAdapter  extends RecyclerView.Adapter<CrimeReportsAdapt
             public void onClick(View v) {
                 androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(context);
                 builder.setTitle("Crime Report Details");
-                builder.setMessage("Type: " + crime.getType() + "\nStreet: " + crime.getCity()+ "\nZip code: " +crime.getZipCode()+ "\nDetails: " + crime.getCrimeDetails()+"\nStatus: " +crime.getStatus());
+                builder.setMessage("Type: " + crime.getType() + "\nStreet Details: " + crime.getCity()+ "\nZip code: " +crime.getZipCode()+ "\nDetails: " + crime.getCrimeDetails()+"\nStatus: " +crime.getStatus());
                 // Add more details to the message as needed
 
                 builder.setPositiveButton("OK", null);
@@ -115,7 +116,7 @@ public class CrimeReportsAdapter  extends RecyclerView.Adapter<CrimeReportsAdapt
         holder.viewButton.setOnClickListener(v -> {
             AlertDialog.Builder builder = new AlertDialog.Builder(context);
             builder.setTitle("Crime Report Details");
-            builder.setMessage("Type: " + crime.getType() + "\nStreet: " + crime.getCity()+ "\nZip code: " +crime.getZipCode()+ "\nDetails: " + crime.getCrimeDetails()+"\nStatus: " +crime.getStatus());
+            builder.setMessage("Type: " + crime.getType() + "\nStreet: " + crime.getStreetDetails()+"\nCity: "+crime.getCity()+ "\nZip code: " +crime.getZipCode()+ "\nDetails: " + crime.getCrimeDetails()+"\nStatus: " +crime.getStatus());
             // Add more details to the message as needed
 
             builder.setPositiveButton("OK", null);
@@ -137,41 +138,45 @@ public class CrimeReportsAdapter  extends RecyclerView.Adapter<CrimeReportsAdapt
                 Spinner spinnerCrime = dialogView.findViewById(R.id.spinnerCrime);
                 EditText etStreet = dialogView.findViewById(R.id.editTextStreetNumber);
                 Spinner spinnerCity = dialogView.findViewById(R.id.spinnerCity);
-                EditText etZipCode = dialogView.findViewById(R.id.etZipCode);
-                EditText etCrimeDetails = dialogView.findViewById(R.id.etCrimeDetails);
+                EditText etZipCode = dialogView.findViewById(R.id.editTextZipCode);
+                EditText etCrimeDetails = dialogView.findViewById(R.id.editTextZipCode);
                 ImageView imageViewCrimeImage = dialogView.findViewById(R.id.imageCrime);
 
                 // Set the initial form data
-                etStreet.setText(crime.getStreetNumber());
+                // Set the crime type of the report as the selected item in the spinner
+                spinnerCrime.setSelection(getCrimeIndex(crime.getType()));
+                etStreet.setText(crime.getStreetDetails());
                 spinnerCity.setSelection(getCityIndex(crime.getCity()));
                 etZipCode.setText(crime.getZipCode());
+                etCrimeDetails.setText(crime.getCrimeDetails());
                 imageViewCrimeImage.setImageBitmap(crime.getCrimeImage());
 
                 builder.setPositiveButton("Update", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         // Get the updated form data
+                        String updatedType = spinnerCrime.getSelectedItem().toString();
                         String updatedStreet = etStreet.getText().toString();
                         String updatedCity = spinnerCity.getSelectedItem().toString();
                         String updatedZipCode = etZipCode.getText().toString();
                         String updatedCrimeDetails = etCrimeDetails.getText().toString();
-                        // Get the updated image (if needed)
-                        Bitmap updatedCrimeImage = ((BitmapDrawable) imageViewCrimeImage.getDrawable()).getBitmap();
 
                         // Perform the necessary database update operations
-                        DatabaseHelper dbHelper = new DatabaseHelper(context);
-                        boolean success = dbHelper.updateCrime(crime.getId(), updatedStreet, updatedCity, updatedZipCode, updatedCrimeDetails, updatedCrimeImage);
+                        DBHelper dbHelper = new DBHelper(context);
+                        boolean success = dbHelper.updateCrime(crime.getId(),updatedType, updatedStreet, updatedCity, updatedZipCode, updatedCrimeDetails);
 
                         if (success) {
-                            Toast.makeText(context, "Form updated successfully!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context, "Report updated successfully!", Toast.LENGTH_SHORT).show();
                             // Update the crime object with the new data
-                            crime.setStreetNumber(updatedStreet);
+                            crime.setStreetDetails(updatedStreet);
                             crime.setCity(updatedCity);
                             crime.setZipCode(updatedZipCode);
                             crime.setZipCode(updatedCrimeDetails);
-                            crime.setCrimeImage(updatedCrimeImage);
+//                            crime.setCrimeImage(updatedCrimeImage);
                             // Notify the adapter that the data has changed
                             notifyItemChanged(position);
+
+                            Toast.makeText(context, "Crime report updated successfully!", Toast.LENGTH_SHORT).show();
                         } else {
                             Toast.makeText(context, "Failed to update form!", Toast.LENGTH_SHORT).show();
                         }
@@ -205,8 +210,8 @@ public class CrimeReportsAdapter  extends RecyclerView.Adapter<CrimeReportsAdapt
                         int crimeId = crime.getId();
 
                         // Call the deleteComplaint method from DatabaseHelper
-                        DatabaseHelper databaseHelper = new DatabaseHelper(context);
-                        databaseHelper.deleteComplaint(crimeId);
+                        DBHelper databaseHelper = new DBHelper(context);
+                        databaseHelper.deleteCrime(crimeId);
 
                         // Remove the complaint from the list
                         crimeList.remove(position);
@@ -242,6 +247,25 @@ public class CrimeReportsAdapter  extends RecyclerView.Adapter<CrimeReportsAdapt
         return Arrays.asList(citiesArray);
     }
 
+    private int getCrimeIndex(String crime) {
+        // Assuming you have a list of crimes to populate the Spinner
+        List<String> crimesList = getCrimesList();
+
+        // Iterate over the list to find the index of the selected crime type
+        for (int i = 0; i < crimesList.size(); i++) {
+            if (crimesList.get(i).equals(crime)) {
+                return i;
+            }
+        }
+
+        return 0; // Return 0 as the default index if the crime is not found
+    }
+
+    private List<String> getCrimesList() {
+        String[] crimesArray = context.getResources().getStringArray(R.array.crime_array);
+        return Arrays.asList(crimesArray);
+    }
+
     @Override
     public int getItemCount() {
         return crimeList.size();
@@ -254,9 +278,7 @@ public class CrimeReportsAdapter  extends RecyclerView.Adapter<CrimeReportsAdapt
         TextView crimeStreetTextView;
         TextView crimeDetailsTextView;
         TextView statusTextView;
-
         ImageView crimeImage;
-
         Button viewButton, updateButton, deleteButton, moreDetailsBtn;
 
         public ViewHolder(View itemView) {
@@ -267,7 +289,7 @@ public class CrimeReportsAdapter  extends RecyclerView.Adapter<CrimeReportsAdapt
              crimeDetailsTextView = itemView.findViewById(R.id.tv6);
              statusTextView = itemView.findViewById(R.id.tv8);
 
-             crimeImage = itemView.findViewById(R.id.imageCrime);
+             crimeImage = itemView.findViewById(R.id.imgCrime);
 
             viewButton = itemView.findViewById(R.id.viewBtn);
             updateButton = itemView.findViewById(R.id.updateBtn);

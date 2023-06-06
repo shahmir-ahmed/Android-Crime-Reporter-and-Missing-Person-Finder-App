@@ -7,45 +7,18 @@ public class Crime {
     private String type;
     private String streetDetails;
     private String city;
-    private int zipCode;
+    private String zipCode;
     private String crimeDetails;
     private Bitmap crimeImage;
     private String status;
 
+
     public int getId() {
         return id;
     }
+
     public void setId(int id) {
         this.id = id;
-    }
-
-    public String getCity() {
-        return city;
-    }
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public int getZipCode() {
-        return zipCode;
-    }
-
-    public String getCrimeDetails() {
-        return crimeDetails;
-    }
-    public void setCrimeDetails(String id) {
-        this.crimeDetails = crimeDetails;
-    }
-
-    public Bitmap getCrimeImage() { return crimeImage; }
-    public void setCrimeImage(Bitmap crimeImage) { this.crimeImage = crimeImage; }
-
-
-    public String getStatus() {
-        return status;
-    }
-    public void setStatus(String status) {
-        this.status = status;
     }
 
     public String getType() {
@@ -64,8 +37,44 @@ public class Crime {
         this.streetDetails = streetDetails;
     }
 
-    public void setZipCode(int zipCode) {
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getZipCode() {
+        return zipCode;
+    }
+
+    public void setZipCode(String zipCode) {
         this.zipCode = zipCode;
+    }
+
+    public String getCrimeDetails() {
+        return crimeDetails;
+    }
+
+    public void setCrimeDetails(String crimeDetails) {
+        this.crimeDetails = crimeDetails;
+    }
+
+    public Bitmap getCrimeImage() {
+        return crimeImage;
+    }
+
+    public void setCrimeImage(Bitmap crimeImage) {
+        this.crimeImage = crimeImage;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }
 
