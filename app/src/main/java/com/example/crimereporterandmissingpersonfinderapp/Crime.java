@@ -4,14 +4,10 @@ import android.graphics.Bitmap;
 
 public class Crime {
     private int id;
-    private String type;
-    private String streetDetails;
-    private String city;
-    private String zipCode;
-    private String crimeDetails;
+    private String type, streetDetails, city, zipCode, crimeDetails, status;
     private Bitmap crimeImage;
-    private String status;
 
+    private String userName, userContact, userEmail, userCNIC;
 
     public int getId() {
         return id;
@@ -75,6 +71,38 @@ public class Crime {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getUserContact() {
+        return userContact;
+    }
+
+    public void setUserContact(String userContact) {
+        this.userContact = userContact;
+    }
+
+    public String getUserEmail() {
+        return userEmail;
+    }
+
+    public void setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
+    }
+
+    public String getUserCNIC() {
+        return userCNIC;
+    }
+
+    public void setUserCNIC(String userCNIC) {
+        this.userCNIC = userCNIC;
     }
 }
 

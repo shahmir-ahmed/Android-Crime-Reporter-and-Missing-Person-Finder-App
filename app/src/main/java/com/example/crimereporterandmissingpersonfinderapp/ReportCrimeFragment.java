@@ -212,10 +212,11 @@ public class ReportCrimeFragment extends Fragment {
 
     // handle the browse image button click
     private void openImageChooser() {
-        Intent intent = new Intent();
+        Intent intent = new Intent(Intent.ACTION_PICK);
         intent.setType("image/*");
-        intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(Intent.createChooser(intent, "Select Image"), PICK_IMAGE_REQUEST);
+//        intent.setAction(Intent.ACTION_PICK_ACTIVITY);
+//        startActivityForResult(Intent.createChooser(intent, "Select Image"), PICK_IMAGE_REQUEST);
+        startActivityForResult(intent, PICK_IMAGE_REQUEST);
     }
 
     // handle the image selection result
@@ -300,6 +301,11 @@ public class ReportCrimeFragment extends Fragment {
 
         if (crimeDescription.isEmpty()) {
             editTextCrimeDescription.setError("Please enter crime description");
+            return;
+        }
+
+        if (crimeDescription.length()>200) {
+            editTextCrimeDescription.setError("Max limit: 200 characters");
             return;
         }
 

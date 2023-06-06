@@ -3,10 +3,14 @@ package com.example.crimereporterandmissingpersonfinderapp;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -23,6 +27,11 @@ public class CrimeReportsByUsersFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    private RecyclerView recyclerView;
+    private CrimeReportsByUsersAdapter adapter;
+    private List<Crime> crimeList;
+    private DBHelper dbHelper;
 
     public CrimeReportsByUsersFragment() {
         // Required empty public constructor
@@ -58,7 +67,24 @@ public class CrimeReportsByUsersFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        dbHelper = new DBHelper(requireContext());
+        crimeList = dbHelper.getAllCrimes();
+        adapter = new CrimeReportsByUsersAdapter(crimeList, requireContext());
+
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_crime_reports_by_users, container, false);
+        View view = inflater.inflate(R.layout.fragment_crime_reports_by_users, container, false);
+
+        recyclerView = view.findViewById(R.id.recyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
+        recyclerView.setAdapter(adapter);
+
+        return view;
     }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        dbHelper.close();
+    }
+
 }

@@ -43,7 +43,7 @@
         app:layout_constraintHorizontal_bias="0.107"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.068"
+        app:layout_constraintVertical_bias="0.058"
         tools:ignore="HardcodedText" />
 
     <Spinner
@@ -58,7 +58,7 @@
         app:layout_constraintHorizontal_bias="0.831"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.055"
+        app:layout_constraintVertical_bias="0.045"
         tools:ignore="SpeakableTextPresentCheck" />
 
     <TextView
@@ -108,7 +108,7 @@
         app:layout_constraintHorizontal_bias="0.11"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView17"
-        app:layout_constraintVertical_bias="0.050"
+        app:layout_constraintVertical_bias="0.045"
         tools:ignore="HardcodedText" />
 
     <Button
@@ -174,7 +174,7 @@
 
     <EditText
         android:id="@+id/editTextStreetNumber"
-        android:layout_width="237dp"
+        android:layout_width="230dp"
         android:layout_height="48dp"
         android:inputType="text"
         android:textColor="#FFFF"
@@ -182,10 +182,10 @@
         android:fontFamily="@font/poppins_light"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.735"
+        app:layout_constraintHorizontal_bias="0.745"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.127"
+        app:layout_constraintVertical_bias="0.112"
         tools:ignore="Autofill,LabelFor,SpeakableTextPresentCheck" />
 
     <Spinner
@@ -200,7 +200,7 @@
         app:layout_constraintHorizontal_bias="0.864"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextStreetNumber"
-        app:layout_constraintVertical_bias="0.027"
+        app:layout_constraintVertical_bias="0.028"
         tools:ignore="SpeakableTextPresentCheck" />
 
     <EditText
@@ -216,7 +216,7 @@
         app:layout_constraintHorizontal_bias="0.78"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spinnerCity"
-        app:layout_constraintVertical_bias="0.034"
+        app:layout_constraintVertical_bias="0.040"
         tools:ignore="Autofill,HardcodedText,LabelFor,SpeakableTextPresentCheck" />
 
     <ImageView

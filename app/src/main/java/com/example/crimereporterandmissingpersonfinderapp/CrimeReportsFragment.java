@@ -88,7 +88,7 @@ public class CrimeReportsFragment extends Fragment {
         crimeList = dbHelper.getUserCrimes(userId);
 
         if(crimeList.stream().count()==0){
-            Toast.makeText(getActivity().getApplicationContext(), "no crime reports!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity().getApplicationContext(), "No crime reports!", Toast.LENGTH_SHORT).show();
         }else{
             crimeAdapter = new CrimeReportsAdapter(crimeList, requireContext());
         }

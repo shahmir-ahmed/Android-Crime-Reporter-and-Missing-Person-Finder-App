@@ -11,6 +11,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -102,7 +103,7 @@ public class CrimeReportsAdapter  extends RecyclerView.Adapter<CrimeReportsAdapt
             public void onClick(View v) {
                 androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(context);
                 builder.setTitle("Crime Report Details");
-                builder.setMessage("Type: " + crime.getType() + "\nStreet Details: " + crime.getCity()+ "\nZip code: " +crime.getZipCode()+ "\nDetails: " + crime.getCrimeDetails()+"\nStatus: " +crime.getStatus());
+                builder.setMessage("Type: " + crime.getType() + "\nStreet: " + crime.getStreetDetails()+"\nCity: "+crime.getCity()+ "\nZip code: " +crime.getZipCode()+ "\nDetails: " + crime.getCrimeDetails()+"\nStatus: " +crime.getStatus());
                 // Add more details to the message as needed
 
                 builder.setPositiveButton("OK", null);
@@ -139,8 +140,22 @@ public class CrimeReportsAdapter  extends RecyclerView.Adapter<CrimeReportsAdapt
                 EditText etStreet = dialogView.findViewById(R.id.editTextStreetNumber);
                 Spinner spinnerCity = dialogView.findViewById(R.id.spinnerCity);
                 EditText etZipCode = dialogView.findViewById(R.id.editTextZipCode);
-                EditText etCrimeDetails = dialogView.findViewById(R.id.editTextZipCode);
-                ImageView imageViewCrimeImage = dialogView.findViewById(R.id.imageCrime);
+                EditText etCrimeDetails = dialogView.findViewById(R.id.editTextCrimeDescription);
+//                ImageView imageViewCrimeImage = dialogView.findViewById(R.id.imageCrime);
+
+                // Retrieve the array from the XML file
+                String[] cityArray = ((Activity)context).getResources().getStringArray(R.array.city_array);
+
+                // Create ArrayAdapter and set it as the adapter for the Spinner
+                ArrayAdapter<String> adapter = new ArrayAdapter<>(context, android.R.layout.simple_list_item_1, cityArray);
+                spinnerCity.setAdapter(adapter);
+
+                // Retrieve the array from the XML file
+                String[] crimeArray = ((Activity)context).getResources().getStringArray(R.array.crime_array);
+
+                // Create ArrayAdapter and set it as the adapter for the Spinner
+                ArrayAdapter<String> adapter1 = new ArrayAdapter<>(context, android.R.layout.simple_list_item_1, crimeArray);
+                spinnerCrime.setAdapter(adapter1);
 
                 // Set the initial form data
                 // Set the crime type of the report as the selected item in the spinner
@@ -149,7 +164,7 @@ public class CrimeReportsAdapter  extends RecyclerView.Adapter<CrimeReportsAdapt
                 spinnerCity.setSelection(getCityIndex(crime.getCity()));
                 etZipCode.setText(crime.getZipCode());
                 etCrimeDetails.setText(crime.getCrimeDetails());
-                imageViewCrimeImage.setImageBitmap(crime.getCrimeImage());
+//                imageViewCrimeImage.setImageBitmap(crime.getCrimeImage());
 
                 builder.setPositiveButton("Update", new DialogInterface.OnClickListener() {
                     @Override
@@ -161,24 +176,63 @@ public class CrimeReportsAdapter  extends RecyclerView.Adapter<CrimeReportsAdapt
                         String updatedZipCode = etZipCode.getText().toString();
                         String updatedCrimeDetails = etCrimeDetails.getText().toString();
 
-                        // Perform the necessary database update operations
-                        DBHelper dbHelper = new DBHelper(context);
-                        boolean success = dbHelper.updateCrime(crime.getId(),updatedType, updatedStreet, updatedCity, updatedZipCode, updatedCrimeDetails);
+                        if (updatedType.equals("Select crime")) {
+                            Toast.makeText(context, "Please select crime type", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
 
-                        if (success) {
-                            Toast.makeText(context, "Report updated successfully!", Toast.LENGTH_SHORT).show();
-                            // Update the crime object with the new data
-                            crime.setStreetDetails(updatedStreet);
-                            crime.setCity(updatedCity);
-                            crime.setZipCode(updatedZipCode);
-                            crime.setZipCode(updatedCrimeDetails);
+                        if (updatedStreet.isEmpty()) {
+                            Toast.makeText(context, "Street details are required", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+
+                        if (updatedCity.equals("Select city")) {
+                            Toast.makeText(context, "Please select a city", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+
+                        if (updatedZipCode.isEmpty()) {
+                            Toast.makeText(context, "Zip code is required", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+                        else if (!isValidZipCode(updatedZipCode)) {
+                            Toast.makeText(context, "Invalid! Enter 5 digit zip code", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+
+                        if (updatedCrimeDetails.isEmpty()) {
+                            Toast.makeText(context, "Please enter crime description", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+
+                        if (updatedCrimeDetails.length()>200) {
+                            Toast.makeText(context, "Crime description max limit: 200 characters", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+
+                        try {
+                            // Perform the necessary database update operations
+                            DBHelper dbHelper = new DBHelper(context);
+                            boolean success = dbHelper.updateCrime(crime.getId(), updatedType, updatedStreet, updatedCity, updatedZipCode, updatedCrimeDetails);
+
+                            if (success) {
+                                Toast.makeText(context, "Report updated successfully!", Toast.LENGTH_SHORT).show();
+                                // Update the crime object with the new data
+                                crime.setType(updatedType);
+                                crime.setStreetDetails(updatedStreet);
+                                crime.setCity(updatedCity);
+                                crime.setZipCode(updatedZipCode);
+                                crime.setCrimeDetails(updatedCrimeDetails);
 //                            crime.setCrimeImage(updatedCrimeImage);
-                            // Notify the adapter that the data has changed
-                            notifyItemChanged(position);
+                                // Notify the adapter that the data has changed
+                                notifyItemChanged(position);
 
-                            Toast.makeText(context, "Crime report updated successfully!", Toast.LENGTH_SHORT).show();
-                        } else {
-                            Toast.makeText(context, "Failed to update form!", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context, "Crime report updated successfully!", Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(context, "Failed to update form!", Toast.LENGTH_SHORT).show();
+                            }
+                        }catch(Exception e){
+                            Toast.makeText(context, "Error occured!", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
@@ -264,6 +318,11 @@ public class CrimeReportsAdapter  extends RecyclerView.Adapter<CrimeReportsAdapt
     private List<String> getCrimesList() {
         String[] crimesArray = context.getResources().getStringArray(R.array.crime_array);
         return Arrays.asList(crimesArray);
+    }
+
+    private boolean isValidZipCode(String zipCode) {
+        // - The zip code shall be a 5 digit number
+        return zipCode.matches("[0-9]{5}");
     }
 
     @Override

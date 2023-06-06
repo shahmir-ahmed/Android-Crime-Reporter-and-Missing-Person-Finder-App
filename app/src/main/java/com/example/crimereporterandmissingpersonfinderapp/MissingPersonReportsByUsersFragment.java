@@ -153,7 +153,7 @@ public class MissingPersonReportsByUsersFragment extends Fragment {
                 missingPersonReportsByUsersAdapter = new MissingPersonReportsByUsersAdapter(missingPersonData, (AdminDashboardActivity) getActivity());
                 recyclerView.setAdapter(missingPersonReportsByUsersAdapter);
             } else {
-                Toast.makeText(getActivity().getApplicationContext(), "No missing person reports found!", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getActivity().getApplicationContext(), "No missing person reports found!", Toast.LENGTH_SHORT).show();
             }
         }catch(Exception e){
             Toast.makeText(getActivity().getApplicationContext(), "Error occured!", Toast.LENGTH_SHORT).show();

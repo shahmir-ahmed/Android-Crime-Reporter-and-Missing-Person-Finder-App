@@ -174,7 +174,7 @@ public class MissingPersonReportsFragment extends Fragment {
             recyclerView.setAdapter(userMissingPersonReportsAdapter);
         }
         else{
-            Toast.makeText(getActivity().getApplicationContext(), "No reports found!", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(getActivity().getApplicationContext(), "No reports found!", Toast.LENGTH_SHORT).show();
         }
     }
 

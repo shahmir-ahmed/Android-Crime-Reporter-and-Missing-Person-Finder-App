@@ -1,237 +1,275 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:fillViewport="true">
 
-    <!-- Main Constraint Layout for the Fragment -->
-    <androidx.constraintlayout.widget.ConstraintLayout
+<!-- Main Linear Layout for the Activity -->
+<LinearLayout android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#240e71"
+    android:orientation="vertical"
+    tools:context=".MissingPersonReportsFragment"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!--    <TextView-->
+    <!--        android:id="@+id/textView17"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginTop="20dp"-->
+    <!--        android:layout_marginBottom="5dp"-->
+    <!--        android:fontFamily="@font/poppins_light"-->
+    <!--        android:text="Crime Reports By Users"-->
+    <!--        android:textColor="#FFFFFF"-->
+    <!--        android:textSize="24sp"-->
+    <!--        android:textStyle="bold"-->
+    <!--        android:layout_gravity="center"/>-->
+
+
+    <!--Recycler View-->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:scrollbars="vertical"
         android:background="#240e71"
-        tools:context=".ViewCrimeAdmin"
-        tools:ignore="ScrollViewSize">
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools" />
 
-        <!--  List of Crimes  -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="8dp"
-            android:text="List of Crimes"
-            android:textColor="@color/black"
-            android:textSize="40sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.496"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="HardcodedText,MissingConstraints" />
+</LinearLayout>
+<!--<?xml version="1.0" encoding="utf-8"?>-->
+<!--<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    xmlns:app="http://schemas.android.com/apk/res-auto"-->
+<!--    xmlns:tools="http://schemas.android.com/tools"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="match_parent"-->
+<!--    android:fillViewport="true">-->
 
-        <!--  Card View  -->
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cv1"
-            android:layout_width="413dp"
-            android:layout_height="304dp"
-            android:layout_marginTop="64dp"
-            app:cardBackgroundColor="@color/white"
-            app:cardCornerRadius="20dp"
-            app:cardElevation="10dp"
-            app:cardMaxElevation="12dp"
-            app:cardPreventCornerOverlap="true"
-            app:cardUseCompatPadding="true"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+<!--    &lt;!&ndash; Main Constraint Layout for the Fragment &ndash;&gt;-->
+<!--    <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:background="#240e71"-->
+<!--        tools:context=".ViewCrimeAdmin"-->
+<!--        tools:ignore="ScrollViewSize">-->
 
+<!--        &lt;!&ndash;  List of Crimes  &ndash;&gt;-->
+<!--&lt;!&ndash;        <TextView&ndash;&gt;-->
+<!--&lt;!&ndash;            android:layout_width="wrap_content"&ndash;&gt;-->
+<!--&lt;!&ndash;            android:layout_height="wrap_content"&ndash;&gt;-->
+<!--&lt;!&ndash;            android:layout_gravity="center"&ndash;&gt;-->
+<!--&lt;!&ndash;            android:layout_marginTop="8dp"&ndash;&gt;-->
+<!--&lt;!&ndash;            android:text="List of Crimes"&ndash;&gt;-->
+<!--&lt;!&ndash;            android:textColor="@color/black"&ndash;&gt;-->
+<!--&lt;!&ndash;            android:textSize="40sp"&ndash;&gt;-->
+<!--&lt;!&ndash;            android:textStyle="bold"&ndash;&gt;-->
+<!--&lt;!&ndash;            app:layout_constraintEnd_toEndOf="parent"&ndash;&gt;-->
+<!--&lt;!&ndash;            app:layout_constraintHorizontal_bias="0.496"&ndash;&gt;-->
+<!--&lt;!&ndash;            app:layout_constraintStart_toStartOf="parent"&ndash;&gt;-->
+<!--&lt;!&ndash;            app:layout_constraintTop_toTopOf="parent"&ndash;&gt;-->
+<!--&lt;!&ndash;            tools:ignore="HardcodedText,MissingConstraints" />&ndash;&gt;-->
 
-            <!--  Inner Constraint Layout 1 inside the Card View for the Card View Content on top  -->
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="378dp"
-                android:layout_height="202dp">
-
-                <!--  "Name" text view  -->
-                <TextView
-                    android:id="@+id/tv1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="36dp"
-                    android:layout_marginTop="28dp"
-                    android:fontFamily="@font/poppins_light"
-                    android:text="Name:"
-                    android:textColor="@color/black"
-                    android:textSize="15sp"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:ignore="HardcodedText" />
-
-                <!--  "person name" text view  -->
-                <TextView
-                    android:id="@+id/tv2"
-                    android:layout_width="180dp"
-                    android:layout_height="25dp"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="28dp"
-                    android:fontFamily="@font/poppins_light"
-                    android:text="Faizan Tariq"
-                    android:textColor="@color/black"
-                    android:textSize="15sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.614"
-                    app:layout_constraintStart_toEndOf="@+id/tv1"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:ignore="HardcodedText" />
-
-                <!--  "City" text view  -->
-                <TextView
-                    android:id="@+id/tv3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="36dp"
-                    android:layout_marginTop="20dp"
-                    android:fontFamily="@font/poppins_light"
-                    android:text="City:"
-                    android:textColor="@color/black"
-                    android:textSize="15sp"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tv1"
-                    tools:ignore="HardcodedText" />
-
-                <!--  "City Name" text view  -->
-                <TextView
-                    android:id="@+id/tv4"
-                    android:layout_width="180dp"
-                    android:layout_height="25dp"
-                    android:layout_marginStart="28dp"
-                    android:layout_marginTop="12dp"
-                    android:fontFamily="@font/poppins_light"
-                    android:text="Rawalpindi"
-                    android:textColor="@color/black"
-                    android:textSize="15sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.52"
-                    app:layout_constraintStart_toEndOf="@+id/tv3"
-                    app:layout_constraintTop_toBottomOf="@+id/tv2"
-                    tools:ignore="HardcodedText" />
-
-                <!--  "Crime" text view  -->
-
-                <!--  "Crime details" text view  -->
+<!--        &lt;!&ndash;  Card View  &ndash;&gt;-->
+<!--        <androidx.cardview.widget.CardView-->
+<!--            android:id="@+id/cv1"-->
+<!--            android:layout_width="363dp"-->
+<!--            android:layout_height="304dp"-->
+<!--            app:cardBackgroundColor="@color/white"-->
+<!--            app:cardCornerRadius="20dp"-->
+<!--            app:cardElevation="10dp"-->
+<!--            app:cardMaxElevation="12dp"-->
+<!--            app:cardPreventCornerOverlap="true"-->
+<!--            app:cardUseCompatPadding="true"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintHorizontal_bias="0.0"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent">-->
 
 
-                <!--  "Status" text view  -->
-                <TextView
-                    android:id="@+id/tv5"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="36dp"
-                    android:layout_marginTop="112dp"
-                    android:fontFamily="@font/poppins_light"
-                    android:text="Crime:"
-                    android:textColor="@color/black"
-                    android:textSize="15sp"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:ignore="HardcodedText" />
+<!--            &lt;!&ndash;  Inner Constraint Layout 1 inside the Card View for the Card View Content on top  &ndash;&gt;-->
+<!--            <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                android:layout_width="328dp"-->
+<!--                android:layout_height="202dp">-->
 
-                <!--  "Status description" text view  -->
+<!--                &lt;!&ndash;  "Name" text view  &ndash;&gt;-->
+<!--                <TextView-->
+<!--                    android:id="@+id/tv1"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginStart="25dp"-->
+<!--                    android:layout_marginTop="28dp"-->
+<!--                    android:fontFamily="@font/poppins_light"-->
+<!--                    android:text="Name:"-->
+<!--                    android:textColor="@color/black"-->
+<!--                    android:textSize="15sp"-->
+<!--                    android:textStyle="bold"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toTopOf="parent"-->
+<!--                    tools:ignore="HardcodedText" />-->
 
-                <TextView
-                    android:id="@+id/tv6"
-                    android:layout_width="180dp"
-                    android:layout_height="25dp"
-                    android:layout_marginTop="104dp"
-                    android:fontFamily="@font/poppins_light"
-                    android:text="Stolen Car"
-                    android:textColor="@color/black"
-                    android:textSize="15sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.644"
-                    app:layout_constraintStart_toEndOf="@+id/tv5"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:ignore="HardcodedText" />
+<!--                &lt;!&ndash;  "person name" text view  &ndash;&gt;-->
 
-                <TextView
-                    android:id="@+id/tv7"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="36dp"
-                    android:layout_marginTop="60dp"
-                    android:fontFamily="@font/poppins_light"
-                    android:text="Status:"
-                    android:textColor="@color/black"
-                    android:textSize="15sp"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tv3"
-                    tools:ignore="HardcodedText" />
+<!--                &lt;!&ndash;  "City" text view  &ndash;&gt;-->
 
-                <TextView
-                    android:id="@+id/tv8"
-                    android:layout_width="180dp"
-                    android:layout_height="25dp"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="56dp"
-                    android:fontFamily="@font/poppins_light"
-                    android:text="Submitted"
-                    android:textColor="@color/design_default_color_error"
-                    android:textSize="15sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.606"
-                    app:layout_constraintStart_toEndOf="@+id/tv5"
-                    app:layout_constraintTop_toBottomOf="@+id/tv4"
-                    tools:ignore="HardcodedText" />
+<!--                &lt;!&ndash;  "City Name" text view  &ndash;&gt;-->
+<!--                <TextView-->
+<!--                    android:id="@+id/tv2"-->
+<!--                    android:layout_width="180dp"-->
+<!--                    android:layout_height="25dp"-->
+<!--                    android:layout_marginStart="10dp"-->
+<!--                    android:layout_marginTop="28dp"-->
+<!--                    android:fontFamily="@font/poppins_light"-->
+<!--                    android:text="Faizan Tariq"-->
+<!--                    android:textColor="@color/black"-->
+<!--                    android:textSize="15sp"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:layout_constraintHorizontal_bias="0.413"-->
+<!--                    app:layout_constraintStart_toEndOf="@+id/tv1"-->
+<!--                    app:layout_constraintTop_toTopOf="parent"-->
+<!--                    tools:ignore="HardcodedText" />-->
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
-            <!--  End of inner constraint layout 1  -->
+<!--                <TextView-->
+<!--                    android:id="@+id/tv3"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginStart="24dp"-->
+<!--                    android:layout_marginTop="12dp"-->
+<!--                    android:fontFamily="@font/poppins_light"-->
+<!--                    android:text="City:"-->
+<!--                    android:textColor="@color/black"-->
+<!--                    android:textSize="15sp"-->
+<!--                    android:textStyle="bold"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toBottomOf="@+id/tv1"-->
+<!--                    tools:ignore="HardcodedText" />-->
 
-            <!-- Linear Layout for action buttons for report-->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="75dp"
-                android:layout_gravity="bottom"
-                android:orientation="horizontal">
+<!--                &lt;!&ndash;  "Crime" text view  &ndash;&gt;-->
 
-                <Button
-                    android:id="@+id/viewBtn"
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginBottom="28dp"
-                    android:text="View"
-                    tools:ignore="ButtonStyle,HardcodedText,RtlHardcoded" />
+<!--                &lt;!&ndash;  "Crime details" text view  &ndash;&gt;-->
 
-                <Button
-                    android:id="@+id/updateBtn"
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="25dp"
-                    android:layout_marginRight="20dp"
-                    android:layout_marginBottom="28dp"
-                    android:text="Update"
-                    tools:ignore="ButtonStyle,HardcodedText,RtlHardcoded" />
 
-                <Button
-                    android:id="@+id/deleteBtn"
-                    android:layout_width="90dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="6dp"
-                    android:layout_marginRight="80dp"
-                    android:layout_marginBottom="28dp"
-                    android:text="Delete"
-                    tools:ignore="ButtonStyle,HardcodedText,RtlHardcoded" />
+<!--                &lt;!&ndash;  "Status" text view  &ndash;&gt;-->
 
-            </LinearLayout>
+<!--                &lt;!&ndash;  "Status description" text view  &ndash;&gt;-->
 
-        </androidx.cardview.widget.CardView>
-        <!--  End of Card View  -->
+<!--                <TextView-->
+<!--                    android:id="@+id/tv4"-->
+<!--                    android:layout_width="180dp"-->
+<!--                    android:layout_height="25dp"-->
+<!--                    android:layout_marginStart="28dp"-->
+<!--                    android:layout_marginTop="12dp"-->
+<!--                    android:fontFamily="@font/poppins_light"-->
+<!--                    android:text="Rawalpindi"-->
+<!--                    android:textColor="@color/black"-->
+<!--                    android:textSize="15sp"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:layout_constraintHorizontal_bias="0.408"-->
+<!--                    app:layout_constraintStart_toEndOf="@+id/tv3"-->
+<!--                    app:layout_constraintTop_toBottomOf="@+id/tv2"-->
+<!--                    tools:ignore="HardcodedText" />-->
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+<!--                <TextView-->
+<!--                    android:id="@+id/tv5"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginStart="24dp"-->
+<!--                    android:layout_marginTop="16dp"-->
+<!--                    android:fontFamily="@font/poppins_light"-->
+<!--                    android:text="Crime:"-->
+<!--                    android:textColor="@color/black"-->
+<!--                    android:textSize="15sp"-->
+<!--                    android:textStyle="bold"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toBottomOf="@+id/tv3"-->
+<!--                    tools:ignore="HardcodedText" />-->
 
-</ScrollView>
+<!--                <TextView-->
+<!--                    android:id="@+id/tv6"-->
+<!--                    android:layout_width="180dp"-->
+<!--                    android:layout_height="25dp"-->
+<!--                    android:layout_marginTop="12dp"-->
+<!--                    android:fontFamily="@font/poppins_light"-->
+<!--                    android:text="Stolen Car"-->
+<!--                    android:textColor="@color/black"-->
+<!--                    android:textSize="15sp"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:layout_constraintHorizontal_bias="0.464"-->
+<!--                    app:layout_constraintStart_toEndOf="@+id/tv5"-->
+<!--                    app:layout_constraintTop_toBottomOf="@+id/tv4"-->
+<!--                    tools:ignore="HardcodedText" />-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/tv7"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginStart="24dp"-->
+<!--                    android:layout_marginTop="16dp"-->
+<!--                    android:fontFamily="@font/poppins_light"-->
+<!--                    android:text="Status:"-->
+<!--                    android:textColor="@color/black"-->
+<!--                    android:textSize="15sp"-->
+<!--                    android:textStyle="bold"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toBottomOf="@+id/tv5"-->
+<!--                    tools:ignore="HardcodedText" />-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/tv8"-->
+<!--                    android:layout_width="180dp"-->
+<!--                    android:layout_height="25dp"-->
+<!--                    android:layout_marginStart="10dp"-->
+<!--                    android:layout_marginTop="16dp"-->
+<!--                    android:fontFamily="@font/poppins_light"-->
+<!--                    android:text="Submitted"-->
+<!--                    android:textColor="@color/design_default_color_error"-->
+<!--                    android:textSize="15sp"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:layout_constraintHorizontal_bias="0.418"-->
+<!--                    app:layout_constraintStart_toEndOf="@+id/tv5"-->
+<!--                    app:layout_constraintTop_toBottomOf="@+id/tv6"-->
+<!--                    tools:ignore="HardcodedText" />-->
+
+<!--            </androidx.constraintlayout.widget.ConstraintLayout>-->
+<!--            &lt;!&ndash;  End of inner constraint layout 1  &ndash;&gt;-->
+
+<!--            &lt;!&ndash; Linear Layout for action buttons for report&ndash;&gt;-->
+<!--            <LinearLayout-->
+<!--                android:layout_width="325dp"-->
+<!--                android:layout_height="75dp"-->
+<!--                android:layout_gravity="bottom"-->
+<!--                android:orientation="horizontal">-->
+
+<!--                <Button-->
+<!--                    android:id="@+id/viewBtn"-->
+<!--                    android:layout_width="80dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginLeft="15dp"-->
+<!--                    android:layout_marginBottom="28dp"-->
+<!--                    android:text="View"-->
+<!--                    tools:ignore="ButtonStyle,HardcodedText,RtlHardcoded" />-->
+
+<!--                <Button-->
+<!--                    android:id="@+id/updateBtn"-->
+<!--                    android:layout_width="93dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginLeft="20dp"-->
+<!--                    android:layout_marginRight="20dp"-->
+<!--                    android:layout_marginBottom="28dp"-->
+<!--                    android:text="Update"-->
+<!--                    tools:ignore="ButtonStyle,HardcodedText,RtlHardcoded" />-->
+
+<!--                <Button-->
+<!--                    android:id="@+id/deleteBtn"-->
+<!--                    android:layout_width="90dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginRight="80dp"-->
+<!--                    android:layout_marginBottom="28dp"-->
+<!--                    android:text="Delete"-->
+<!--                    tools:ignore="ButtonStyle,HardcodedText,RtlHardcoded" />-->
+
+<!--            </LinearLayout>-->
+
+<!--        </androidx.cardview.widget.CardView>-->
+<!--        &lt;!&ndash;  End of Card View  &ndash;&gt;-->
+
+<!--    </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+<!--</ScrollView>-->
