@@ -202,7 +202,7 @@ public class CrimeReportsByUsersAdapter extends RecyclerView.Adapter<CrimeReport
 
                         // Call the deleteComplaint method from DatabaseHelper
                         DBHelper databaseHelper = new DBHelper(context);
-                        databaseHelper.deleteComplaint(crimeId);
+                        databaseHelper.deleteCrime(crimeId);
 
                         // Remove the complaint from the list
                         crimeList.remove(position);

@@ -473,7 +473,7 @@ public class DBHelper extends SQLiteOpenHelper {
         db.close();
 
         if (deletedRows > 0) {
-            Log.d("DatabaseHelper", "Crime deleted successfully!");
+            Log.d("DatabaseHelper", "Crime report deleted successfully!");
         } else {
             Log.d("DatabaseHelper", "Failed to delete crime");
         }

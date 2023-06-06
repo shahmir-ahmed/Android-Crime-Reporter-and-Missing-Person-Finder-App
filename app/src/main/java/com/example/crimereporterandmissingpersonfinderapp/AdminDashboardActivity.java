@@ -110,6 +110,8 @@ public class AdminDashboardActivity extends AppCompatActivity {
                 // starting the login activity over the main activity
                 startActivity(intent);
 
+                Toast.makeText(this, "Logged out successfully!", Toast.LENGTH_SHORT).show();
+
                 return true;
 
             default:
