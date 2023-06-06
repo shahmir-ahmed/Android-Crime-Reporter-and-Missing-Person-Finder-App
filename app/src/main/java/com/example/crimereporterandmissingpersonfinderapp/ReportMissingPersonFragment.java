@@ -163,11 +163,17 @@ public class ReportMissingPersonFragment extends Fragment {
                 // validation
                 // if name is not entered
                 if(name.trim().isEmpty()){
-                    Toast.makeText(getView().getContext(), "Please enter name!", Toast.LENGTH_LONG).show();
+//                    Toast.makeText(getView().getContext(), "Please enter name!", Toast.LENGTH_LONG).show();
+                    etPersonName.setError("Name is required");
+                    etPersonName.requestFocus();
+                    return;
                 }
                 // if age is not entered
                 else if(age.trim().isEmpty()){
-                    Toast.makeText(getView().getContext(), "Please enter age!", Toast.LENGTH_LONG).show();
+//                    Toast.makeText(getView().getContext(), "Please enter age!", Toast.LENGTH_LONG).show();
+                    etPersonAge.setError("Age is required");
+                    etPersonAge.requestFocus();
+                    return;
                 }
                 // if age is not entered
                 else if(age.length()!=2){
@@ -179,18 +185,30 @@ public class ReportMissingPersonFragment extends Fragment {
                 }
                 // last seen field is not filled
                 else if(lastSeen.trim().isEmpty()){
-                    Toast.makeText(getView().getContext(), "Please enter last seen location!", Toast.LENGTH_LONG).show();
+//                    Toast.makeText(getView().getContext(), "Please enter last seen location!", Toast.LENGTH_LONG).show();
+                    etLastSeen.setError("Last seen location is required");
+                    etLastSeen.requestFocus();
+                    return;
                 }
                 // zip code field
                 else if(zipCode.trim().isEmpty()){
-                    Toast.makeText(getView().getContext(), "Please enter zip code!", Toast.LENGTH_LONG).show();
+//                    Toast.makeText(getView().getContext(), "Please enter zip code!", Toast.LENGTH_LONG).show();
+                    etZipCode.setError("Zip code is required");
+                    etZipCode.requestFocus();
+                    return;
                 }
                 else if(zipCode.length()>5 || zipCode.length()<5){
-                    Toast.makeText(getView().getContext(), "Zip code must be 5 digits!", Toast.LENGTH_LONG).show();
+//                    Toast.makeText(getView().getContext(), "Zip code must be 5 digits!", Toast.LENGTH_LONG).show();
+                    etZipCode.setError("Zip code must be 5 digits!");
+                    etZipCode.requestFocus();
+                    return;
                 }
                 // report details are not entered
                 else if(reportDetails.trim().isEmpty()){
-                    Toast.makeText(getView().getContext(), "Please enter report details!", Toast.LENGTH_LONG).show();
+//                    Toast.makeText(getView().getContext(), "Please enter report details!", Toast.LENGTH_LONG).show();
+                    etDetails.setError("Report details are required");
+                    etDetails.requestFocus();
+                    return;
                 }
                 // if image is not selected
                 else if(imageViewPersonImage.getDrawable()==null){
