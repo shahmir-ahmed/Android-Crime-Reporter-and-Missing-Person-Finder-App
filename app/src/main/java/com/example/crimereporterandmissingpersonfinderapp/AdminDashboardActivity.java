@@ -81,7 +81,7 @@ public class AdminDashboardActivity extends AppCompatActivity {
 
     // Options Menu
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+\]    public boolean onCreateOptionsMenu(Menu menu) {
 
         MenuInflater inflater = getMenuInflater();
 
